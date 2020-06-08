@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<Context path="/OnlineShopApp"/>-->
+<Context path="/OnlineShopApp">
+
+  <Resource name="jdbc/web_onlineshop" 
+            auth="Container" type="javax.sql.DataSource"
+            maxActive="20" maxIdle="5" maxWait="10000"
+            username="root" password="toantenx7" 
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/quanlybanhang"/>
+    <ResourceLink 
+        name="jdbc/web_onlineshop"
+        global="jdbc/web_onlineshop"
+        type="javax.sql.DataSource"/>    
+</Context>
