@@ -61,7 +61,7 @@
                 <button class="close" onClick="closeDialog()" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body tab-content py-4">
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="">
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" action="./LoginServlet">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
                         <input class="form-control" type="text" id="username" name="username">
@@ -83,14 +83,14 @@
                     </div>
                     <button class="btn btn-primary btn-block btn-shadow btn-login" type="submit">Sign in</button>
                 </form>
-                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" >
+                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" action="./RegisterServlet">
                     <div class="form-group">
                         <label for="su-name">Tên đăng nhập</label>
-                        <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister" placeholder="John Doe">
+                        <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister"  placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="su-password">Mật khẩu</label>
-                        <input type="passwordRegister"
+                        <input type="password"
                                class="form-control"
                                id="passwordRegister" name="passwordRegister">
                     </div>

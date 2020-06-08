@@ -73,67 +73,24 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </body>
     <script type="text/javascript">
-        $(document).ready(function () {
 
-            $('#signin-tab').submit(function (e) {
-                e.preventDefault();
-                var username = $('#username').val();
-                var password = $('#password').val();
-
-                $(".error").remove();
-
-                if (username.length < 1) {
-                    $('#username').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
-                }
-
-                if (password.length <= 0) {
-                    $('#password').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
-                } else if (password.length < 4 || password.length > 10) {
-                    $('#password').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
-                }
-            });
-
-            $('#signup-tab').submit(function (e) {
-                e.preventDefault();
-                var usernameRegister = $('#usernameRegister').val();
-                var passwordRegister = $('#passwordRegister').val();
-                var passwordConfirm = $('#passwordConfirm').val();
-
-                $(".error").remove();
-
-                if (usernameRegister.length < 1) {
-                    $('#usernameRegister').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
-                }
-
-                if (passwordRegister.length <= 0) {
-                    $('#passwordRegister').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
-                } else if (passwordRegister.length < 4 || password.length > 10) {
-                    $('#passwordRegister').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
-                }
-
-                if (passwordConfirm.length <= 0) {
-                    $('#passwordConfirm').after('<span class="error">Bạn chưa nhập mật khẩu xác nhận</span>');
-                }
-            });
-        });
-
-        function closeDialog() {
-            document.getElementById('modal').style.display = "none";
-        }
-
-        function openDialog() {
-            document.getElementById('modal').style.display = "block";
-        }
-
-        function showPassword() {
-            var typePassword = document.getElementById('password').type;
-            if (typePassword === "password") {
-                document.getElementById('password').type = "text";
-                document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
-            } else {
-                document.getElementById('password').type = "password";
-                document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+            function closeDialog() {
+                document.getElementById('modal').style.display = "none";
             }
-        }
+
+            function openDialog() {
+                document.getElementById('modal').style.display = "block";
+            }
+
+            function showPassword() {
+                var typePassword = document.getElementById('password').type;
+                if (typePassword === "password") {
+                    document.getElementById('password').type = "text";
+                    document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+                } else {
+                    document.getElementById('password').type = "password";
+                    document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+                }
+            }
     </script>
 </html>
