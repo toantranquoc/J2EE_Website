@@ -5,9 +5,10 @@
  */
 package com.onlineshop.mapper;
 
-import com.onlineshop.dbconnection.DBConnectionService;
 import java.sql.Connection;
+import java.sql.SQLException;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
@@ -15,35 +16,42 @@ import javax.sql.DataSource;
  * @author to cong hau
  */
 public class DBMapper {
-    private Connection connection;
-    public DBMapper() throws Exception {
-        try {            
-            connection = DBConnectionService.getConnectionFromConnection();
-        } catch (Exception e) {
-            System.out.println("Failed in constructor method in MapperDB:" + e);
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    public DBMapper(Connection con) {
-        connection = con;
-    }
-
-    public void closeConnection() throws Exception {
+    protected static void loadJDBCDriver() throws Exception {
         try {
-            getConnection().close();
-        } catch (Exception e) {
-            System.out.println("Failed in closeConnection method in MapperDB:" + e);
-            throw e;
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (java.lang.ClassNotFoundException e) {
+            throw new Exception("SQL JDBC Driver not found ...");
         }
     }
 
-    public Connection getConnection() {
-        return connection;
+    /*public static Connection getConnection() throws Exception {
+    Connection connect = null;
+    if (connect == null) {
+    loadJDBCDriver();
+    try {
+    
+    connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false",
+    "root", "");
+    } catch (java.sql.SQLException e) {
+    throw new Exception("Can not access to Database Server ..." + e.getMessage());
     }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
+    return connect;
+    }*/
+    
+    
+    public static Connection getConnection() throws Exception {
+        Connection connect = null;
+        if (connect == null) {
+            try {                
+                DataSource ds = (DataSource) new InitialContext().
+                        lookup("jdbc/j2ee_MySQLConnection");                
+                return ds.getConnection();
+            } catch (SQLException | NamingException e) {
+                throw new Exception("Can not access to Database Server ..." + e.getMessage());
+            }
+        }
+        return connect;
+    }
+    
 }

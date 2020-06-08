@@ -5,16 +5,12 @@
  */
 package com.onlineshop.controller.frontend;
 
-import com.onlineshop.dbconnection.DBConnectionService;
-import com.onlineshop.mapper.DBMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.annotation.Resource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +24,8 @@ import javax.sql.DataSource;
  */
 @WebServlet(name = "TestDemo", urlPatterns = {"/TestDemo"})
 public class TestDemo extends HttpServlet {
+    @Resource(name="jdbc/web_onlineshop")
+    private DataSource dataSource;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Step 1:  Set up the printwriter
@@ -39,8 +37,8 @@ public class TestDemo extends HttpServlet {
         Statement myStmt = null;
         ResultSet myRs = null;
 
-        try {               
-            myConn = DBConnectionService.getConnectionFromConnection();
+        try {
+            myConn = dataSource.getConnection();
 
             // Step 3:  Create a SQL statements
             String sql = "select * from products";
@@ -51,7 +49,7 @@ public class TestDemo extends HttpServlet {
 
             // Step 5:  Process the result set
             while (myRs.next()) {
-                String email = myRs.getString("IDProduct");
+                String email = myRs.getString("Name");
                 out.println(email);
             }
         } catch (Exception exc) {
