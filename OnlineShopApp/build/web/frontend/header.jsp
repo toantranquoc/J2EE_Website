@@ -61,7 +61,7 @@
                 <button class="close" onClick="closeDialog()" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body tab-content py-4">
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="">
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="POST" action="./NewServlet">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
                         <input class="form-control" type="text" id="username" name="username">
@@ -106,3 +106,5 @@
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
