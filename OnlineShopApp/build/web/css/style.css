@@ -545,7 +545,7 @@ label {
 }
 
 .dropdown{
-    display: none;
+    display: block;
 }
 
 

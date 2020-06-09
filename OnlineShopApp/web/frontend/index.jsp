@@ -73,24 +73,23 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </body>
     <script type="text/javascript">
-
-            function closeDialog() {
+        function closeDialog() {
                 document.getElementById('modal').style.display = "none";
-            }
-
-            function openDialog() {
+        }
+        
+        function openDialog() {
                 document.getElementById('modal').style.display = "block";
-            }
-
-            function showPassword() {
+        }
+        
+        function showPassword() {
                 var typePassword = document.getElementById('password').type;
-                if (typePassword === "password") {
-                    document.getElementById('password').type = "text";
-                    document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+        if (typePassword === "password") {
+        document.getElementById('password').type = "text";
+        document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
                 } else {
-                    document.getElementById('password').type = "password";
-                    document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
-                }
-            }
-    </script>
+                document.getElementById('password').type = "password";
+        document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+                    }
+                    }
+                    </script>
 </html>

@@ -36,6 +36,25 @@ public class UserBO {
         }
     }
     
+        public static boolean IsExistAccount(String name) {
+        //boolean result = true;
+        String sql = "select * from users where Username=?";
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return  true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static boolean AddNewAccount(UserDTO user) {
         String sql = "insert into users(Username, Password, Created)" + "values(?,?,?)";
         try {

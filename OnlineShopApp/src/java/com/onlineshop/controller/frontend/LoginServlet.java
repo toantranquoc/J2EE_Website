@@ -72,12 +72,15 @@ public class LoginServlet extends HttpServlet {
         if (checkType != -1) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            RequestDispatcher rs = request.getRequestDispatcher("./HomeServlet");
+            RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
             rs.forward(request, response);
         }
         else
         {
-            System.out.println("Looi");
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
+            rs.forward(request, response);
         }
     }
 

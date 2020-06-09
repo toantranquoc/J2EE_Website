@@ -150,14 +150,14 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>\r\n");
       out.write("                    <button class=\"btn btn-primary btn-block btn-shadow btn-login\" type=\"submit\">Sign in</button>\r\n");
       out.write("                </form>\r\n");
-      out.write("                <form id=\"signup-tab\" class=\"needs-validation tab-pane fade\" method=\"post\" autocomplete=\"off\" novalidate=\"\" >\r\n");
+      out.write("                <form id=\"signup-tab\" class=\"needs-validation tab-pane fade\" method=\"post\" autocomplete=\"off\" novalidate=\"\" action=\"./RegisterServlet\">\r\n");
       out.write("                    <div class=\"form-group\">\r\n");
       out.write("                        <label for=\"su-name\">Tên đăng nhập</label>\r\n");
-      out.write("                        <input  type=\"text\" class=\"form-control\" id=\"usernameRegister\" name=\"usernameRegister\" action=\"./RegisterServlet\" placeholder=\"John Doe\">\r\n");
+      out.write("                        <input  type=\"text\" class=\"form-control\" id=\"usernameRegister\" name=\"usernameRegister\"  placeholder=\"John Doe\">\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"form-group\">\r\n");
       out.write("                        <label for=\"su-password\">Mật khẩu</label>\r\n");
-      out.write("                        <input type=\"passwordRegister\"\r\n");
+      out.write("                        <input type=\"password\"\r\n");
       out.write("                               class=\"form-control\"\r\n");
       out.write("                               id=\"passwordRegister\" name=\"passwordRegister\">\r\n");
       out.write("                    </div>\r\n");
@@ -231,6 +231,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js\" integrity=\"sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI\" crossorigin=\"anonymous\"></script>\r\n");
       out.write("    </body>\r\n");
       out.write("    <script type=\"text/javascript\">\r\n");
+      out.write("\r\n");
       out.write("            function closeDialog() {\r\n");
       out.write("                document.getElementById('modal').style.display = \"none\";\r\n");
       out.write("            }\r\n");

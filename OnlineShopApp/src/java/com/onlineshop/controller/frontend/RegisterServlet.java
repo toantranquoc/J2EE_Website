@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -72,14 +73,26 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher rs = request.getRequestDispatcher("error.jsp");
             rs.forward(request, response);
         } else {
-            UserDTO user = new UserDTO(username, password, date );
-            boolean isCreate = UserBO.AddNewAccount(user);
-            if (isCreate) {
-                System.out.println("loi tu servlet");
-            }
-            else
-            {
-                System.out.println("loi tu servlet");
+            UserDTO user = new UserDTO(username, password, date);
+            boolean isExist = UserBO.IsExistAccount(username);
+            if (isExist) {
+                HttpSession session = request.getSession();
+                session.setAttribute("message", "Tài khoản đã tồn tại!");
+                RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
+                rs.forward(request, response);
+            } else {
+                boolean isCreate = UserBO.AddNewAccount(user);
+                if (isCreate) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("message", "Đăng ký tài khoản thành công!");
+                    RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
+                    rs.forward(request, response);                  
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("message", "Đăng ký tài khoản thất bại!");
+                    RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
+                    rs.forward(request, response); 
+                }
             }
         }
     }

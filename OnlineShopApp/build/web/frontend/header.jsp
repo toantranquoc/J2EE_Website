@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    session = request.getSession();
+    String name = "";
+    name = (String) session.getAttribute("username");
+%>
 <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -18,25 +23,32 @@
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <% if (name == null || name == "") {
+                %>
                 <form class="form-inline my-2 my-lg-0 form-login-register">
                     <button onClick="openDialog()" class="btn btn-outline-success btn-sm my-2 my-sm-0 p-2" type="button">Đăng nhập <strong>|</strong> Đăng ký</button>
                 </form>
+                <%
+                } else {
+                %>
                 <div class="dropdown">
                     <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
                         <div class="navbar-tool-icon-box">
                             <i class="navbar-tool-icon fas fa-user"></i>
                         </div>
                         <div class="navbar-tool-text ml-n3">
-                            <small>Hello,</small>My Account
+                            <small>Hello,</small><%=name%>
                         </div>
                     </a>
                     <div class="dropdown-content">
                         <a>Tài khoản của tôi</a>
                         <a>Đơn hàng của tôi</a>
-                        <a style="color:#00bfa5">Đăng xuất</a>
+                        <a style="color:#00bfa5" href="./HomeServlet">Đăng xuất</a>
                     </div>
                 </div>
-
+                <%
+                    }
+                %>
                 <div class="navbar-tool ml-3">
                     <a class="navbar-tool-icon-box bg-secondary dropdown-toggle">
                         <span class="navbar-tool-label"></span>
@@ -61,7 +73,7 @@
                 <button class="close" onClick="closeDialog()" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body tab-content py-4">
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" action="./LoginServlet">
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" action="./LoginServlet" name="form" onsubmit="return validLogin()">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
                         <input class="form-control" type="text" id="username" name="username">
@@ -106,3 +118,21 @@
         </div>
     </div>
 </div>
+<script>
+                            function validLogin() {
+                                if (document.form.username.value == "") {
+                                    alert("Please enter Login Name.");
+                                    document.loginform.username.focus();
+                                    return false;
+                                }
+                                else
+                                if (document.form.password.value == "") {
+                                    alert("Please enter password.");
+                                    document.userform.password.focus();
+                                    return false;
+                                }
+                            else
+                                return true;
+                                
+                            }
+</script>
