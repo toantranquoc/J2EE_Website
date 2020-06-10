@@ -22,7 +22,10 @@ public class ProductDTO {
     private boolean IsNew;
     private String Description;
     private int IDManufacturer;
-
+    
+    public ProductDTO(){
+        
+    }
     public ProductDTO(int IdProduct, String Name, double Price, String Introduction, Date Created, Date Updated, int Quantity, boolean IsNew, String Description, int IDManufacturer) {
         this.IdProduct = IdProduct;
         this.Name = Name;
@@ -36,6 +39,23 @@ public class ProductDTO {
         this.IDManufacturer = IDManufacturer;
     }
 
+    public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description) {
+        this.IdProduct = IdProduct;
+        this.Name = Name;
+        this.Price = Price;
+        this.Introduction = Introduction;
+        this.Description = Description;
+    }
+    
+        public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description, int Quantity) {
+        this.IdProduct = IdProduct;
+        this.Name = Name;
+        this.Price = Price;
+        this.Introduction = Introduction;
+        this.Description = Description;
+        this.Quantity = Quantity;
+    }
+    
     public ProductDTO(String Name, double Price, String Introduction, Date Created, Date Updated, int Quantity, boolean IsNew, String Description, int IDManufacturer) {
         this.Name = Name;
         this.Price = Price;

@@ -4,10 +4,52 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Jun 7, 2020, 11:02:50 PM
-    Author     : to cong hau
+    Created on : Jun 10, 2020, 8:52:35 PM
+    Author     : pc
 */
-@charset "ISO-8859-1";
+.row{
+    margin-top: 20px;
+}
+.card:hover img{
+  transform: scale(1.2,1.2);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  opacity: 0.7;
+}
+.card img{
+  transform: scale(1.0,1.0);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.card-img-wrapper{
+  overflow: hidden;
+  position: relative;
+}
+
+.product-icons{
+  position: absolute;
+  bottom: -30%;
+  left:0;
+  right:0;
+  margin-left: 0;
+  margin-right: 0;
+  opacity: 0;
+}
+
+.card-img-wrapper:hover .product-icons{
+  bottom: 0%;
+  opacity: 1;
+}
+
+.animate{
+  transition: all 0.3s ease-in-out;
+}
+
+.list-inline-item{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 .align-items-center {
   -ms-flex-align: center !important;
@@ -583,8 +625,4 @@ label.error {
   color: hsla(0,0%,100%,.7);
   background-color: #fe2a2b;
 } */
-
-
-
-
 

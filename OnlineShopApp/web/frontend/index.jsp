@@ -15,50 +15,38 @@
         <script src="https://kit.fontawesome.com/2d0af8021d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-
-
     </head>
     <body>
         <jsp:directive.include file="header.jsp"/>
 
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-
-                <div class="item active image-slide">
-                    <img src="images/bg_4.jpg" alt="Image" style="width:100%;">
+        <div class="carousel slide" data-ride="carousel" id="slides" data-interval="3000">
+            <ul class="carousel-indicators">
+                <li data-target="#slides" data-slide-to="0"></li>
+                <li data-target="#slides" data-slide-to="1"></li>
+                <li data-target="#slides" data-slide-to="2"></li>
+                <li data-target="#slides" data-slide-to="3"></li>
+            </ul>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img src="images/bg_4.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_1.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_3.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_2.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_2.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_3.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_1.jpg" width="100%">
                 </div>
-
             </div>
+            <a class="carousel-control-prev" href="#slides" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#slides" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
 
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
 
         <div align="center">
@@ -74,22 +62,22 @@
     </body>
     <script type="text/javascript">
         function closeDialog() {
-                document.getElementById('modal').style.display = "none";
+            document.getElementById('modal').style.display = "none";
         }
-        
+
         function openDialog() {
-                document.getElementById('modal').style.display = "block";
+            document.getElementById('modal').style.display = "block";
         }
-        
+
         function showPassword() {
-                var typePassword = document.getElementById('password').type;
-        if (typePassword === "password") {
-        document.getElementById('password').type = "text";
-        document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
-                } else {
+            var typePassword = document.getElementById('password').type;
+            if (typePassword === "password") {
+                document.getElementById('password').type = "text";
+                document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+            } else {
                 document.getElementById('password').type = "password";
-        document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
-                    }
-                    }
-                    </script>
+                document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+            }
+        }
+    </script>
 </html>
