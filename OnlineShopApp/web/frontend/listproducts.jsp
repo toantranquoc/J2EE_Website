@@ -39,7 +39,7 @@
                             <h6 class="card-title mb-1"><i class="fa fa-user"></i>
                                 ${product.getName()}
                             </h6>
-                            <p class="card-text text-muted"> ${product.getPrice()}</p>
+                            <p class="card-text text-muted"> ${product.currencyFormat(product.getPrice())}</p>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,8 @@
 package com.onlineshop.dto;
 
 import java.sql.Date;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  *
@@ -148,5 +150,7 @@ public class ProductDTO {
         this.IDManufacturer = IDManufacturer;
     }
     
-    
+    public String currencyFormat(double price){
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
+    }
 }

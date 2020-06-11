@@ -9,6 +9,7 @@ import com.onlineshop.bo.ManufacturerBO;
 import com.onlineshop.bo.ProductBO;
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.ManufacturerDTO;
+import com.onlineshop.dto.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,10 +42,12 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         ServletContext context = request.getServletContext();
         ManufacturerBO manufacturerBO = new ManufacturerBO(context);
-
+        ProductBO productBO = new ProductBO(context);
         List<ManufacturerDTO> list = manufacturerBO.GetListManufacturers();
+        List<ProductDTO> listnewproducts = productBO.GetListNewProducts();
         HttpSession session = request.getSession();
         session.setAttribute("listmanufacturers", list);
+        session.setAttribute("listnewproducts", listnewproducts);
         String homepage = "./frontend/index.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
         dispatcher.forward(request, response);
@@ -53,8 +56,7 @@ public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String homepage = "./frontend/index.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
-        dispatcher.forward(request, response);
+        response.sendRedirect("./frontend/index.jsp");
 
     }
 

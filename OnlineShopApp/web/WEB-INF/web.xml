@@ -24,6 +24,14 @@
         <servlet-name>AddToCartServlet</servlet-name>
         <servlet-class>com.onlineshop.controller.frontend.AddToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoCartServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.frontend.GoCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GoCheckOutServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.frontend.GoCheckOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>AddToCartServlet</servlet-name>
         <url-pattern>/AddToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoCartServlet</servlet-name>
+        <url-pattern>/GoCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoCheckOutServlet</servlet-name>
+        <url-pattern>/GoCheckOutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

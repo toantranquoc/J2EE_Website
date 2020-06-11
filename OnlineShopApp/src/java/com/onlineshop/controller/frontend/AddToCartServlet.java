@@ -5,12 +5,20 @@
  */
 package com.onlineshop.controller.frontend;
 
+import com.onlineshop.bo.ProductBO;
+import com.onlineshop.dto.CartDTO;
+import com.onlineshop.dto.ProductDTO;
+import com.onlineshop.dto.ProductSelectionDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,18 +37,55 @@ public class AddToCartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddToCartServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddToCartServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int quantity = 1;
+        String idProduct = request.getParameter("idProduct");
+        ServletContext context = request.getServletContext();
+        ProductBO productBO = new ProductBO(context);
+        ProductDTO productDTO = productBO.GetProductByID(idProduct);
+        int totalCart = 0;
+        if (productDTO != null) {
+            if (request.getParameter("quantity")!= null) {
+                quantity = Integer.parseInt(request.getParameter("quantity"));
+            }
+            HttpSession session = request.getSession();
+            if (session.getAttribute("cart") == null) {
+                CartDTO cart = new CartDTO();
+                List<ProductSelectionDTO> listItem = new ArrayList<ProductSelectionDTO>();
+                ProductSelectionDTO productSelectionDTO = new ProductSelectionDTO();
+                productSelectionDTO.setId(productDTO.getIdProduct());
+                productSelectionDTO.setName(productDTO.getName());
+                productSelectionDTO.setPrice(productDTO.getPrice());
+                productSelectionDTO.setQuantity(quantity);
+                listItem.add(productSelectionDTO);
+                cart.setListProduct(listItem);
+                totalCart = cart.getTotalQuantity();
+                session.setAttribute("cart", cart);
+                session.setAttribute("totalcart", totalCart);
+            }
+            else
+            {
+                CartDTO cart = (CartDTO) session.getAttribute("cart");
+                List<ProductSelectionDTO> list = cart.getListProduct();
+                boolean check = false;
+                for (ProductSelectionDTO productSelectionDTO : list) {
+                    if (productSelectionDTO.getId() == productDTO.getIdProduct()) {
+                        productSelectionDTO.setQuantity(productSelectionDTO.getQuantity() + quantity);
+                        check = true;
+                    }
+                }
+                if (check == false) {
+                    ProductSelectionDTO productSelectionDTO = new ProductSelectionDTO();
+                    productSelectionDTO.setId(productDTO.getIdProduct());
+                    productSelectionDTO.setName(productDTO.getName());
+                    productSelectionDTO.setPrice(productDTO.getPrice());
+                    productSelectionDTO.setQuantity(quantity);
+                    list.add(productSelectionDTO);
+                }
+                totalCart = cart.getTotalQuantity();
+                session.setAttribute("totalcart", totalCart);
+                session.setAttribute("cart", cart);
+            }
+            response.sendRedirect("./GoCartServlet");
         }
     }
 

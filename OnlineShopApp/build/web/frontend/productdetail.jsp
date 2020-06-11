@@ -30,7 +30,7 @@
                                 <strong>${productdetail.getName()}</strong>
                             </div>
                             <div>
-                                <strong>${productdetail.getPrice()}</strong>
+                                <strong>${productdetail.currencyFormat(productdetail.getPrice())}</strong>
                             </div>
                             <div>
                                 <p>Số lượng trong kho<strong> ${productdetail.getQuantity()}</strong></p>

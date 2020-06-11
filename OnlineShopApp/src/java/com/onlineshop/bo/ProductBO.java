@@ -69,6 +69,25 @@ public class ProductBO {
         }
         return products;
     }
+    
+        public List<ProductDTO> GetListNewProducts(){
+        List<ProductDTO> products = null;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            products = mapper.GetListNewProduct();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
+    }
 
     public ProductDTO GetProductByID(String IdProduct){
         ProductDTO product = new ProductDTO();

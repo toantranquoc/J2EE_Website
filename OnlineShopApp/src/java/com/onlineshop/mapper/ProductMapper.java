@@ -106,4 +106,28 @@ public class ProductMapper extends DBMapper {
         }
         return product;
     }
+    
+        public List<ProductDTO> GetListNewProduct() throws NamingException {
+        String query = "Select * from products where IsNew = true";
+        List<ProductDTO> list = new ArrayList<ProductDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("IDProduct");
+                String name = rs.getString("Name");
+                double price = rs.getDouble("Price");                 
+                String intro = rs.getString("Introduction");
+                String descrip = rs.getString("Description");
+
+                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
+                list.add(user);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

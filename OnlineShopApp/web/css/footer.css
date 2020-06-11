@@ -11,7 +11,9 @@ and open the template in the editor.
 .container-fluid ol li a{
   color:#1d8afe;
 }
-
+.container-fluid {
+    padding-top: 50px;
+}
 .container-fluid ol li a:hover{
   color:#007bff;
   text-decoration: underline;
@@ -37,3 +39,4 @@ footer{
   margin-top: 100px;
   color: white;
 }
+

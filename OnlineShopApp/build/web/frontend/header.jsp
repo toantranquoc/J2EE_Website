@@ -50,8 +50,8 @@
                     }
                 %>
                 <div class="navbar-tool ml-3">
-                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle">
-                        <span class="navbar-tool-label"></span>
+                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="./GoCartServlet">
+                        <span class="navbar-tool-label">${totalcart}</span>
                         <i class="navbar-tool-icon fas fa-shopping-cart"></i>
                     </a>
                     <a class="navbar-tool-text"><small>My Cart</small>
@@ -120,7 +120,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark manufacturer">
+<nav class="navbar navbar-expand-md sticky-top bg-dark navbar-dark manufacturer">
   <a class="navbar-brand" href="./HomeServlet">Trang chủ</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>

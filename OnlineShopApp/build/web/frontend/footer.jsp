@@ -1,6 +1,6 @@
 <link href="css/footer.css" rel="stylesheet" type="text/css"/>
 <footer>
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding-top: 10px;">
 		<div class="row text-center mt-6">
 			<div class="col-md-4 col-sm-6" >
 				<h5>Member</h5>
