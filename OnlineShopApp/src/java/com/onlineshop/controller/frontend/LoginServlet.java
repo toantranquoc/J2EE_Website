@@ -5,11 +5,14 @@
  */
 package com.onlineshop.controller.frontend;
 
+import com.onlineshop.bo.ManufacturerBO;
 import com.onlineshop.bo.UserBO;
 import com.onlineshop.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import javax.servlet.ServletContext;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -63,20 +66,22 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//        out.println("<script>toastr.error('Đăng nhập thất bại');</script>");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserDTO user = new UserDTO(username, password);
-        int checkType = UserBO.Login(user);
+
+        ServletContext context = request.getServletContext();
+        UserBO userBO = new UserBO(context);
+        int checkType = userBO.Login(user);
 
         if (checkType != -1) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-            rs.forward(request, response);
-        }
-        else
-        {
+            response.sendRedirect("./HomeServlet");
+        } else {
             HttpSession session = request.getSession();
             session.setAttribute("username", "");
             RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");

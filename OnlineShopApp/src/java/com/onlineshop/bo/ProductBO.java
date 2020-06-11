@@ -7,6 +7,7 @@ package com.onlineshop.bo;
 
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.ProductDTO;
+import com.onlineshop.mapper.ProductMapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,88 +19,72 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 
 /**
  *
  * @author pc
  */
 public class ProductBO {
+    private ServletContext context;
 
-    public static List<ProductDTO> GetListProducts() throws NamingException {
-        String query = "Select * from products";
-        List<ProductDTO> list = new ArrayList<ProductDTO>();
+    public ProductBO(ServletContext context) {
+        this.context = context;
+    }
+    
+    public List<ProductDTO> GetListProducts(){
+        List<ProductDTO> products = null;
+        ProductMapper mapper = null;
         try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("IDProduct");
-                String name = rs.getString("Name");
-                double price = rs.getDouble("Price");
-                String intro = rs.getString("Introduction");
-                String descrip = rs.getString("Description");
-                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
-                list.add(user);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            mapper = new ProductMapper();
+            products = mapper.GetListProducts();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
     }
 
-    public static List<ProductDTO> GetListProductsByID(String IDManufac) throws NamingException {
-        String query = "Select * from products where IDManufacturer=?";
-        List<ProductDTO> list = new ArrayList<ProductDTO>();
+    public List<ProductDTO> GetListProductsByID(String IDManufac){
+        List<ProductDTO> products = null;
+        ProductMapper mapper = null;
         try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, IDManufac);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("IDProduct");
-                String name = rs.getString("Name");
-                double price = rs.getDouble("Price");
-                //NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price); 
-                String intro = rs.getString("Introduction");
-                String descrip = rs.getString("Description");
-                
-                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
-                list.add(user);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            mapper = new ProductMapper();
+            products = mapper.GetListProductsByID(IDManufac);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
     }
 
-    public static ProductDTO GetProductByID(String IdProduct) throws NamingException {
-        String query = "Select * from products where IDProduct=?";
+    public ProductDTO GetProductByID(String IdProduct){
         ProductDTO product = new ProductDTO();
-        try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, IdProduct);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("IDProduct");
-                String name = rs.getString("Name");
-                double price = rs.getDouble("Price");
-                //NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price); 
-                String intro = rs.getString("Introduction");
-                String descrip = rs.getString("Description");
-                int quantity = rs.getInt("Quantity");
-                product.setIdProduct(id);
-                product.setName(name);
-                product.setPrice(price);
-                product.setIntroduction(intro);
-                product.setDescription(descrip);
-                product.setQuantity(quantity);
+        ProductMapper mapper = null;
+                try {
+            mapper = new ProductMapper();
+            product = mapper.GetProductByID(IdProduct);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return product;
     }

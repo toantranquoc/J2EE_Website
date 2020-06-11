@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,15 +38,14 @@ public class GoProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idproduct = request.getParameter("idProduct");
-        try {
-            ProductDTO product = ProductBO.GetProductByID(idproduct);
-            HttpSession session = request.getSession();
-            session.setAttribute("productdetail", product);
-            RequestDispatcher rs = request.getRequestDispatcher("./frontend/productdetail.jsp");
-            rs.forward(request, response);
-        } catch (NamingException ex) {
-            Logger.getLogger(GoProductDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ServletContext context = request.getServletContext();
+        ProductBO productBO = new ProductBO(context);
+        
+        ProductDTO product = productBO.GetProductByID(idproduct);
+        HttpSession session = request.getSession();
+        session.setAttribute("productdetail", product);
+        RequestDispatcher rs = request.getRequestDispatcher("./frontend/productdetail.jsp");
+        rs.forward(request, response);
 
     }
 

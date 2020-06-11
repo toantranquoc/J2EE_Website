@@ -43,7 +43,7 @@
                     <div class="dropdown-content">
                         <a>Tài khoản của tôi</a>
                         <a>Đơn hàng của tôi</a>
-                        <a style="color:#00bfa5" href="./HomeServlet">Đăng xuất</a>
+                        <a style="color:#00bfa5" id="btnLogout" href="./Logout">Đăng xuất</a>
                     </div>
                 </div>
                 <%
@@ -73,7 +73,8 @@
                 <button class="close" onClick="closeDialog()" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body tab-content py-4">
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" action="./LoginServlet" name="form" onsubmit="return validLogin()">
+
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" onsubmit="return validLogin()" action="./LoginServlet" name="form">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
                         <input class="form-control" type="text" id="username" name="username">
@@ -95,7 +96,7 @@
                     </div>
                     <button class="btn btn-primary btn-block btn-shadow btn-login" type="submit">Sign in</button>
                 </form>
-                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" action="./RegisterServlet">
+                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" onsubmit="return validRegister()" action="./RegisterServlet">
                     <div class="form-group">
                         <label for="su-name">Tên đăng nhập</label>
                         <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister"  placeholder="John Doe">
@@ -118,6 +119,7 @@
         </div>
     </div>
 </div>
+
 <nav class="navbar navbar-expand-md bg-dark navbar-dark manufacturer">
   <a class="navbar-brand" href="./HomeServlet">Trang chủ</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -136,17 +138,67 @@
 
 <script>
     function validLogin() {
-        if (document.form.username.value == "") {
-            alert("Please enter Login Name.");
-            document.loginform.username.focus();
-            return false;
-        } else
-        if (document.form.password.value == "") {
-            alert("Please enter password.");
-            document.userform.password.focus();
-            return false;
-        } else
-            return true;
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var isValid = true;
 
+        $(".error").remove();
+        if (username.length < 1) {
+            $('#username').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
+            isValid = false;
+        }
+        if (password.length <= 0) {
+            $('#password').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
+            isValid = false;
+        } else if (password.length < 4 || password.length > 10) {
+            $('#password').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
+            isValid = false;
+        }
+
+        if (isValid === true) {
+            toastr.info("Đăng nhập thành công");
+            return true;
+        } else{
+            toastr.error("Đăng nhập thất bại");
+            return false;
+        }
+    }
+
+    function validRegister() {
+        var usernameRegister = $('#usernameRegister').val();
+        var passwordRegister = $('#passwordRegister').val();
+        var passwordConfirm = $('#passwordConfirm').val();
+        var isValid = true;
+        
+        $(".error").remove();
+        if (usernameRegister.length < 1) {
+            $('#usernameRegister').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
+            isValid = false;
+        }
+        if (passwordRegister.length <= 0) {
+            $('#passwordRegister').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
+            isValid = false;
+        } else if (passwordRegister.length < 4 || password.length > 10) {
+            $('#passwordRegister').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
+            isValid = false;
+        }
+        
+        if (passwordConfirm.length <= 0) {
+            $('#passwordConfirm').after('<span class="error">Bạn chưa nhập mật khẩu xác nhận</span>');
+            isValid = false;
+        }
+        
+        if (isValid === true) {
+            toastr.success("Đăng ký thành công");
+            return true;
+        } else{
+            toastr.error("Đăng ký thất bại");
+            return false;
+        }
+        
+        document.getElementById('btnLogout').addEventListener('click',function(){
+            toastr.success("Đăng xuất thành công");
+        });
+        
     }
 </script>

@@ -6,71 +6,81 @@
 package com.onlineshop.bo;
 
 import com.onlineshop.dbconnection.DBConnectionService;
+import com.onlineshop.dto.ProductDTO;
 import com.onlineshop.dto.UserDTO;
+import com.onlineshop.mapper.ProductMapper;
+import com.onlineshop.mapper.UserMapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 
 /**
  *
  * @author pc
  */
 public class UserBO {
-    public static int Login(UserDTO user) {
-        //boolean result = true;
-        String sql = "select * from users where Username=? and Password =?";
+
+    private ServletContext context;
+
+    public UserBO(ServletContext context) {
+        this.context = context;
+    }
+
+    public int Login(UserDTO user) {
+        int result = -1;
+        UserMapper mapper = null;
         try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("Id");
-            } else {
-                return -1;
+            mapper = new UserMapper();
+            result = mapper.Login(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (Exception e) {
-            return -1;
         }
+        return result;
     }
-    
-        public static boolean IsExistAccount(String name) {
-        //boolean result = true;
-        String sql = "select * from users where Username=?";
+
+    public boolean IsExistAccount(String name) {
+        boolean result = false;
+        UserMapper mapper = null;
         try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,name);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return  true;
-            } else {
-                return false;
+            mapper = new UserMapper();
+            result = mapper.IsExistAccount(name);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (Exception e) {
-            return false;
         }
+        return result;
     }
-    
-    public static boolean AddNewAccount(UserDTO user) {
-        String sql = "insert into users(Username, Password, Created)" + "values(?,?,?)";
+
+    public boolean AddNewAccount(UserDTO user) {
+        boolean result = false;
+        UserMapper mapper = null;
         try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
-            java.util.Date date= user.getCreated();			
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            ps.setDate(3, sqlDate);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            mapper = new UserMapper();
+            result = mapper.AddNewAccount(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return result;
     }
-
-
 }

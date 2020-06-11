@@ -7,6 +7,9 @@ package com.onlineshop.bo;
 
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.ManufacturerDTO;
+import com.onlineshop.dto.ProductDTO;
+import com.onlineshop.mapper.ManufacturerMapper;
+import com.onlineshop.mapper.ProductMapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -23,25 +27,28 @@ import javax.naming.NamingException;
  */
 public class ManufacturerBO {
 
-    public static List<ManufacturerDTO> GetListManufacturers() throws NamingException {
-        String query = "Select * from manufacturers";
-        List<ManufacturerDTO> list = new ArrayList<ManufacturerDTO>();
-        try {
-            Connection connection = DBConnectionService.getConnectionFromConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("IDManufacturer");
-                String name = rs.getString("Name");
-                String contact = rs.getString("Contact");
-                boolean isActive = rs.getBoolean("IsActive");
-                ManufacturerDTO user = new ManufacturerDTO(id, name, contact, isActive);
-                list.add(user);
-            }
+    private ServletContext context;
 
-        } catch (SQLException ex) {
-            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+    public ManufacturerBO(ServletContext context) {
+        this.context = context;
+    }
+
+    public List<ManufacturerDTO> GetListManufacturers(){
+        List<ManufacturerDTO> manufacturers = null;
+        ManufacturerMapper mapper = null;
+        try {
+            mapper = new ManufacturerMapper();
+            manufacturers = mapper.GetListManufacturers();
+        } catch (Exception ex) {
+            Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return manufacturers;
     }
 }

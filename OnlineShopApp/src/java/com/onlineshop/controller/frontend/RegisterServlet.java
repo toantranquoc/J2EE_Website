@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,29 +70,31 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("usernameRegister");
         String password = request.getParameter("passwordRegister");
         String veryPassword = request.getParameter("passwordConfirm");
+
+        ServletContext context = request.getServletContext();
+        UserBO userBO = new UserBO(context);
         if (!password.equalsIgnoreCase(veryPassword)) {
             RequestDispatcher rs = request.getRequestDispatcher("error.jsp");
             rs.forward(request, response);
         } else {
             UserDTO user = new UserDTO(username, password, date);
-            boolean isExist = UserBO.IsExistAccount(username);
+            boolean isExist = userBO.IsExistAccount(username);
             if (isExist) {
                 HttpSession session = request.getSession();
                 session.setAttribute("message", "Tài khoản đã tồn tại!");
                 RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
                 rs.forward(request, response);
             } else {
-                boolean isCreate = UserBO.AddNewAccount(user);
+                boolean isCreate = userBO.AddNewAccount(user);
                 if (isCreate) {
                     HttpSession session = request.getSession();
                     session.setAttribute("message", "Đăng ký tài khoản thành công!");
-                    RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-                    rs.forward(request, response);                  
+                    response.sendRedirect("./HomeServlet");
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("message", "Đăng ký tài khoản thất bại!");
                     RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-                    rs.forward(request, response); 
+                    rs.forward(request, response);
                 }
             }
         }

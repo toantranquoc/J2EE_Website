@@ -5,17 +5,11 @@
  */
 package com.onlineshop.controller.frontend;
 
-import com.onlineshop.bo.ProductBO;
-import com.onlineshop.dto.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,9 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author pc
+ * @author to cong hau
  */
-public class GoListProductsServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/Logout"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,18 +34,18 @@ public class GoListProductsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<ProductDTO> list;
-        String ID = request.getParameter("id");
-
-        ServletContext context = request.getServletContext();
-        ProductBO productBO = new ProductBO(context);
-        list = productBO.GetListProductsByID(ID);
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("listproducts", list);
-        RequestDispatcher rs = request.getRequestDispatcher("./frontend/listproducts.jsp");
-        rs.forward(request, response);
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LogoutServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,7 +60,11 @@ public class GoListProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession(false);
+        session.removeAttribute("username");
+        session.getMaxInactiveInterval();
+
+        response.sendRedirect("./HomeServlet");
     }
 
     /**
