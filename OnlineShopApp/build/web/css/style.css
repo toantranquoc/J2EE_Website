@@ -545,7 +545,7 @@ label {
 }
 
 .dropdown{
-    display: none;
+    display: block;
 }
 
 
@@ -579,7 +579,9 @@ label.error {
   margin-top: 30px;
 }
 
-
+a:hover{
+    cursor: pointer;
+}
 /* .login-register:hover{
   color: hsla(0,0%,100%,.7);
   background-color: #fe2a2b;

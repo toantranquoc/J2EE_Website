@@ -20,11 +20,25 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "HomeServlet", urlPatterns = {"/HomeServlet"})
 public class HomeServlet extends HttpServlet {
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String homepage="./frontend/index.jsp";
         RequestDispatcher dispatcher=request.getRequestDispatcher(homepage);
         dispatcher.forward(request, response);
+
+    }
+    
+       protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String homepage="./frontend/index.jsp";
+        RequestDispatcher dispatcher=request.getRequestDispatcher(homepage);
+        dispatcher.forward(request, response);
+
     }
     
 }

@@ -1,11 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    session = request.getSession();
+    String name = "";
+    name = (String) session.getAttribute("username");
+%>
 <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" style="min-width: 7rem;">
+            <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="./HomeServlet" style="min-width: 7rem;">
                 <img width="180" height="55" src="images/logo.png" alt="Home Shoppe">
             </a>
-            <a class="navbar-brand d-sm-none mr-2" style="min-width: 4.625rem;">
+            <a class="navbar-brand d-sm-none mr-2" href="./HomeServlet" style="min-width: 4.625rem;">
                 <img width="100" height="35" src="images/logo.png" alt="Home Shoppe">
             </a>
             <div class="input-group-overlay d-none d-lg-flex mx-4 w-75">
@@ -18,25 +23,32 @@
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <% if (name == null || name == "") {
+                %>
                 <form class="form-inline my-2 my-lg-0 form-login-register">
                     <button onClick="openDialog()" class="btn btn-outline-success btn-sm my-2 my-sm-0 p-2" type="button">Đăng nhập <strong>|</strong> Đăng ký</button>
                 </form>
+                <%
+                } else {
+                %>
                 <div class="dropdown">
                     <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
                         <div class="navbar-tool-icon-box">
                             <i class="navbar-tool-icon fas fa-user"></i>
                         </div>
                         <div class="navbar-tool-text ml-n3">
-                            <small>Hello,</small>My Account
+                            <small>Hello,</small><%=name%>
                         </div>
                     </a>
                     <div class="dropdown-content">
                         <a>Tài khoản của tôi</a>
                         <a>Đơn hàng của tôi</a>
-                        <a style="color:#00bfa5">Đăng xuất</a>
+                        <a style="color:#00bfa5" href="./HomeServlet">Đăng xuất</a>
                     </div>
                 </div>
-
+                <%
+                    }
+                %>
                 <div class="navbar-tool ml-3">
                     <a class="navbar-tool-icon-box bg-secondary dropdown-toggle">
                         <span class="navbar-tool-label"></span>
@@ -61,7 +73,8 @@
                 <button class="close" onClick="closeDialog()" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body tab-content py-4">
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="POST" action="./NewServlet">
+
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" onsubmit="return validLogin()" action="./LoginServlet" name="form">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
                         <input class="form-control" type="text" id="username" name="username">
@@ -83,14 +96,14 @@
                     </div>
                     <button class="btn btn-primary btn-block btn-shadow btn-login" type="submit">Sign in</button>
                 </form>
-                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" >
+                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" onsubmit="return validRegister()" action="./RegisterServlet">
                     <div class="form-group">
                         <label for="su-name">Tên đăng nhập</label>
-                        <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister" placeholder="John Doe">
+                        <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister"  placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="su-password">Mật khẩu</label>
-                        <input type="passwordRegister"
+                        <input type="password"
                                class="form-control"
                                id="passwordRegister" name="passwordRegister">
                     </div>
@@ -107,4 +120,58 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function validLogin() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var isValid = true;
+
+        $(".error").remove();
+        if (username.length < 1) {
+            $('#username').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
+            isValid = false;
+        }
+        if (password.length <= 0) {
+            $('#password').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
+            isValid = false;
+        } else if (password.length < 4 || password.length > 10) {
+            $('#password').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
+            isValid = false;
+        }
+
+        if (isValid === true) {
+            return true;
+        } else
+            return false;
+    }
+
+    function validRegister() {
+        var usernameRegister = $('#usernameRegister').val();
+        var passwordRegister = $('#passwordRegister').val();
+        var passwordConfirm = $('#passwordConfirm').val();
+        var isValid = true;
+        
+        $(".error").remove();
+        if (usernameRegister.length < 1) {
+            $('#usernameRegister').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
+            isValid = false;
+        }
+        if (passwordRegister.length <= 0) {
+            $('#passwordRegister').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
+            isValid = false;
+        } else if (passwordRegister.length < 4 || password.length > 10) {
+            $('#passwordRegister').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
+            isValid = false;
+        }
+        
+        if (passwordConfirm.length <= 0) {
+            $('#passwordConfirm').after('<span class="error">Bạn chưa nhập mật khẩu xác nhận</span>');
+            isValid = false;
+        }
+        
+        if (isValid === true) {
+            return true;
+        } else
+            return false;
+    }
+</script>

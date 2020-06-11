@@ -1,0 +1,121 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.onlineshop.dto;
+
+import java.util.Date;
+
+
+/**
+ *
+ * @author pc
+ */
+public class UserDTO {
+    private int Id;
+    private String Fullname;
+    private String Username;
+    private String Password;
+    private Date DateOfBirth;
+    private String Email;
+    private String PhoneNumber;
+    private String Address;
+    private Date Created;
+    private Date LastActived;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(String Username, String Password) {
+        this.Username = Username;
+        this.Password = Password;
+    }
+    
+    public UserDTO(String Username, String Password, Date Created) {
+        this.Username = Username;
+        this.Password = Password;
+        this.Created = Created;
+    }
+    
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
+    public String getFullname() {
+        return Fullname;
+    }
+
+    public void setFullname(String Fullname) {
+        this.Fullname = Fullname;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public Date getDateOfBirth() {
+        return DateOfBirth;
+    }
+
+    public void setDateOfBirth(Date DateOfBirth) {
+        this.DateOfBirth = DateOfBirth;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public Date getCreated() {
+        return Created;
+    }
+
+    public void setCreated(Date Created) {
+        this.Created = Created;
+    }
+
+    public Date getLastActived() {
+        return LastActived;
+    }
+
+    public void setLastActived(Date LastActived) {
+        this.LastActived = LastActived;
+    }
+    
+}
