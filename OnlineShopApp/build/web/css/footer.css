@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 10, 2020, 2:15:21 PM
+    Author     : pc
+*/
+@charset "ISO-8859-1";
+.container-fluid ol li a{
+  color:#1d8afe;
+}
+
+.container-fluid ol li a:hover{
+  color:#007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.text-danger:hover{
+  cursor: pointer;
+  color: red;
+}
+
+.text-primary{
+  cursor: pointer;
+  color: blue;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+footer{
+  background-color: darkslategray;
+  margin-top: 100px;
+  color: white;
+}

@@ -4,11 +4,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Jun 7, 2020, 11:02:50 PM
-    Author     : to cong hau
+    Created on : Jun 10, 2020, 10:37:44 PM
+    Author     : pc
 */
-@charset "ISO-8859-1";
-
 .align-items-center {
   -ms-flex-align: center !important;
   align-items: center !important;
@@ -578,13 +576,28 @@ label.error {
   margin-top: 30px;
 }
 
-a:hover{
-    cursor: pointer;
-}
+
 /* .login-register:hover{
   color: hsla(0,0%,100%,.7);
   background-color: #fe2a2b;
 } */
 
+.img-thumbnail{
+  margin: 25px;
+  width: 85%;
+  height: 85%;
+}
+
+.card-body{
+  padding: 0 25px;
+}
+
+.card-footer{
+  padding: 10px 15px;
+  background-color: #fff;
+  /* border-top: none; */
+}
+
+.ngx-gallery { display: inline-block; margin-bottom: 20px; }
 
 

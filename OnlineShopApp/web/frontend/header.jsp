@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.onlineshop.dto.ManufacturerDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="css/nav.css" rel="stylesheet" type="text/css"/>
 <%
     session = request.getSession();
     String name = "";
@@ -7,10 +10,10 @@
 <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="./HomeServlet" style="min-width: 7rem;">
+            <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" style="min-width: 7rem;" href="./HomeServlet">
                 <img width="180" height="55" src="images/logo.png" alt="Home Shoppe">
             </a>
-            <a class="navbar-brand d-sm-none mr-2" href="./HomeServlet" style="min-width: 4.625rem;">
+            <a class="navbar-brand d-sm-none mr-2" style="min-width: 4.625rem;" href="./HomeServlet">
                 <img width="100" height="35" src="images/logo.png" alt="Home Shoppe">
             </a>
             <div class="input-group-overlay d-none d-lg-flex mx-4 w-75">
@@ -20,9 +23,6 @@
                 </form>
             </div>
             <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <% if (name == null || name == "") {
                 %>
                 <form class="form-inline my-2 my-lg-0 form-login-register">
@@ -43,7 +43,7 @@
                     <div class="dropdown-content">
                         <a>Tài khoản của tôi</a>
                         <a>Đơn hàng của tôi</a>
-                        <a style="color:#00bfa5" href="./HomeServlet">Đăng xuất</a>
+                        <a style="color:#00bfa5" id="btnLogout" href="./Logout">Đăng xuất</a>
                     </div>
                 </div>
                 <%
@@ -120,6 +120,22 @@
     </div>
 </div>
 
+<nav class="navbar navbar-expand-md bg-dark navbar-dark manufacturer">
+  <a class="navbar-brand" href="./HomeServlet">Trang chủ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <c:forEach items="${listmanufacturers}" var="manufacturer" >
+      <li class="nav-item">
+        <a class="nav-link" href="./GoListProductsServlet?id=${manufacturer.getIDManufacturer()}">${manufacturer.getName()}</a>
+      </li>
+      </c:forEach>
+    </ul>
+  </div>  
+</nav>
+
 <script>
     function validLogin() {
         var username = $('#username').val();
@@ -140,9 +156,12 @@
         }
 
         if (isValid === true) {
+            toastr.info("Đăng nhập thành công");
             return true;
-        } else
+        } else{
+            toastr.error("Đăng nhập thất bại");
             return false;
+        }
     }
 
     function validRegister() {
@@ -170,8 +189,16 @@
         }
         
         if (isValid === true) {
+            toastr.success("Đăng ký thành công");
             return true;
-        } else
+        } else{
+            toastr.error("Đăng ký thất bại");
             return false;
+        }
+        
+        document.getElementById('btnLogout').addEventListener('click',function(){
+            toastr.success("Đăng xuất thành công");
+        });
+        
     }
 </script>

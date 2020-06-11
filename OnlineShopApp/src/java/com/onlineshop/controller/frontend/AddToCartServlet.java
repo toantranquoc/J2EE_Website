@@ -5,26 +5,18 @@
  */
 package com.onlineshop.controller.frontend;
 
-import com.onlineshop.bo.ManufacturerBO;
-import com.onlineshop.bo.UserBO;
-import com.onlineshop.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import javax.servlet.ServletContext;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author pc
  */
-public class LoginServlet extends HttpServlet {
+public class AddToCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +29,19 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddToCartServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddToCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,27 +70,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        out.println("<script>toastr.error('Đăng nhập thất bại');</script>");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        UserDTO user = new UserDTO(username, password);
-
-        ServletContext context = request.getServletContext();
-        UserBO userBO = new UserBO(context);
-        int checkType = userBO.Login(user);
-
-        if (checkType != -1) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            response.sendRedirect("./HomeServlet");
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", "");
-            RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-            rs.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

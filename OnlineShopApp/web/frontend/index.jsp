@@ -14,52 +14,39 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/2d0af8021d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-
-        <script src="js/jquery-3.5.1.min.js" type="text/javascript"></script>
-        <script src="js/jquery.validate.min.js" type="text/javascript"></script>
     </head>
     <body>
         <jsp:directive.include file="header.jsp"/>
-
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-
-                <div class="item active image-slide">
-                    <img src="images/bg_4.jpg" alt="Image" style="width:100%;">
+        <div class="carousel slide" data-ride="carousel" id="slides" data-interval="3000">
+            <ul class="carousel-indicators">
+                <li data-target="#slides" data-slide-to="0"></li>
+                <li data-target="#slides" data-slide-to="1"></li>
+                <li data-target="#slides" data-slide-to="2"></li>
+                <li data-target="#slides" data-slide-to="3"></li>
+            </ul>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img src="images/bg_4.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_1.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_3.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_2.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_2.jpg" width="100%">
                 </div>
-
-                <div class="item">
-                    <img src="images/bg_3.jpg" alt="Image" style="width:100%;">
+                <div class="carousel-item">
+                    <img src="images/bg_1.jpg" width="100%">
                 </div>
-
             </div>
+            <a class="carousel-control-prev" href="#slides" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#slides" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
 
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
 
         <div align="center">
@@ -72,6 +59,7 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js">
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </body>
     <script type="text/javascript">
         function closeDialog() {
