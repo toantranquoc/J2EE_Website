@@ -62,14 +62,14 @@
                                                             <td>
                                                                 ${selection.getName()}
                                                             </td>
-                                                            <td>                                                              <!-- <input type="number" value="{{sel.quantity}}" class="form-control"> -->
+                                                            <td>                                                              
                                                                 <input type="number" class="form-control" name="quantity" value="${selection.getQuantity()}">
                                                             </td>
                                                             <td>
                                                               ${selection.currencyFormat(selection.getPrice())}
                                                             </td>                  
                                                             <td>${selection.currencyFormat(selection.getPrice()*selection.getQuantity())}</td>
-                                                            <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                            <td><a href="./RemoveFromCartServlet?idItem=${selection.getId()}&itemQuantity=${selection.getQuantity()}"><i class="fa fa-trash-o"></i></a></td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
