@@ -3,16 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/productdetail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/frontend/GoCheckOutServlet.java</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/cart.jsp</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dto/ProductSelectionDTO.java</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/mapper/DBMapper.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/header.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dbconnection/DBConnectionService.java</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dto/CartDTO.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/css/cart.css</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/listproducts.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/frontend/GoListProductsServlet.java</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/bo/ProductBO.java</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/frontend/AddToCartServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/mapper/ProductMapper.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/frontend/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

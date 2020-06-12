@@ -5,7 +5,9 @@
  */
 package com.onlineshop.dto;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -45,4 +47,7 @@ public class CartDTO {
         return totalPrice;
     }
 
+    public String currencyFormat(double price) {
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
+    }
 }

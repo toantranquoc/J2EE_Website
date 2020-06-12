@@ -84,24 +84,36 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 </body>
-                <script type="text/j                avascript">
-                    function closeDialog() {
-                    document.getElementById('modal').style.displa        y = "none";                
-                    }
+    <script type="text/javascript">
+        $(function () {
+            window.pagObj = $('#pagination').twbsPagination({
+                totalPages: 35,
+                visiblePages: 10,
+                onPageClick: function (event, page) {
+                    console.info(page + ' (from options)');
+                }
+            }).on('page', function (event, page) {
+                console.info(page + ' (from event listening)');
+            });
+        });
 
-                    function openDialog() {
-                    document.getElementById('modal').style.display                = "block";
-                    }
+        function closeDialog() {
+            document.getElementById('modal').style.display = "none";
+        }
 
-                    function showPassword() {
-                    var typePassword = document.getElementById('password').type;
-                    if (typePassword === "password") {
-                    document.getElementById('password').typ                    e = "text";
-                    document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-                indicator";
-                    } else {
-                    document.getElementById('password').type =         "password";
-                    document.getElementById("showEye").className = "fa fa-eye password-toggle-i                        ndicator'";
-                    }
-                    }
-                </script>
+        function openDialog() {
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function showPassword() {
+            var typePassword = document.getElementById('password').type;
+            if (typePassword === "password") {
+                document.getElementById('password').type = "text";
+                document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+            } else {
+                document.getElementById('password').type = "password";
+                document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+            }
+        }
+    </script>
                 </html>

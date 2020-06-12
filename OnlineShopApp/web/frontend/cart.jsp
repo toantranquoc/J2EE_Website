@@ -36,12 +36,13 @@
                         <div id="basket" class="col-lg-9">
                             <div class="box">
                                 <form method="post" action="./GoCheckOutServlet">
-                                           
+                                    <c:if test = "${totalcart == null}">
                                     <div class="alert alert-danger" role="alert">Chưa có sản phẩm nào trong giỏ hàng</div>
-
+                                    </c:if>
+                                    <c:if test="${totalcart > 0}">
                                     <div>
                                         <h1>Giỏ hàng</h1>
-                                        <p class="text-muted">Bạn có sản phẩm trong giỏ hàng.</p>
+                                        <p class="text-muted">Bạn có ${totalcart} sản phẩm trong giỏ hàng.</p>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -54,29 +55,28 @@
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${cart.listProduct}" var="selection">
-                                                    <tr >
-                                                        <td>
-                                                            <a href="#">
+                                                        <tr >
+                                                            <td>
+                                                                <img style="width: 50px; height: 50px; border-style: none;vertical-align: middle;" src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="${selection.getName()}">
+                                                            </td>
+                                                            <td>
                                                                 ${selection.getName()}
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#">${selection.getPrice()}</a>
-                                                        </td>
-                                                        <td>
-                                                            <!-- <input type="number" value="{{sel.quantity}}" class="form-control"> -->
-                                                            <input type="number" class="form-control" name="quantity" value="${selection.getQuantity()}">
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                                    </tr>
+                                                            </td>
+                                                            <td>                                                              <!-- <input type="number" value="{{sel.quantity}}" class="form-control"> -->
+                                                                <input type="number" class="form-control" name="quantity" value="${selection.getQuantity()}">
+                                                            </td>
+                                                            <td>
+                                                              ${selection.currencyFormat(selection.getPrice())}
+                                                            </td>                  
+                                                            <td>${selection.currencyFormat(selection.getPrice()*selection.getQuantity())}</td>
+                                                            <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                        </tr>
                                                     </c:forEach>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th colspan="5">Total</th>
-                                                        <th colspan="2">${cart.getTotalPrice()}</th>
+                                                        <th colspan="4">Total</th>
+                                                        <th colspan="2">${cart.currencyFormat(cart.getTotalPrice())}</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -91,6 +91,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </c:if>
                                 </form>
                             </div>
                             <!-- /.box-->
@@ -135,23 +136,23 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </body>
     <script type="text/javascript">
-function closeDialog() {
-    document.getElementById('modal').style.display = "none";
-}
+        function closeDialog() {
+            document.getElementById('modal').style.display = "none";
+        }
 
-function openDialog() {
-    document.getElementById('modal').style.display = "block";
-}
+        function openDialog() {
+            document.getElementById('modal').style.display = "block";
+        }
 
-function showPassword() {
-    var typePassword = document.getElementById('password').type;
-    if (typePassword === "password") {
-        document.getElementById('password').type = "text";
-        document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
-    } else {
-        document.getElementById('password').type = "password";
-        document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
-    }
-}
+        function showPassword() {
+            var typePassword = document.getElementById('password').type;
+            if (typePassword === "password") {
+                document.getElementById('password').type = "text";
+                document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+            } else {
+                document.getElementById('password').type = "password";
+                document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
+            }
+        }
     </script>
 </html>

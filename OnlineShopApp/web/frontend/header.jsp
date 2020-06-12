@@ -120,7 +120,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-md sticky-top bg-dark navbar-dark manufacturer">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark manufacturer">
   <a class="navbar-brand" href="./HomeServlet">Trang chủ</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>

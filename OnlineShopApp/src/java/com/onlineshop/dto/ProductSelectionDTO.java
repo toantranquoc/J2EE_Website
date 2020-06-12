@@ -5,6 +5,9 @@
  */
 package com.onlineshop.dto;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  *
  * @author pc
@@ -55,6 +58,7 @@ public class ProductSelectionDTO {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
-    
+    public String currencyFormat(double price) {
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
+    }    
 }
