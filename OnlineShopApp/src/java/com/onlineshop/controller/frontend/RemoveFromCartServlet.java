@@ -38,7 +38,7 @@ public class RemoveFromCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idProduct = request.getParameter("idItem");
-        int quantity = Integer.parseInt(request.getParameter("itemQuantity"));
+//        int quantity = Integer.parseInt(request.getParameter("itemQuantity"));
         ServletContext context = request.getServletContext();
         ProductBO productBO = new ProductBO(context);
         ProductDTO productDTO = productBO.GetProductByID(idProduct);
@@ -48,12 +48,18 @@ public class RemoveFromCartServlet extends HttpServlet {
             if (session.getAttribute("cart") != null) {
                 CartDTO cart = (CartDTO) session.getAttribute("cart");
                 List<ProductSelectionDTO> listItem = cart.getListProduct();
-                ProductSelectionDTO productSelectionDTO = new ProductSelectionDTO();
-                productSelectionDTO.setId(productDTO.getIdProduct());
-                productSelectionDTO.setName(productDTO.getName());
-                productSelectionDTO.setPrice(productDTO.getPrice());
-                productSelectionDTO.setQuantity(quantity);
-                listItem.remove(productSelectionDTO);
+                for (int i = 0; i < listItem.size(); i++) {
+                    if (listItem.get(i).getId() == Integer.parseInt(idProduct)) {
+                        listItem.remove(i);
+                    }
+                }
+//                ProductSelectionDTO productSelectionDTO = new ProductSelectionDTO();
+//                productSelectionDTO.setId(productDTO.getIdProduct());
+//                productSelectionDTO.setName(productDTO.getName());
+//                productSelectionDTO.setPrice(productDTO.getPrice());
+//                productSelectionDTO.setQuantity(quantity);
+//                listItem.remove(productSelectionDTO);
+                cart.setListProduct(listItem);
                 totalCart = cart.getTotalQuantity();
                 session.setAttribute("cart", cart);
                 session.setAttribute("totalcart", totalCart);

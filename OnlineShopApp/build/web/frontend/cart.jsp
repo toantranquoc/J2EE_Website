@@ -36,7 +36,7 @@
                         <div id="basket" class="col-lg-9">
                             <div class="box">
                                 <form method="post" action="./GoCheckOutServlet">
-                                    <c:if test = "${totalcart == null}">
+                                    <c:if test = "${totalcart == null || totalcart == 0}">
                                     <div class="alert alert-danger" role="alert">Chưa có sản phẩm nào trong giỏ hàng</div>
                                     </c:if>
                                     <c:if test="${totalcart > 0}">
