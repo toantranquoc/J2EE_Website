@@ -83,4 +83,23 @@ public class UserBO {
         }
         return result;
     }
+    
+        public int GetIdUserByUsername(String user) {
+        int result = -1;
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            result = mapper.GetIdByUsername(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+    
 }

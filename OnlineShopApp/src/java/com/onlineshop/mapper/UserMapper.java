@@ -76,4 +76,23 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
+    
+        public int GetIdByUsername(String name) {
+        //boolean result = true;
+        String sql = "select * from users where Username=?";
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Id");
+            } else {
+                return -1;
+            }
+
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 }

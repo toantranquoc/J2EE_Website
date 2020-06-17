@@ -33,7 +33,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div id="basket" class="col-lg-9">
+                        <div id="basket" class="col-lg-12">
                             <div class="box">
                                 <form method="post" action="./GoCheckOutServlet">
                                     <c:if test = "${totalcart == null || totalcart == 0}">
@@ -63,7 +63,7 @@
                                                                 ${selection.getName()}
                                                             </td>
                                                             <td>                                                              
-                                                                <input type="number" class="form-control" name="quantity" value="${selection.getQuantity()}">
+                                                                <input type="number" class="form-control" name="quantity" id="quantity" value="${selection.getQuantity()}">
                                                             </td>
                                                             <td>
                                                               ${selection.currencyFormat(selection.getPrice())}
@@ -97,33 +97,6 @@
                             <!-- /.box-->
                         </div>
                         <!-- /.col-lg-9-->
-                        <div class="col-lg-3">
-                            <div id="order-summary" class="box">
-                                <div class="box-header">
-                                    <h3 class="mb-0">Thông tin đặt hàng</h3>
-                                </div>
-                                <p class="text-muted">Tính theo đơn giá tổng tiền và chi phí vận chuyển.</p>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Tổng tiền</td>
-                                                <th>$446.00</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Chi phí vận chuyển</td>
-                                                <th>$10.00</th>
-                                            </tr>
-                                            <tr class="total">
-                                                <td>Tổng</td>
-                                                <th>$456.00</th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-md-3-->
                     </div>
                 </div>
             </div>
@@ -136,10 +109,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </body>
     <script type="text/javascript">
+        
         function closeDialog() {
             document.getElementById('modal').style.display = "none";
         }
-
+        
         function openDialog() {
             document.getElementById('modal').style.display = "block";
         }

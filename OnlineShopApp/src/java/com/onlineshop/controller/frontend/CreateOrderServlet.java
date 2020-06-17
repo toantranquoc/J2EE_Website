@@ -5,16 +5,15 @@
  */
 package com.onlineshop.controller.frontend;
 
+import com.onlineshop.bo.OrderBO;
+import com.onlineshop.bo.OrderDetailBO;
 import com.onlineshop.bo.ProductBO;
-import com.onlineshop.dto.ProductDTO;
+import com.onlineshop.bo.UserBO;
+import com.onlineshop.dto.CartDTO;
+import com.onlineshop.dto.OrderDTO;
+import com.onlineshop.dto.OrderDetailDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pc
  */
-public class GoListProductsServlet extends HttpServlet implements Serializable{
+public class CreateOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,18 +38,6 @@ public class GoListProductsServlet extends HttpServlet implements Serializable{
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        List<ProductDTO> list;
-        String ID = request.getParameter("id");
-
-        ServletContext context = request.getServletContext();
-        ProductBO productBO = new ProductBO(context);
-        list = productBO.GetListProductsByID(ID);
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("listproducts", list);
-        RequestDispatcher rs = request.getRequestDispatcher("./frontend/listproducts.jsp");
-        rs.forward(request, response);
 
     }
 
@@ -80,7 +67,39 @@ public class GoListProductsServlet extends HttpServlet implements Serializable{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ServletContext context = request.getServletContext();
+        UserBO userBO = new UserBO(context);
+        OrderBO orderBO = new OrderBO(context);
+        HttpSession session = request.getSession();
+        String receiver = request.getParameter("receiver");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String username = (String) session.getAttribute("username");
+        int IdUser = userBO.GetIdUserByUsername(username);
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        OrderDTO order = new OrderDTO(IdUser, receiver, email, phone, address);
+        boolean isAddNew = orderBO.AddNewOrder(order);
+        OrderDetailBO orderdetailBO = new OrderDetailBO(context);
+
+        if (isAddNew) {
+            boolean isAddNewOrderDetail = true;
+            int IdOrder = orderBO.GetLastInsertID();
+            for (int i = 0; i < cart.getListProduct().size(); i++) {
+                OrderDetailDTO detail = new OrderDetailDTO(IdOrder, cart.getListProduct().get(i).getId(), cart.getListProduct().get(i).getQuantity(), cart.getListProduct().get(i).getPrice());
+                isAddNewOrderDetail = orderdetailBO.AddNewOrder(detail);
+            }
+            if (isAddNewOrderDetail) {
+                session.removeAttribute("cart");
+                session.setAttribute("totalcart", 0);
+                response.sendRedirect("./HomeServlet");
+            }
+        }
+        else
+        {
+            
+        }
+
     }
 
     /**

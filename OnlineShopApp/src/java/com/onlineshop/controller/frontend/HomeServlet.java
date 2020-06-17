@@ -12,6 +12,7 @@ import com.onlineshop.dto.ManufacturerDTO;
 import com.onlineshop.dto.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ import javax.servlet.http.HttpSession;
  * @author to cong hau
  */
 @WebServlet(name = "HomeServlet", urlPatterns = {"/HomeServlet"})
-public class HomeServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet implements Serializable {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
