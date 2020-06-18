@@ -6,7 +6,9 @@
 package com.onlineshop.bo;
 
 import com.onlineshop.dto.OrderDetailDTO;
+import com.onlineshop.dto.OrderDetailHelperDTO;
 import com.onlineshop.mapper.OrderDetailMapper;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -40,4 +42,24 @@ public class OrderDetailBO {
         }
         return result;
     }
+    
+    
+    public List<OrderDetailHelperDTO> GetListOrderDetailByOrderID(int IdOrder) {
+        List<OrderDetailHelperDTO> list = null;
+        OrderDetailMapper mapper = null;
+        try {
+            mapper = new OrderDetailMapper();
+            list = mapper.GetListOrderDetailByOrderID(IdOrder);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
+    }
+
 }

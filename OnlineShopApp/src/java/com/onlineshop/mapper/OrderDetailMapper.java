@@ -7,8 +7,16 @@ package com.onlineshop.mapper;
 
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.OrderDetailDTO;
+import com.onlineshop.dto.OrderDetailHelperDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -35,4 +43,29 @@ public class OrderDetailMapper extends DBMapper {
             return false;
         }
     }
+
+    public List<OrderDetailHelperDTO> GetListOrderDetailByOrderID(int OrderID) throws NamingException, Exception {
+        String query = "SELECT * FROM orderdetails o, products b WHERE o.IDProduct = b.IDProduct and o.IDOrder =?";
+        List<OrderDetailHelperDTO> list = new ArrayList<OrderDetailHelperDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, OrderID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int IdOrder = rs.getInt("IDOrder");
+                int IdProduct = rs.getInt("IDProduct");
+                String Name = rs.getString("Name");            
+                int Quantity = rs.getInt("Quantity");
+                double UnitPrice = rs.getDouble("UnitPrice");
+                OrderDetailHelperDTO orderDetailDTO = new OrderDetailHelperDTO(IdOrder, IdProduct, Name, Quantity, UnitPrice);
+                list.add(orderDetailDTO);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.toString());
+        }
+        return list;
+    }
+
 }
