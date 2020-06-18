@@ -1,0 +1,11 @@
+use quanlybanhang
+ALTER TABLE Orders MODIFY Receiver Nvarchar(255);
+ALTER TABLE Orders MODIFY Address Nvarchar(255);
+ALTER TABLE Orders MODIFY Paid Nvarchar(255);
+
+ALTER TABLE Products MODIFY Name Nvarchar(255);
+ALTER TABLE Products MODIFY Introduction Nvarchar(10000);
+ALTER TABLE Products MODIFY Description Nvarchar(10000);
+
+ALTER TABLE Users MODIFY FullName Nvarchar(50);
+ALTER TABLE Users MODIFY Address Nvarchar(255);

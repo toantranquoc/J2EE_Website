@@ -17,7 +17,7 @@
                 <img width="100" height="35" src="images/logo.png" alt="Home Shoppe">
             </a>
             <div class="input-group-overlay d-none d-lg-flex mx-4 w-75">
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" method="GET" action="./SearchProductServlet">
                     <input class="form-control mr-sm-1" type="search" placeholder="Nhập tên sản phẩm cần tìm" aria-label="Search" name="nameSearch" required style="width:500px">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><span><i class="fas fa-search"></i></span></button>
                 </form>
@@ -41,7 +41,7 @@
                         </div>
                     </a>
                     <div class="dropdown-content">
-                        <a>Tài khoản của tôi</a>
+                        <a href="./GoUserInfoServlet">Tài khoản của tôi</a>
                         <a>Đơn hàng của tôi</a>
                         <a style="color:#00bfa5" id="btnLogout" href="./Logout">Đăng xuất</a>
                     </div>
@@ -120,23 +120,52 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark manufacturer">
-  <a class="navbar-brand" href="./HomeServlet">Trang chủ</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <c:forEach items="${listmanufacturers}" var="manufacturer" >
-      <li class="nav-item">
-        <a class="nav-link" href="./GoListProductsServlet?id=${manufacturer.getIDManufacturer()}">${manufacturer.getName()}</a>
-      </li>
-      </c:forEach>
-    </ul>
-  </div>  
-</nav>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <div class="navbar-buttons">
+            <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+            <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+        <div id="navigation" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a href="./HomeServlet" class="nav-link">Trang chủ</a></li>
+                <li class="nav-item"><a href="./GoListAllProductsServlet?page=1&maxPageItem=12" class="nav-link">Sản phẩm</a></li>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Danh mục<b class="caret"></b></a>
+                    <ul class="dropdown-menu megamenu">
+                        <li>
+                            <div class="row">
+                                <c:forEach items="${listmanufacturers}" var="manufacturer" >
+                                    <div class="col-md-6 col-lg-3">
+                                        <a class="nav-link" href="./GoListProductsServlet?id=${manufacturer.getIDManufacturer()}&page=1&maxPageItem=12">${manufacturer.getName()}</a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>                     
 
 <script>
+    var totalPages = ${model.totalPage};
+    var currentPage = ${model.page};
+    var limit = 12;
+    $(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 10,
+            startPage: currentPage,
+            onPageClick: function (event, page) {
+                if (currentPage !== page) {
+                    $('#maxPageItem').val(limit);
+                    $('#page').val(page);
+                    $('#formSubmit').submit();
+                }
+            }
+        });
+    });
     function validLogin() {
         var username = $('#username').val();
         var password = $('#password').val();
@@ -158,7 +187,7 @@
         if (isValid === true) {
             toastr.info("Đăng nhập thành công");
             return true;
-        } else{
+        } else {
             toastr.error("Đăng nhập thất bại");
             return false;
         }
@@ -169,7 +198,7 @@
         var passwordRegister = $('#passwordRegister').val();
         var passwordConfirm = $('#passwordConfirm').val();
         var isValid = true;
-        
+
         $(".error").remove();
         if (usernameRegister.length < 1) {
             $('#usernameRegister').after('<span class="error">Bạn chưa nhập tên đăng nhập</span>');
@@ -182,23 +211,23 @@
             $('#passwordRegister').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
             isValid = false;
         }
-        
+
         if (passwordConfirm.length <= 0) {
             $('#passwordConfirm').after('<span class="error">Bạn chưa nhập mật khẩu xác nhận</span>');
             isValid = false;
         }
-        
+
         if (isValid === true) {
             toastr.success("Đăng ký thành công");
             return true;
-        } else{
+        } else {
             toastr.error("Đăng ký thất bại");
             return false;
         }
-        
-        document.getElementById('btnLogout').addEventListener('click',function(){
+
+        document.getElementById('btnLogout').addEventListener('click', function () {
             toastr.success("Đăng xuất thành công");
         });
-        
+
     }
 </script>
