@@ -42,6 +42,19 @@ public class OrderDTO {
         this.DeliverDate = tomorrow;
     }
 
+    public OrderDTO(int Id, String Paid, int OrderState, Date OrderDate, Date DeliverDate, int IdUser, String Receiver, String Email, String Phone, String Address) {
+        this.Id = Id;
+        this.Paid = Paid;
+        this.OrderState = OrderState;
+        this.OrderDate = OrderDate;
+        this.DeliverDate = DeliverDate;
+        this.IdUser = IdUser;
+        this.Receiver = Receiver;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.Address = Address;
+    }
+
     public OrderDTO() {
     }
 

@@ -28,7 +28,7 @@ public class ManufacturerMapper extends DBMapper {
         super();
     }
 
-    public List<ManufacturerDTO> GetListManufacturers() throws NamingException {
+    public List<ManufacturerDTO> GetListManufacturers() throws NamingException, Exception {
         String query = "Select * from manufacturers";
         List<ManufacturerDTO> list = new ArrayList<ManufacturerDTO>();
         try {

@@ -5,13 +5,12 @@
  */
 package com.onlineshop.controller.frontend;
 
+import com.onlineshop.bo.OrderBO;
 import com.onlineshop.bo.UserBO;
-import com.onlineshop.dto.UserDTO;
+import com.onlineshop.dto.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pc
  */
-public class RegisterServlet extends HttpServlet {
+public class GoMyOrdersServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +36,16 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ServletContext context = request.getServletContext();
+        OrderBO orderBO = new OrderBO(context);
+        HttpSession session = request.getSession();
+        UserBO userBO = new UserBO(context);
+        String username = (String) session.getAttribute("username");
+        int IdUser = userBO.GetIdUserByUsername(username);
+        List<OrderDTO> list = orderBO.GetListOrderByUserID(IdUser);
+        session.setAttribute("myorders", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./frontend/myorders.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,37 +75,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Date date = new Date();
-        String username = request.getParameter("usernameRegister");
-        String password = request.getParameter("passwordRegister");
-        String veryPassword = request.getParameter("passwordConfirm");
-
-        ServletContext context = request.getServletContext();
-        UserBO userBO = new UserBO(context);
-        if (!password.equalsIgnoreCase(veryPassword)) {
-            RequestDispatcher rs = request.getRequestDispatcher("error.jsp");
-            rs.forward(request, response);
-        } else {
-            UserDTO user = new UserDTO(username, password, date);
-            boolean isExist = userBO.IsExistAccount(username);
-            if (isExist) {
-                HttpSession session = request.getSession();
-                session.setAttribute("message", "Tài khoản đã tồn tại!");
-                RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-                rs.forward(request, response);
-            } else {
-                boolean isCreate = userBO.AddNewAccount(user);
-                if (isCreate) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("message", "Đăng ký tài khoản thành công!");
-                    response.sendRedirect("./HomeServlet");
-                } else {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("message", "Đăng ký tài khoản thất bại!");
-                    response.sendRedirect("./HomeServlet");
-                }
-            }
-        }
     }
 
     /**

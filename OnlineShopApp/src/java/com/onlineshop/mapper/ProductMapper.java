@@ -28,7 +28,7 @@ public class ProductMapper extends DBMapper {
         super();
     }
 
-    public List<ProductDTO> GetListProducts() throws NamingException {
+    public List<ProductDTO> GetListProducts() throws NamingException, Exception {
         String query = "Select * from products";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
@@ -51,7 +51,7 @@ public class ProductMapper extends DBMapper {
         return list;
     }
 
-    public List<ProductDTO> GetListProductsByID(String IDManufac) throws NamingException {
+    public List<ProductDTO> GetListProductsByID(String IDManufac) throws NamingException, Exception {
         String query = "Select * from products where IDManufacturer=?";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
@@ -77,7 +77,7 @@ public class ProductMapper extends DBMapper {
         return list;
     }
 
-    public ProductDTO GetProductByID(String IdProduct) throws NamingException {
+    public ProductDTO GetProductByID(String IdProduct) throws NamingException, Exception {
         String query = "Select * from products where IDProduct=?";
         ProductDTO product = new ProductDTO();
         try {
@@ -107,7 +107,7 @@ public class ProductMapper extends DBMapper {
         return product;
     }
     
-        public List<ProductDTO> GetListNewProduct() throws NamingException {
+        public List<ProductDTO> GetListNewProduct() throws NamingException, Exception {
         String query = "Select * from products where IsNew = true";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {

@@ -7,6 +7,8 @@ package com.onlineshop.bo;
 
 import com.onlineshop.dto.OrderDTO;
 import com.onlineshop.mapper.OrderMapper;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -57,6 +59,24 @@ public class OrderBO {
             }
         }
         return result;
+    }
+    
+        public List<OrderDTO> GetListOrderByUserID(int UserID) {
+        List<OrderDTO> list = new ArrayList<>();
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            list = mapper.GetListOrderByUserID(UserID);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
     }
 
 }

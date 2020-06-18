@@ -11,8 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -62,7 +66,7 @@ public class OrderMapper extends DBMapper {
                 return rs.getInt(1);
             }
 
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {
             Logger.getLogger(OrderMapper.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         } catch (Exception ex) {
@@ -70,6 +74,35 @@ public class OrderMapper extends DBMapper {
             return -1;
         }
         return -1;
+    }
+
+    public List<OrderDTO> GetListOrderByUserID(int UserId) throws NamingException, Exception {
+        String query = "Select * from orders where IdUser=?";
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, UserId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int IdOrder = rs.getInt("IDOrder");
+                String Paid = rs.getString("Paid");
+                int  OrderState = rs.getInt("OrderState");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date DeliveryDate = rs.getDate("DeliveryDate");
+                int IdUser = rs.getInt("IdUser");
+                String Receiver = rs.getString("Receiver");
+                String Email = rs.getString("Email");
+                String Phone = rs.getString("PhoneNumber");
+                String Address = rs.getString("Address");
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                list.add(user);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.toString());
+        }
+        return list;
     }
 
 }

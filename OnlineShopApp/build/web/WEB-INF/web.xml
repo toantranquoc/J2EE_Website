@@ -40,6 +40,14 @@
         <servlet-name>CreateOrderServlet</servlet-name>
         <servlet-class>com.onlineshop.controller.frontend.CreateOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoMyOrdersServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.frontend.GoMyOrdersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GoOrderDetailServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.frontend.GoOrderDetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>CreateOrderServlet</servlet-name>
         <url-pattern>/CreateOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoMyOrdersServlet</servlet-name>
+        <url-pattern>/GoMyOrdersServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoOrderDetailServlet</servlet-name>
+        <url-pattern>/GoOrderDetailServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

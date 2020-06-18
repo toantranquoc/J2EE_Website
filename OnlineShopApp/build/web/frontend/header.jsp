@@ -42,7 +42,7 @@
                     </a>
                     <div class="dropdown-content">
                         <a>Tài khoản của tôi</a>
-                        <a>Đơn hàng của tôi</a>
+                        <a href="./GoMyOrdersServlet">Đơn hàng của tôi</a>
                         <a style="color:#00bfa5" id="btnLogout" href="./Logout">Đăng xuất</a>
                     </div>
                 </div>

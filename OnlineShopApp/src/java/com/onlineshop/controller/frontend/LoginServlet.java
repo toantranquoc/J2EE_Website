@@ -81,11 +81,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             response.sendRedirect("./HomeServlet");
+
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("username", "");
-            RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
-            rs.forward(request, response);
+            response.sendRedirect("./HomeServlet");
         }
     }
 
