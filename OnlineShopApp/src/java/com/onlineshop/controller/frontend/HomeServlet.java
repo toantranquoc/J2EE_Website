@@ -54,10 +54,11 @@ public class HomeServlet extends HttpServlet implements Serializable {
         dispatcher.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String homepage = "./frontend/index.jsp";
-        response.sendRedirect("./frontend/index.jsp");
+        response.sendRedirect(homepage);
 
     }
 

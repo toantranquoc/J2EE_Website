@@ -1,0 +1,34 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 17, 2020, 8:24:07 PM
+    Author     : to cong hau
+*/
+.container-fluid ol li a{
+  color:#1d8afe;
+}
+
+.container-fluid ol li a:hover{
+  color:#007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.text-danger:hover{
+  cursor: pointer;
+  color: red;
+}
+
+.text-primary{
+  cursor: pointer;
+  color: blue;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+

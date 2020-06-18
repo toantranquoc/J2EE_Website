@@ -24,8 +24,8 @@
     </head>
     <body>
         <jsp:directive.include file="header.jsp"/>
-        <div class="row">
-            <c:forEach items="${listproducts}" var="product" >
+        <div class="row" style="margin-top:20px;">
+            <c:forEach var="product" items="${model.listResult}" >
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="card mb-4">
                         <div class="card-img-wrapper">
@@ -45,21 +45,32 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="d-flex justify-content-center mt-2">
-            <ul class="pagination" id="pagination"></ul>
-        </div>
+        <form action="./GoListProductsServlet" id="formSubmit" method="GET">
+            <div class="d-flex justify-content-center mt-2">
+                <ul class="pagination" id="pagination"></ul>
+                <input type="hidden" value="${nhasanxuat}" id="id" name="id"/>
+                <input type="hidden" value="" id="page" name="page"/>
+                <input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
+            </div>
+        </form>
         <jsp:directive.include file="footer.jsp"/>
     </body>
     <script type="text/javascript">
+        var totalPages = ${model.totalPage};
+        var currentPage = ${model.page};
+        var limit = 12;
         $(function () {
             window.pagObj = $('#pagination').twbsPagination({
-                totalPages: 35,
+                totalPages: totalPages,
                 visiblePages: 10,
+                startPage: currentPage,
                 onPageClick: function (event, page) {
-                    console.info(page + ' (from options)');
+                    if (currentPage !== page) {
+                        $('#maxPageItem').val(limit);
+                        $('#page').val(page);
+                        $('#formSubmit').submit();
+                    }
                 }
-            }).on('page', function (event, page) {
-                console.info(page + ' (from event listening)');
             });
         });
 

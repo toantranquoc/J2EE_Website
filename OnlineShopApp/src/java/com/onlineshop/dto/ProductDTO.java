@@ -13,7 +13,7 @@ import java.util.Locale;
  *
  * @author to cong hau
  */
-public class ProductDTO {
+public class ProductDTO extends AbstractModel<ProductDTO> {
     private int IdProduct;
     private String Name;
     private double Price ;

@@ -29,7 +29,8 @@ public class OrderMapper extends DBMapper {
     }
 
     public boolean AddNewOrder(OrderDTO order) {
-        String sql = "insert into orders(Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, PhoneNumber, Address)" + "values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into orders(Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, PhoneNumber, Address)" 
+                + "values(?,?,?,?,?,N'"+order.getReceiver()+"',?,?,N'"+order.getAddress()+"')";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -45,10 +46,8 @@ public class OrderMapper extends DBMapper {
             ps.setDate(3, sqlDate);
             ps.setDate(4, sqlDateDeliver);
             ps.setInt(5, order.getIdUser());
-            ps.setString(6, order.getReceiver());
-            ps.setString(7, order.getEmail());
-            ps.setString(8, order.getPhone());
-            ps.setString(9, order.getAddress());
+            ps.setString(6, order.getEmail());
+            ps.setString(7, order.getPhone());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
