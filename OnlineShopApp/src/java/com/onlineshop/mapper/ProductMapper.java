@@ -110,8 +110,8 @@ public class ProductMapper extends DBMapper {
         }
         return product;
     }
-        public List<ProductDTO> GetListNewProduct() throws NamingException {
-    public List<ProductDTO> GetListNewProduct() throws NamingException, Exception 
+
+    public List<ProductDTO> GetListNewProduct() throws NamingException, Exception{
         String query = "Select * from products where IsNew = true";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
