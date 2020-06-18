@@ -76,7 +76,6 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
-    
         public int GetIdByUsername(String name) {
         //boolean result = true;
         String sql = "select * from users where Username=?";
@@ -94,5 +93,4 @@ public class UserMapper extends DBMapper {
         } catch (Exception e) {
             return -1;
         }
-    }
-}
+    }}
