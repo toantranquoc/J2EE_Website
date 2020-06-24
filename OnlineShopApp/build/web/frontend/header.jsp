@@ -74,17 +74,19 @@
             </div>
             <div class="modal-body tab-content py-4">
 
-                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" novalidate="" onsubmit="return validLogin()" action="./LoginServlet" name="form">
+                <form id="signin-tab" class="needs-validation tab-pane fade show active" method="post" autocomplete="off" onsubmit="return validLogin()" action="./LoginServlet" name="form">
                     <div class="form-group">
                         <label for="si-user">Tên đăng nhập</label>
-                        <input class="form-control" type="text" id="username" name="username">
+                        <input class="form-control" type="text" required id="username" name="username">
                     </div>
                     <div class="form-group">
                         <label for="si-password">Mật khẩu</label>
                         <div class="password-toggle">
-                            <input class="form-control" type="password" id="password" name="password">
+                            <input class="form-control"                                  
+                                   type="password" required id="password" name="password">
                             <label class="password-toggle-btn">
-                                <input class="custom-control-input" type="checkbox"><i id="showEye" class="fa fa-eye password-toggle-indicator" onClick="showPassword()"></i><span class="sr-only">Show password</span>
+                                <input class="custom-control-input"                                    
+                                       type="checkbox"><i id="showEye" class="fa fa-eye password-toggle-indicator" onClick="showPassword()"></i><span class="sr-only">Show password</span>
                             </label>
                         </div>
                     </div>
@@ -96,23 +98,29 @@
                     </div>
                     <button class="btn btn-primary btn-block btn-shadow btn-login" type="submit">Sign in</button>
                 </form>
-                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" novalidate="" onsubmit="return validRegister()" action="./RegisterServlet">
+                <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" onsubmit="return validRegister()" action="./RegisterServlet">
                     <div class="form-group">
                         <label for="su-name">Tên đăng nhập</label>
-                        <input  type="text" class="form-control" id="usernameRegister" name="usernameRegister"  placeholder="John Doe">
+                        <input  type="text" class="form-control" pattern="^[a-z\d\.]{5,}$" required id="usernameRegister" name="usernameRegister"  placeholder="Ít nhất 5 ký tự">
                     </div>
                     <div class="form-group">
                         <label for="su-password">Mật khẩu</label>
                         <input type="password"
+                               required
+                               pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
                                class="form-control"
+                               placeholder="Ít nhất 8 ký tự bao gồm ký tự in hoa và số"
                                id="passwordRegister" name="passwordRegister">
                     </div>
                     <div class="form-group">
                         <label for="su-password-confirm">Xác nhận mật khẩu</label>
                         <input type="password"
+                               required
+                               pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
                                class="form-control"
                                id="passwordConfirm" name="passwordConfirm">
                     </div>
+                    
                     <button class="btn btn-primary btn-block btn-shadow" type="submit">Sign up</button>
                 </form>
             </div>

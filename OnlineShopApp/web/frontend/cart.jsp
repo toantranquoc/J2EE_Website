@@ -63,7 +63,7 @@
                                                                 ${selection.getName()}
                                                             </td>
                                                             <td>                                                              
-                                                                <input type="number" class="form-control" name="quantity" id="quantity" value="${selection.getQuantity()}">
+                                                                <input type="number" class="form-control" min="1" max="30" name="quantity" id="quantity" value="${selection.getQuantity()}">
                                                             </td>
                                                             <td>
                                                               ${selection.currencyFormat(selection.getPrice())}
