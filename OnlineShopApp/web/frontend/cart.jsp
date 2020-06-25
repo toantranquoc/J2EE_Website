@@ -35,7 +35,6 @@
                         </div>
                         <div id="basket" class="col-lg-12">
                             <div class="box">
-                                <form method="post" action="./GoCheckOutServlet">
                                     <c:if test = "${totalcart == null || totalcart == 0}">
                                     <div class="alert alert-danger" role="alert">Chưa có sản phẩm nào trong giỏ hàng</div>
                                     </c:if>
@@ -55,22 +54,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${cart.listProduct}" var="selection">
-                                                        <tr >
+                                                    <form action="./UpdateToCartServlet" method="post">
+                                                        <tr>
                                                             <td>
+                                                                <input type="hidden" name="IdProduct" value="${selection.getId()}">
                                                                 <img style="width: 50px; height: 50px; border-style: none;vertical-align: middle;" src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="${selection.getName()}">
                                                             </td>
                                                             <td>
                                                                 ${selection.getName()}
                                                             </td>
                                                             <td>                                                              
-                                                                <input type="number" class="form-control" min="1" max="30" name="quantity" id="quantity" value="${selection.getQuantity()}">
+                                                                <input type="number" class="form-control" min="1" max="30" name="UpdateQuantity" id="UpdateQuantity" value="${selection.getQuantity()}">
                                                             </td>
                                                             <td>
                                                               ${selection.currencyFormat(selection.getPrice())}
                                                             </td>                  
                                                             <td>${selection.currencyFormat(selection.getPrice()*selection.getQuantity())}</td>
+                                                            <td><button type="submit" class="btn btn-outline-secondary">Cập nhật số lượng</button></td>
                                                             <td><a href="./RemoveFromCartServlet?idItem=${selection.getId()}&itemQuantity=${selection.getQuantity()}"><i class="fa fa-trash-o"></i></a></td>
                                                         </tr>
+                                                        </form>
                                                     </c:forEach>
                                                 </tbody>
                                                 <tfoot>
@@ -87,12 +90,11 @@
                                                 <a href="./HomeServlet"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua</button></a>
                                             </div>
                                             <div class="right">
-                                                <button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button>
+                                                <a href="./GoCheckOutServlet"><button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button></a>
                                             </div>
                                         </div>
                                     </div>
                                     </c:if>
-                                </form>
                             </div>
                             <!-- /.box-->
                         </div>

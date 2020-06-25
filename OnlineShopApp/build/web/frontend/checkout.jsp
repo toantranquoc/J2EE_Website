@@ -75,7 +75,7 @@
                                         <div class="form-group row">
                                             <label for="su-address" class="col-sm-4 col-form-label">Địa chỉ</label>
                                             <div class="col-8">
-                                                <textarea class="form-control" rows="2" required name="address" ></textarea>
+                                                <textarea class="form-control" rows="2" required name="address" maxlength="2000"></textarea>
                                             </div>
                                         </div>
 
