@@ -37,7 +37,16 @@ public class UserDTO {
         this.Password = Password;
         this.Created = Created;
     }
-    
+    public UserDTO(int id, String Username, String Fullname, Date DateOfBirth, String Email, String Phone, String Adress, Date CreateDate) {
+        this.Username = Username;
+        this.Id = id; 
+        this.Fullname = Fullname;
+        this.DateOfBirth = DateOfBirth;
+        this.Email = Email;
+        this.PhoneNumber = Phone;
+        this.Address = Adress;
+        this.Created = CreateDate;
+    }
     public int getId() {
         return Id;
     }

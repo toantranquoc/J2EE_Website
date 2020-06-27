@@ -37,7 +37,7 @@ public class DBConnectionService {
             try {
 
                 connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/quanlybanhang?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8",
-                        "root", "toantenx7");
+                        "root", "hung187657128");
             } catch (java.sql.SQLException e) {
                 throw new Exception("Can not access to Database Server ..." + e.getMessage());
             }

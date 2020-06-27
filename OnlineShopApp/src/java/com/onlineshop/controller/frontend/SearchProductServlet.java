@@ -74,7 +74,7 @@ public class SearchProductServlet extends HttpServlet {
         }
 
         session.setAttribute("model", list);
-        RequestDispatcher rs = request.getRequestDispatcher("./frontend/listproductsearch.jsp");
+        RequestDispatcher rs = request.getRequestDispatcher("./frontend/listallproducts.jsp");
         rs.forward(request, response);
     }
 

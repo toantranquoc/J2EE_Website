@@ -6,6 +6,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! int i = 1;%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <link href="css/admin/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/admin/product.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
     </head>
+    
     <body>
         <jsp:directive.include file="template.jsp"/>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -32,14 +38,25 @@
 
                 <!-- DataTables Example -->
                 <div class="card mb-3">
+                    <c:if test="${not empty messagePro}">
+                        <div class="alert alert-success alert-dismissible" id="mess">
+                            <button id="xoa" type="button" class="close" data-dismiss="alert">&times;</button> ${messagePro}
+                        </div>
+                        
+                    </c:if>
+                    <%
+                        // Removing after display
+                        session.removeAttribute("messagePro");
+                    %>
                     <div class="card-header row">
+                        
                         <div class="col-sm-6 mt-1">
                             <i class="fas fa-table"></i>
                             Danh sách sản phẩm
                         </div>
                         <div class="col-sm-4">
-                            <form class="form-inline mt-0 mt-md-0">
-                                <input name="name" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên sản phẩm" aria-label="Search">
+                            <form class="form-inline mt-0 mt-md-0" method="GET" action="./SearchProduct">
+                                <input class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên sản phẩm" aria-label="Search" name="nameSearch">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
                         </div>
@@ -63,39 +80,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                    <tr id="row_1" *ngFor="let product of products, let i=index">
-                                        <td>{{i+1}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>{{product.price|currency:'VND'}}</td>
-                                        <td><img src="{{product.photoURL}}" alt="{{product.name}}" style="width: 20px;height: 16px;"></td>
-                                        <td>{{product.quantity}}</td>
-                                        <td>
-                                            <i (click)="deleteProduct(product.idProduct)" class="fas fa-trash-alt fa-sm text-danger"></i>
-                                            |
-                                            <i [routerLink]="product.idProduct" class="far fa-edit fa-sm text-primary"></i>
-                                        </td>
-                                    </tr>-->
+                                    <c:forEach items="${listproducts}" var="product" >
+                                        <tr id="row_1" *ngFor="let product of products, let i=index">
+                                             <td><%= i%></td>
+                                             <td>${product.name}</td>
+                                             <td>${product.currencyFormat(product.getPrice())}</td>
+                                             <td><img src="./images/${product.getImage()}" width="100" height="50"></td>
+                                             <td>${product.getQuantity()}</td>
+                                             <td>
+                                                 <a href="./DeleteProduct?idProduct=${product.getIdProduct()}"><li class="list-inline-item"><buttons><i class="fas fa-trash-alt fa-sm text-danger"></i></button></li></a>     
+                                                 |
+                                                 <a href="./ProductDetail?idProduct=${product.getIdProduct()}"><li class="list-inline-item"><buttons><i class="far fa-edit fa-sm text-primary"></i></button></li></a>
+                                             </td>
+                                         </tr>
+                                         <%i++;%>
+                                    </c:forEach>
+                                         <%i=1;%>
                                 </tbody>
                             </table>
                             <br>
-                            <div class="d-flex justify-content-center">
-<!--                                <pagination [boundaryLinks]="true"
-                                    [totalItems]="pagination.totalItems"
-                                    [itemsPerPage]="pagination.itemsPerPage"
-                                    [(ngModel)]="pagination.currentPage"
-                                    (pageChanged)="pageChanged($event)"
-                                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-                                </pagination>-->
-                            </div>
+                            
                         </div>
+                           
                     </div>
                 </div>
             </div>
 
         </main>
+        
     </body>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    
 </html>
+
+
