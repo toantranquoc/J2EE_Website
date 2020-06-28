@@ -77,6 +77,20 @@
                         </c:forEach>
                     </div>
                 </div>
+                <!--Register-->
+                <c:if test="${not empty checkoutmessage}">
+                    <script>
+                        swal("${checkoutmessage}", "", "success");
+                    </script>
+                    ${checkoutmessage= ""} ;
+                </c:if>
+
+                <c:if test="${not empty checkouterror}">
+                    <script>
+                        swal("${checkouterror}", "", "error");
+                    </script>
+                    ${checkouterror  = ""};
+                </c:if>
                 <jsp:directive.include file="footer.jsp"/>
                 <!--        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
                 <script src="https://code.jquery.com/jquery-3.1.1.min.js">

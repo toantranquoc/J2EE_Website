@@ -2,6 +2,7 @@
 <%@page import="com.onlineshop.dto.ManufacturerDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="css/nav.css" rel="stylesheet" type="text/css"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <%
     session = request.getSession();
     String name = "";
@@ -101,7 +102,12 @@
                 <form id="signup-tab" class="needs-validation tab-pane fade" method="post" autocomplete="off" onsubmit="return validRegister()" action="./RegisterServlet">
                     <div class="form-group">
                         <label for="su-name">Tên đăng nhập</label>
-                        <input  type="text" class="form-control" pattern="^[a-z\d\.]{5,}$" required id="usernameRegister" name="usernameRegister"  placeholder="Ít nhất 5 ký tự">
+                        <input  type="text" 
+                                class="form-control" 
+                                pattern="^[a-z\d\.]{5,}$" 
+                                required id="usernameRegister" 
+                                name="usernameRegister"  
+                                placeholder="Ít nhất 5 ký tự">
                     </div>
                     <div class="form-group">
                         <label for="su-password">Mật khẩu</label>
@@ -120,7 +126,7 @@
                                class="form-control"
                                id="passwordConfirm" name="passwordConfirm">
                     </div>
-                    
+
                     <button class="btn btn-primary btn-block btn-shadow" type="submit">Sign up</button>
                 </form>
             </div>
@@ -154,26 +160,37 @@
             </ul>
         </div>
     </div>
-</nav>                     
+</nav>   
+<!--Login-->
+<c:if test="${not empty loginmessage}">
+    <script>
+        swal("${loginmessage}", "", "success");
+    </script>
+    ${loginmessage = ""};
+</c:if>
 
+<c:if test="${not empty errormessage}">
+    <script>
+        swal("${errormessage}", "", "error");
+    </script>
+    ${errormessage = ""} ;
+</c:if>
+
+<!--Register-->
+<c:if test="${not empty registermessage}">
+    <script>
+        swal("${registermessage}", "", "success");
+    </script>
+    ${registermessage= ""} ;
+</c:if>
+
+<c:if test="${not empty errorregister}">
+    <script>
+        swal("${errorregister}", "", "error");
+    </script>
+    ${errorregister  = ""};
+</c:if>
 <script>
-    var totalPages = ${model.totalPage};
-    var currentPage = ${model.page};
-    var limit = 12;
-    $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 10,
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-                if (currentPage !== page) {
-                    $('#maxPageItem').val(limit);
-                    $('#page').val(page);
-                    $('#formSubmit').submit();
-                }
-            }
-        });
-    });
     function validLogin() {
         var username = $('#username').val();
         var password = $('#password').val();
@@ -193,12 +210,12 @@
         }
 
         if (isValid === true) {
-            toastr.info("Đăng nhập thành công");
             return true;
         } else {
-            toastr.error("Đăng nhập thất bại");
             return false;
         }
+
+
     }
 
     function validRegister() {
@@ -224,12 +241,14 @@
             $('#passwordConfirm').after('<span class="error">Bạn chưa nhập mật khẩu xác nhận</span>');
             isValid = false;
         }
+        if (passwordRegister !== passwordConfirm) {
+            toastr.error("Mật khẩu xác thực không chính xác");
+            return false;
+        }
 
         if (isValid === true) {
-            toastr.success("Đăng ký thành công");
             return true;
         } else {
-            toastr.error("Đăng ký thất bại");
             return false;
         }
 
