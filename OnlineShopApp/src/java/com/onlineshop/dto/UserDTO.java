@@ -29,12 +29,12 @@ public class UserDTO {
 
     public UserDTO(String Username, String Password) {
         this.Username = Username;
-        this.Password = Password;
+        this.Password = CryptMD5.Crypt(Password);;
     }
     
     public UserDTO(String Username, String Password, Date Created) {
         this.Username = Username;
-        this.Password = Password;
+        this.Password = CryptMD5.Crypt(Password);
         this.Created = Created;
     }
     public UserDTO(int id, String Username, String Fullname, Date DateOfBirth, String Email, String Phone, String Adress, Date CreateDate) {
@@ -76,7 +76,7 @@ public class UserDTO {
     }
 
     public void setPassword(String Password) {
-        this.Password = Password;
+        this.Password = CryptMD5.Crypt(Password);;
     }
 
     public Date getDateOfBirth() {
