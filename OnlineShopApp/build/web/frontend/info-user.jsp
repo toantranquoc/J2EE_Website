@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label for="su-name" class="col-sm-4 col-form-label">Tên đăng nhập</label>
                             <div class="col-8">
-                                <input type="text" id="username" name="username" required
+                                <input type="text" id="username" name="username"
                                        class="form-control" placeholder="Username" required>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <label for="su-fullname"  class="col-sm-4 col-form-label">Họ tên</label>
                             <div class="col-8">
-                                <input type="text" id="fullname" required name="fullname"
+                                <input type="text" id="fullname" name="fullname"
                                        class="form-control" placeholder="Fullname">
                             </div>
                         </div>
@@ -47,14 +47,14 @@
                         <div class="form-group row">
                             <label for="su-dateOfBirthday" class="col-sm-4 col-form-label">Ngày sinh</label>
                             <div class="col-8">
-                                <input type="date" id="dateOfBirthday" required name="dateOfBirthday" class="form-control">
+                                <input type="date" id="dateOfBirthday" name="dateOfBirthday" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="su-email" class="col-sm-4 col-form-label">Email</label>
                             <div class="col-8">
-                                <input type="email" id="email" required name="email"
+                                <input type="email" id="email" name="email"
                                        class="form-control">
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="form-group row">
                             <label for="su-phoneNumber" class="col-sm-4 col-form-label">Số điện thoại</label>
                             <div class="col-8">
-                                <input type="tel" id="phoneNumber" required name="phoneNumber"
+                                <input type="tel" id="phoneNumber" name="phoneNumber"
                                        class="form-control">
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="form-group row">
                             <label for="su-address" class="col-sm-4 col-form-label">Địa chỉ</label>
                             <div class="col-8">
-                                <textarea class="form-control" required rows="2" id="address" name="address"></textarea>
+                                <textarea class="form-control" rows="2" id="address" name="address"></textarea>
                             </div>
                         </div>
 

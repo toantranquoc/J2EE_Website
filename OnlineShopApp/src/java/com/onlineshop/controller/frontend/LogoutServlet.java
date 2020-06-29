@@ -62,10 +62,6 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         session.removeAttribute("username");
-        session.setAttribute("errorregister", "");
-        session.setAttribute("registermessage","");
-        session.setAttribute("errormessage","");
-        session.setAttribute("loginmessage","");
         session.getMaxInactiveInterval();
 
         response.sendRedirect("./HomeServlet");

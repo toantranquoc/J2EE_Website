@@ -6,6 +6,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! int i = 1;%>
+<%! String isActive = ""; %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <link href="css/admin/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/admin/addnewmanufacturer.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     </head>
     <body>
         <jsp:directive.include file="template.jsp"/>
@@ -32,14 +35,23 @@
 
                 <!-- DataTables Example -->
                 <div class="card mb-3">
+                    <c:if test="${not empty messageManu}">
+                        <div class="alert alert-primary">
+                            <button id="xoa" type="button" class="close" data-dismiss="alert">&times;</button>${messageManu}
+                        </div>
+                    </c:if>
+                    <%
+                        // Removing after display
+                        session.removeAttribute("messageManu");
+                    %>
                     <div class="card-header row">
                         <div class="col-sm-6 mt-1">
                             <i class="fas fa-table"></i>
                             Danh sách nhà cung cấp
                         </div>
                         <div class="col-sm-4">
-                            <form class="form-inline mt-0 mt-md-0">
-                                <input name="name" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên nhà cung cấp" aria-label="Search">
+                            <form class="form-inline mt-0 mt-md-0" method="GET" action="./SearchManufacturer">
+                                <input name="nameSearch" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên nhà cung cấp" aria-label="Search">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
                         </div>
@@ -61,16 +73,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                    <tr id="row_1" *ngFor="let manufacturer of manufacturers, let i = index">
-                                        <td>{{i+1}}</td>
-                                        <td>{{manufacturer.name}}</td>
-                                        <td>{{manufacturer.isActive===true? 'Hoạt động': 'Không hoạt động'}}</td>
-                                        <td>
-                                            <i (click)="deleteManufacturer(manufacturer.idManufacturer)" class="fas fa-trash-alt fa-sm text-danger"></i>
-                                            |
-                                            <i [routerLink]="[manufacturer.idManufacturer]" class="far fa-edit fa-sm text-primary"></i>
-                                        </td>
-                                    </tr>-->
+                                     <c:forEach items="${listmanufacturers}" var="manufacturer" >
+                                        <tr id="row_1" *ngFor="let manufacturer of manufacturers, let i = index">
+                                            <td><%= i%></td>
+                                            <td>${manufacturer.name}</td>
+                                            
+                                            <td>${manufacturer.isActive == true? 'Hoạt động': 'Không hoạt động'}</td>
+                                            <td>
+                                                <a href="./RemoveManufacturer?idManu=${manufacturer.getIDManufacturer()}"><li class="list-inline-item"><buttons><i class="fas fa-trash-alt fa-sm text-danger"></i></button></li></a>     
+                                            </td>
+                                        </tr>
+                                        <%i++;%>
+                                    </c:forEach>
+                                        <%i = 1;%>
                                 </tbody>
                             </table>
                             <br>
@@ -94,4 +109,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>
 </html>

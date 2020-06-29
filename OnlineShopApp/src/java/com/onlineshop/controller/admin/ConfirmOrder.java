@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.onlineshop.controller.frontend;
+package com.onlineshop.controller.admin;
 
-import com.onlineshop.bo.ProductBO;
-import com.onlineshop.dto.CartDTO;
-import com.onlineshop.dto.ProductDTO;
-import com.onlineshop.dto.ProductSelectionDTO;
+import com.onlineshop.bo.OrderBO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author pc
+ * @author Hung
  */
-public class UpdateToCartServlet extends HttpServlet {
+@WebServlet(name = "ConfirmOrder", urlPatterns = {"/ConfirmOrder"})
+public class ConfirmOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,32 +32,16 @@ public class UpdateToCartServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int UpdateQuantity = 1;
-        String idProduct = request.getParameter("IdProduct");
+            throws ServletException, IOException{
+        String idProduct = request.getParameter("idOrder");
+        int id =Integer.parseInt(idProduct);
         ServletContext context = request.getServletContext();
-        ProductBO productBO = new ProductBO(context);
-        ProductDTO productDTO = productBO.GetProductByID(idProduct);
-        int totalCart = 0;
-        if (productDTO != null) {
-            if (request.getParameter("UpdateQuantity") != null) {
-                UpdateQuantity = Integer.parseInt(request.getParameter("UpdateQuantity"));
-            }
-            HttpSession session = request.getSession();
-            CartDTO cart = (CartDTO) session.getAttribute("cart");
-            List<ProductSelectionDTO> list = cart.getListProduct();
-            boolean check = false;
-            for (ProductSelectionDTO productSelectionDTO : list) {
-                if (productSelectionDTO.getId() == productDTO.getIdProduct()) {
-                    productSelectionDTO.setQuantity(UpdateQuantity);                    
-                }
-            }
-            totalCart = cart.getTotalQuantity();
-            session.setAttribute("totalcart", totalCart);
-            session.setAttribute("cart", cart);
-            response.sendRedirect("./GoCartServlet");
-        }
+        OrderBO productBO = new OrderBO(context);
+        
+        productBO.ConfirmOrder(id);
+        
+        HttpSession session = request.getSession();
+        response.sendRedirect("./GoListOrdersAdminServlet");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

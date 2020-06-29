@@ -5,14 +5,23 @@
  */
 package com.onlineshop.controller.admin;
 
+import com.onlineshop.bo.ManufacturerBO;
+import com.onlineshop.bo.ProductBO;
+import com.onlineshop.bo.UserBO;
+import com.onlineshop.dto.ManufacturerDTO;
+import com.onlineshop.dto.ProductDTO;
+import com.onlineshop.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +41,14 @@ public class GoListCustomersAdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ServletContext context = request.getServletContext();
+        UserBO userBO = new UserBO(context);
+        
+        List<UserDTO> list = userBO.getAllUser();
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("listusers", list);
         String homepage = "./admin/customer.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
         dispatcher.forward(request, response);

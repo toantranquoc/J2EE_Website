@@ -92,13 +92,12 @@ public class CreateOrderServlet extends HttpServlet {
                 isAddNewOrderDetail = orderdetailBO.AddNewOrder(detail);
             }
             if (isAddNewOrderDetail) {
-                session.setAttribute("checkoutmessage", "Đặt hàng thành công!" );
                 session.removeAttribute("cart");
                 session.setAttribute("totalcart", 0);
                 response.sendRedirect("./HomeServlet");
             }
         } else {
-            session.setAttribute("checkouterror", "Đặt hàng thất bại!" );
+
         }
 
     }

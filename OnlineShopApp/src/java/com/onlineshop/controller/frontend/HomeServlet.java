@@ -58,8 +58,7 @@ public class HomeServlet extends HttpServlet implements Serializable {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String homepage = "./frontend/index.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
-        dispatcher.forward(request, response);
+        response.sendRedirect(homepage);
 
     }
 

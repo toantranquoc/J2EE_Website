@@ -6,6 +6,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! int i = 1;%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,8 +39,8 @@
                             Danh sách hóa đơn
                         </div>
                         <div class="col-sm-4">
-                            <form class="form-inline mt-0 mt-md-0">
-                                <input name="name" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên người nhận" aria-label="Search">
+                            <form class="form-inline mt-0 mt-md-0" method="GET" action="./SearchOrder">
+                                <input name="nameSearch" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên người nhận" aria-label="Search">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
                         </div>
@@ -49,6 +50,7 @@
                             <table class="table table-bordered" id="dataTable" cellspacing="0">
                                 <thead  class="thead-light">
                                     <tr>
+                                        <th>STT</th>
                                         <th>Mã hóa đơn</th>
                                         <th>Người nhận</th>
                                         <th>Số điện thoại</th>
@@ -61,41 +63,54 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                    <tr id="row_1" *ngFor="let order of listOrders">
-                                        <td><a [routerLink]="['detail/', order.idOrder]">{{order.idOrder}}</a></td>
-                                        <td>{{order.receiver}}</td>
-                                        <td>{{order.phoneNumber}}</td>
-                                        <td>{{order.email}}</td>
-                                        <td>{{order.address}}</td>
-                                        <td>{{order.orderDate}}</td>
-                                        <td>{{order.paid}}</td>
-                                        <td *ngIf="order.orderState == 1">Đang chờ xử lý</td>
-                                        <td *ngIf="order.orderState == 2">Đã xác nhận</td>
-                                        <td *ngIf="order.orderState == 0">Đơn hàng bị hủy</td>
-                                        <td>
-                                            <i (click)="updateOrder(order.idOrder, 2)" class="fas fa-check fa-sm text-primary"></i>
-                                            |
-                                            <i (click)="updateOrder(order.idOrder, 0)" class="fas fa-trash-alt fa-sm text-danger"></i>
-                                        </td>
-                                    </tr>-->
+                                     <c:forEach items="${listorders}" var="order" >
+                                        <tr id="row_1" *ngFor="let order of listorders, let i = index">
+                                            <td><%= i%></td>
+                                            <td><a href="./OrderDetail?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>${order.id}</i></button></li></a></td>
+                                            <td>${order.getReceiver()}</td>
+                                            <td>${order.phone}</td>
+                                            <td>${order.email}</td>
+                                            <td>${order.address}</td>
+                                            <td>${order.getOrderDate()}</td>
+                                            <td>${order.paid}</td>
+                                            <c:choose>
+                                                <c:when test="${order.getOrderState() == 0}">
+                                                    <td>Đã hủy</td>
+                                                </c:when>
+                                                <c:when test="${order.getOrderState() == 1}">
+                                                    <td>Chờ xác nhận</td>
+                                                </c:when>
+                                                <c:when test="${order.getOrderState() == 2}">
+                                                    <td>Đã duyệt</td>
+                                                </c:when>
+                                            </c:choose>
+                                            
+                                            <td>
+                                                <a href="./DeleteOrder?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Xóa</i></button></li></a>|
+                                                <a href="./ConfirmOrder?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Duyệt</i></button></li></a>
+                                                
+                                                <c:choose>
+                                                    
+                                                    <c:when test="${order.getOrderState() == 2}">
+                                                        |<a href="./ThanhToan?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Đã thanh toán</i></button></li></a>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                        <%i++;%>
+                                    </c:forEach>
+                                        <%i = 1;%>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colspan="7"><b>Tổng đơn hàng</b></td>
-                                        <td colspan="1">{{listOrders.length}}</td>
+                                        <td colspan="1">${listorders.size()}</td>
+                                        <td colspan="2"></td>
                                     </tr>
                                 </tfoot>
                             </table>
                             <br>
-                            <div class="d-flex justify-content-center">
-<!--                                <pagination [boundaryLinks]="true"
-                                    [totalItems]="pagination.totalItems"
-                                    [itemsPerPage]="pagination.itemsPerPage"
-                                    [(ngModel)]="pagination.currentPage"
-                                    (pageChanged)="pageChanged($event)"
-                                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-                                </pagination>-->
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
