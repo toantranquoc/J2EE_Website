@@ -91,6 +91,20 @@
                     </script>
                     ${checkouterror  = ""};
                 </c:if>
+                                <!--Update UserInfor-->
+                <c:if test="${not empty updatesuccess}">
+                    <script>
+                        swal("${updatesuccess}", "", "success");
+                    </script>
+                    ${updatesuccess= ""} ;
+                </c:if>
+
+                <c:if test="${not empty updateerror}">
+                    <script>
+                        swal("${updateerror}", "", "error");
+                    </script>
+                    ${updateerror  = ""};
+                </c:if>
                 <jsp:directive.include file="footer.jsp"/>
                 <!--        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
                 <script src="https://code.jquery.com/jquery-3.1.1.min.js">

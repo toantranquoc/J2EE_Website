@@ -52,6 +52,10 @@
         <servlet-name>UpdateToCartServlet</servlet-name>
         <servlet-class>com.onlineshop.controller.frontend.UpdateToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateUserInforServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.frontend.UpdateUserInforServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>UpdateToCartServlet</servlet-name>
         <url-pattern>/UpdateToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserInforServlet</servlet-name>
+        <url-pattern>/UpdateUserInforServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

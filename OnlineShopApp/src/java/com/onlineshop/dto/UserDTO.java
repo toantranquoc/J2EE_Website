@@ -27,6 +27,15 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    public UserDTO(String Username, String Fullname, Date DateOfBirth, String Email, String PhoneNumber, String Address) {
+        this.Username = Username;
+        this.Fullname = Fullname;
+        this.DateOfBirth = DateOfBirth;
+        this.Email = Email;
+        this.PhoneNumber = PhoneNumber;
+        this.Address = Address;
+    }
+    
     public UserDTO(String Username, String Password) {
         this.Username = Username;
         this.Password = CryptMD5.Crypt(Password);;

@@ -3,7 +3,7 @@
     Created on : Jun 18, 2020, 12:29:27 AM
     Author     : to cong hau
 --%>
-<%@page import="com.onlineshop.dto.ProductDTO"%>
+<%@page import="com.onlineshop.dto.UserDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,38 +23,37 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-5">
-                    <form id="editForm" action="./" >
-                        <hr>
+                    <form id="editForm" action="./UpdateUserInforServlet">
                         <h4 class="text-center text-primary">Thông tin tài khoản</h4>
                         <hr>
-
-                        <div class="form-group row">
-                            <label for="su-name" class="col-sm-4 col-form-label">Tên đăng nhập</label>
-                            <div class="col-8">
-                                <input type="text" id="username" name="username" required
-                                       class="form-control" placeholder="Username" required>
-                            </div>
-                        </div>
-
                         <div class="form-group row">
                             <label for="su-fullname"  class="col-sm-4 col-form-label">Họ tên</label>
                             <div class="col-8">
                                 <input type="text" id="fullname" required name="fullname"
-                                       class="form-control" placeholder="Fullname">
+                                       value="${inforuser.getFullname()}"
+                                       class="form-control" placeholder="Full name">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="su-dateOfBirthday" class="col-sm-4 col-form-label">Ngày sinh</label>
                             <div class="col-8">
-                                <input type="date" id="dateOfBirthday" required name="dateOfBirthday" class="form-control">
+                                <input type="date" id="dateOfBirthday"
+                                       required name="dateOfBirth" 
+                                       value="${inforuser.getDateOfBirth()}"
+                                       class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="su-email" class="col-sm-4 col-form-label">Email</label>
                             <div class="col-8">
-                                <input type="email" id="email" required name="email"
+                                <input type="email" id="email"
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                       required 
+                                       placeholder="abc@email.com"
+                                       name="email"
+                                       value="${inforuser.getEmail()}"
                                        class="form-control">
                             </div>
                         </div>
@@ -62,7 +61,11 @@
                         <div class="form-group row">
                             <label for="su-phoneNumber" class="col-sm-4 col-form-label">Số điện thoại</label>
                             <div class="col-8">
-                                <input type="tel" id="phoneNumber" required name="phoneNumber"
+                                <input type="tel" id="phoneNumber"
+                                       pattern="(09|03|07|08|05)+([0-9]{8})"
+                                       required 
+                                       name="phoneNumber"
+                                       value="${inforuser.getPhoneNumber()}"
                                        class="form-control">
                             </div>
                         </div>
@@ -70,7 +73,7 @@
                         <div class="form-group row">
                             <label for="su-address" class="col-sm-4 col-form-label">Địa chỉ</label>
                             <div class="col-8">
-                                <textarea class="form-control" required rows="2" id="address" name="address"></textarea>
+                                <textarea class="form-control" required rows="2" id="address" name="address">${inforuser.getAddress()}</textarea>
                             </div>
                         </div>
 

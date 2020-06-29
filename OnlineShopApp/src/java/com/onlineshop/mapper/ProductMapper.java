@@ -30,7 +30,8 @@ public class ProductMapper extends DBMapper {
     }
 
     public List<ProductDTO> GetListProducts(int offset, int limit) throws NamingException, Exception {
-        String query = "Select * from products limit ? OFFSET ?";        List<ProductDTO> list = new ArrayList<ProductDTO>();
+        String query = "Select * from products limit ? OFFSET ?";        
+        List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(query);

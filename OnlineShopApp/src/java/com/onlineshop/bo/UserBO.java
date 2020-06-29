@@ -83,8 +83,8 @@ public class UserBO {
         }
         return result;
     }
-    
-        public int GetIdUserByUsername(String user) {
+
+    public int GetIdUserByUsername(String user) {
         int result = -1;
         UserMapper mapper = null;
         try {
@@ -101,5 +101,40 @@ public class UserBO {
         }
         return result;
     }
-    
+
+    public UserDTO GetUserByUsername(String username) {
+        UserDTO user = new UserDTO();
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            user = mapper.GetUserByUserName(username);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return user;
+    }
+
+    public boolean UpdateInforUser(UserDTO user) {
+        boolean isUpdate = false;
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            isUpdate = mapper.UpdateUserInfor(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return isUpdate;
+    }
 }
