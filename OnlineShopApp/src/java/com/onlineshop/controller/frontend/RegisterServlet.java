@@ -75,25 +75,27 @@ public class RegisterServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         UserBO userBO = new UserBO(context);
         if (!password.equalsIgnoreCase(veryPassword)) {
-            RequestDispatcher rs = request.getRequestDispatcher("error.jsp");
-            rs.forward(request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("errorregister", "Mật khẩu xác thực không chính xác!");
+            response.sendRedirect("./HomeServlet");
         } else {
             UserDTO user = new UserDTO(username, password, date);
             boolean isExist = userBO.IsExistAccount(username);
             if (isExist) {
                 HttpSession session = request.getSession();
-                session.setAttribute("message", "Tài khoản đã tồn tại!");
+                session.setAttribute("errorregister", "Tài khoản đã tồn tại!");
                 RequestDispatcher rs = request.getRequestDispatcher("/HomeServlet");
                 rs.forward(request, response);
             } else {
                 boolean isCreate = userBO.AddNewAccount(user);
                 if (isCreate) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("message", "Đăng ký tài khoản thành công!");
+                    session.setAttribute("registermessage", "Đăng ký tài khoản thành công!");
+                    session.setAttribute("username", username);
                     response.sendRedirect("./HomeServlet");
                 } else {
                     HttpSession session = request.getSession();
-                    session.setAttribute("message", "Đăng ký tài khoản thất bại!");
+                    session.setAttribute("errorregister", "Đăng ký tài khoản thất bại!");
                     response.sendRedirect("./HomeServlet");
                 }
             }

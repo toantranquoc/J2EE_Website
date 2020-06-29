@@ -77,6 +77,20 @@
                         </c:forEach>
                     </div>
                 </div>
+                <!--Register-->
+                <c:if test="${not empty checkoutmessage}">
+                    <script>
+                        swal("${checkoutmessage}", "", "success");
+                    </script>
+                    ${checkoutmessage= ""} ;
+                </c:if>
+
+                <c:if test="${not empty checkouterror}">
+                    <script>
+                        swal("${checkouterror}", "", "error");
+                    </script>
+                    ${checkouterror  = ""};
+                </c:if>
                 <jsp:directive.include file="footer.jsp"/>
                 <!--        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
                 <script src="https://code.jquery.com/jquery-3.1.1.min.js">
@@ -85,18 +99,6 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </body>
     <script type="text/javascript">
-        $(function () {
-            window.pagObj = $('#pagination').twbsPagination({
-                totalPages: 35,
-                visiblePages: 10,
-                onPageClick: function (event, page) {
-                    console.info(page + ' (from options)');
-                }
-            }).on('page', function (event, page) {
-                console.info(page + ' (from event listening)');
-            });
-        });
-
         function closeDialog() {
             document.getElementById('modal').style.display = "none";
         }
