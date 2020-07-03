@@ -35,7 +35,6 @@
                         </div>
                         <div id="basket" class="col-lg-12">
                             <div class="box">
-                                <form method="post" action="./GoCheckOutServlet">
                                     <c:if test = "${totalcart == null || totalcart == 0}">
                                     <div class="alert alert-danger" role="alert">Chưa có sản phẩm nào trong giỏ hàng</div>
                                     </c:if>
@@ -55,22 +54,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${cart.listProduct}" var="selection">
-                                                        <tr >
+                                                    <form action="./UpdateToCartServlet" method="post">
+                                                        <tr>
                                                             <td>
+                                                                <input type="hidden" name="IdProduct" value="${selection.getId()}">
                                                                 <img style="width: 50px; height: 50px; border-style: none;vertical-align: middle;" src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="${selection.getName()}">
                                                             </td>
                                                             <td>
                                                                 ${selection.getName()}
                                                             </td>
                                                             <td>                                                              
-                                                                <input type="number" class="form-control" name="quantity" id="quantity" value="${selection.getQuantity()}">
+                                                                <input type="number" class="form-control" min="1" max="30" name="UpdateQuantity" id="UpdateQuantity" value="${selection.getQuantity()}">
                                                             </td>
                                                             <td>
                                                               ${selection.currencyFormat(selection.getPrice())}
                                                             </td>                  
                                                             <td>${selection.currencyFormat(selection.getPrice()*selection.getQuantity())}</td>
+                                                            <td><button type="submit" class="btn btn-outline-secondary">Cập nhật số lượng</button></td>
                                                             <td><a href="./RemoveFromCartServlet?idItem=${selection.getId()}&itemQuantity=${selection.getQuantity()}"><i class="fa fa-trash-o"></i></a></td>
                                                         </tr>
+                                                        </form>
                                                     </c:forEach>
                                                 </tbody>
                                                 <tfoot>
@@ -87,12 +90,11 @@
                                                 <a href="./HomeServlet"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua</button></a>
                                             </div>
                                             <div class="right">
-                                                <button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button>
+                                                <a href="./GoCheckOutServlet"><button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button></a>
                                             </div>
                                         </div>
                                     </div>
                                     </c:if>
-                                </form>
                             </div>
                             <!-- /.box-->
                         </div>
@@ -101,32 +103,31 @@
                 </div>
             </div>
         </div>
+<jsp:directive.include file="footer.jsp"/>
 
-        <jsp:directive.include file="footer.jsp"/>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+<script type="text/javascript">
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    </body>
-    <script type="text/javascript">
-        
-        function closeDialog() {
-            document.getElementById('modal').style.display = "none";
-        }
-        
-        function openDialog() {
-            document.getElementById('modal').style.display = "block";
-        }
+    function closeDialog() {
+        document.getElementById('modal').style.display = "none";
+    }
 
-        function showPassword() {
-            var typePassword = document.getElementById('password').type;
-            if (typePassword === "password") {
-                document.getElementById('password').type = "text";
-                document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
-            } else {
-                document.getElementById('password').type = "password";
-                document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
-            }
+    function openDialog() {
+        document.getElementById('modal').style.display = "block";
+    }
+
+    function showPassword() {
+        var typePassword = document.getElementById('password').type;
+        if (typePassword === "password") {
+            document.getElementById('password').type = "text";
+            document.getElementById("showEye").className = "fa fa-eye-slash password-toggle-indicator";
+        } else {
+            document.getElementById('password').type = "password";
+            document.getElementById("showEye").className = "fa fa-eye password-toggle-indicator'";
         }
-    </script>
+    }
+</script>
 </html>

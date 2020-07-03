@@ -2,11 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.LoginServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.RegisterServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TestServlet</servlet-name>
@@ -14,43 +14,47 @@
     </servlet>
     <servlet>
         <servlet-name>GoListProductsServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoListProductsServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoListProductsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GoProductDetailServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoProductDetailServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoProductDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCartServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.AddToCartServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.AddToCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GoCartServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoCartServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GoCheckOutServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoCheckOutServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoCheckOutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveFromCartServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.RemoveFromCartServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.RemoveFromCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateOrderServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.CreateOrderServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.CreateOrderServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GoMyOrdersServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoMyOrdersServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoMyOrdersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GoOrderDetailServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.GoOrderDetailServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.GoOrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateUserInforServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.UpdateUserInforServlet</servlet-class>
+        <servlet-class>com.onlineshop.controller.servlet.UpdateUserInforServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateToCartServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.servlet.UpdateToCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>UpdateUserInforServlet</servlet-name>
         <url-pattern>/UpdateUserInforServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateToCartServlet</servlet-name>
+        <url-pattern>/UpdateToCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

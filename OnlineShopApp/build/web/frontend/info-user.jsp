@@ -52,8 +52,7 @@
                                        required 
                                        placeholder="abc@email.com"
                                        name="email"
-                                       value="${inforuser.getEmail()}"
-                                       class="form-control">">
+                                       value="${inforuser.getEmail()}"                                       class="form-control">
                             </div>
                         </div>
 
@@ -65,7 +64,7 @@
                                        required 
                                        name="phoneNumber"
                                        value="${inforuser.getPhoneNumber()}"
-                                       class="form-control">>
+                                       class="form-control">
                             </div>
                         </div>
 

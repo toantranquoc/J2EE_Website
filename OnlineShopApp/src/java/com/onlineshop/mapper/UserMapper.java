@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+
 /**
  *
  * @author to cong hau
@@ -82,7 +83,8 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
-        public int GetIdByUsername(String name) {        //boolean result = true;
+
+    public int GetIdByUsername(String name) {        //boolean result = true;
         String sql = "select * from users where Username=?";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
@@ -98,6 +100,8 @@ public class UserMapper extends DBMapper {
         } catch (Exception e) {
             return -1;
         }
+    }
+
     public UserDTO GetUserByUserName(String username) {
         String sql = "select * from users where Username=?";
         UserDTO user = new UserDTO();
@@ -144,6 +148,7 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
+
     public ArrayList<UserDTO> searchUser(String userName) throws Exception {
         String query = "SELECT * FROM users WHERE name LIKE '%" + userName + "%'";
         ArrayList<UserDTO> users = new ArrayList<>();
@@ -160,7 +165,7 @@ public class UserMapper extends DBMapper {
                 Date Create = rs.getDate("Created");
                 String Address = rs.getString("Address");
                 Date DateOfBirth = rs.getDate("DateOfBirthday");
-                UserDTO user = new UserDTO(id, UserName,name,DateOfBirth,Email,Phone,Address,Create);
+                UserDTO user = new UserDTO(id, UserName, name, DateOfBirth, Email, Phone, Address, Create);
                 users.add(user);
             }
 
@@ -170,6 +175,7 @@ public class UserMapper extends DBMapper {
 
         return users;
     }
+
     public ArrayList<UserDTO> getAllUser() throws Exception {
         String query = "SELECT * FROM users";
         ArrayList<UserDTO> users = new ArrayList<>();
@@ -186,7 +192,7 @@ public class UserMapper extends DBMapper {
                 Date Create = rs.getDate("Created");
                 String Address = rs.getString("Address");
                 Date DateOfBirth = rs.getDate("DateOfBirthday");
-                UserDTO user = new UserDTO(id, UserName,name,DateOfBirth,Email,Phone,Address,Create);
+                UserDTO user = new UserDTO(id, UserName, name, DateOfBirth, Email, Phone, Address, Create);
                 users.add(user);
             }
 
@@ -196,6 +202,7 @@ public class UserMapper extends DBMapper {
 
         return users;
     }
+
     public boolean DeleteUser(int id) {
         String sql = "DELETE FROM users WHERE Id = " + id;
         try {
