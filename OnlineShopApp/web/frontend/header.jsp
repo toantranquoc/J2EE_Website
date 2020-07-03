@@ -204,8 +204,8 @@
         if (password.length <= 0) {
             $('#password').after('<span class="error">Bạn chưa nhập mật khẩu</span>');
             isValid = false;
-        } else if (password.length < 4 || password.length > 10) {
-            $('#password').after('<span class="error">Mật khẩu phải từ 4 đến 10 ký tự</span>');
+        } else if (password.length < 4 || password.length > 15) {
+            $('#password').after('<span class="error">Mật khẩu phải từ 4 đến 15 ký tự</span>');
             isValid = false;
         }
 

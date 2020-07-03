@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 package com.onlineshop.dto;
-
 import java.security.MessageDigest;
-
 /**
  *
- * @author pc
+ * @author to cong hau
  */
 public class CryptMD5 {
 

@@ -5,13 +5,18 @@
  */
 package com.onlineshop.mapper;
 
+import com.onlineshop.bo.UserBO;
 import com.onlineshop.dbconnection.DBConnectionService;
+import com.onlineshop.dto.ProductDTO;
 import com.onlineshop.dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Date;
-
 /**
  *
  * @author to cong hau
@@ -77,9 +82,7 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
-
-    public int GetIdByUsername(String name) {
-        //boolean result = true;
+        public int GetIdByUsername(String name) {        //boolean result = true;
         String sql = "select * from users where Username=?";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
@@ -95,8 +98,6 @@ public class UserMapper extends DBMapper {
         } catch (Exception e) {
             return -1;
         }
-    }
-
     public UserDTO GetUserByUserName(String username) {
         String sql = "select * from users where Username=?";
         UserDTO user = new UserDTO();
@@ -143,5 +144,67 @@ public class UserMapper extends DBMapper {
             return false;
         }
     }
+    public ArrayList<UserDTO> searchUser(String userName) throws Exception {
+        String query = "SELECT * FROM users WHERE name LIKE '%" + userName + "%'";
+        ArrayList<UserDTO> users = new ArrayList<>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("FullName");
+                String UserName = rs.getString("FullName");
+                String Phone = rs.getString("PhoneNumber");
+                String Email = rs.getString("Email");
+                Date Create = rs.getDate("Created");
+                String Address = rs.getString("Address");
+                Date DateOfBirth = rs.getDate("DateOfBirthday");
+                UserDTO user = new UserDTO(id, UserName,name,DateOfBirth,Email,Phone,Address,Create);
+                users.add(user);
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return users;
+    }
+    public ArrayList<UserDTO> getAllUser() throws Exception {
+        String query = "SELECT * FROM users";
+        ArrayList<UserDTO> users = new ArrayList<>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("FullName");
+                String UserName = rs.getString("Username");
+                String Phone = rs.getString("PhoneNumber");
+                String Email = rs.getString("Email");
+                Date Create = rs.getDate("Created");
+                String Address = rs.getString("Address");
+                Date DateOfBirth = rs.getDate("DateOfBirthday");
+                UserDTO user = new UserDTO(id, UserName,name,DateOfBirth,Email,Phone,Address,Create);
+                users.add(user);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return users;
+    }
+    public boolean DeleteUser(int id) {
+        String sql = "DELETE FROM users WHERE Id = " + id;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

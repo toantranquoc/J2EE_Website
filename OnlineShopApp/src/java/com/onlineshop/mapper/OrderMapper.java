@@ -5,8 +5,10 @@
  */
 package com.onlineshop.mapper;
 
+import com.onlineshop.bo.UserBO;
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.OrderDTO;
+import com.onlineshop.dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,5 +105,91 @@ public class OrderMapper extends DBMapper {
         }
         return list;
     }
+    public List<OrderDTO> GetListAllOrder() throws NamingException, Exception {
+        String query = "Select * from orders";
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int IdOrder = rs.getInt("IDOrder");
+                String Paid = rs.getString("Paid");
+                int  OrderState = rs.getInt("OrderState");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date DeliveryDate = rs.getDate("DeliveryDate");
+                int IdUser = rs.getInt("IdUser");
+                String Receiver = rs.getString("Receiver");
+                String Email = rs.getString("Email");
+                String Phone = rs.getString("PhoneNumber");
+                String Address = rs.getString("Address");
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                list.add(user);
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.toString());
+        }
+        return list;
+    }
+    public List<OrderDTO> searchOrder(String receiver) throws Exception {
+        String query = "SELECT * FROM orders WHERE Receiver LIKE '%" + receiver + "%'";
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int IdOrder = rs.getInt("IDOrder");
+                String Paid = rs.getString("Paid");
+                int  OrderState = rs.getInt("OrderState");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date DeliveryDate = rs.getDate("DeliveryDate");
+                int IdUser = rs.getInt("IdUser");
+                String Receiver = rs.getString("Receiver");
+                String Email = rs.getString("Email");
+                String Phone = rs.getString("PhoneNumber");
+                String Address = rs.getString("Address");
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                list.add(user);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public boolean DeleteOrder(int id) {
+        String sql = "update orders set OrderState = 0 WHERE IDOrder = " + id;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean ConfirmOrder(int id) {
+        String sql = "update orders set OrderState = 2 WHERE IDOrder = " + id;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean ThanhToan(int id) {
+        String sql = "update orders set Paid = 'Đã thanh toán' WHERE IDOrder = " + id;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

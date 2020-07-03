@@ -28,7 +28,31 @@ public class ProductMapper extends DBMapper {
     public ProductMapper() throws Exception {
         super();
     }
+    public List<ProductDTO> GetAllProduct() throws NamingException, Exception{
+        String query = "Select * from products";
+        List<ProductDTO> list = new ArrayList<ProductDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("IDProduct");
+                String name = rs.getString("Name");
+                double price = rs.getDouble("Price");
+                String intro = rs.getString("Introduction");
+                String descrip = rs.getString("Description");
+                int quantity = Integer.parseInt(rs.getString("Quantity"));
+                String Image = rs.getString("Image");
+                
+                ProductDTO pro = new ProductDTO(id, name, price, intro, descrip,quantity,Image);
+                list.add(pro);
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     public List<ProductDTO> GetListProducts(int offset, int limit) throws NamingException, Exception {
         String query = "Select * from products limit ? OFFSET ?";        
         List<ProductDTO> list = new ArrayList<ProductDTO>();
@@ -98,12 +122,16 @@ public class ProductMapper extends DBMapper {
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
                 int quantity = rs.getInt("Quantity");
+                int IdManufacturer = rs.getInt("IDManufacturer");
+                Boolean isNew = rs.getBoolean("IsNew");
                 product.setIdProduct(id);
                 product.setName(name);
                 product.setPrice(price);
                 product.setIntroduction(intro);
                 product.setDescription(descrip);
                 product.setQuantity(quantity);
+                product.setIDManufacturer(IdManufacturer);
+                product.setIsNew(isNew);
             }
 
         } catch (SQLException ex) {
@@ -187,7 +215,6 @@ public class ProductMapper extends DBMapper {
         }
         return count;
     }
-
     public ArrayList<ProductDTO> searchProduct(int offset, int limit, String productName) throws Exception {
         String query = "SELECT * FROM products WHERE name LIKE '%" + productName + "%'"
                 + "LIMIT ? OFFSET ?";
@@ -213,5 +240,83 @@ public class ProductMapper extends DBMapper {
         }
 
         return products;
+    }
+    public ArrayList<ProductDTO> searchProduct(String productName) throws Exception {
+        String query = "SELECT * FROM products WHERE name LIKE '%" + productName + "%'";
+        ArrayList<ProductDTO> products = new ArrayList<>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("IDProduct");
+                String name = rs.getString("Name");
+                double price = rs.getDouble("Price");
+                String intro = rs.getString("Introduction");
+                String descrip = rs.getString("Description");
+                ProductDTO product = new ProductDTO(id, name, price, intro, descrip);
+                products.add(product);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return products;
+    }
+    public boolean AddNewProduct(ProductDTO pro) {
+        String sql = "insert into products(Name, Price,Introduction,Created, Quantity,Isnew,Description,IDManufacturer,Image)" + "values(?,?,?,?,?,?,?,?,?)";
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, pro.getName());
+            ps.setDouble(2,pro.getPrice());
+            ps.setString(3,pro.getIntroduction());
+            java.util.Date date = pro.getCreated();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            ps.setDate(4,sqlDate);
+            ps.setInt(5,pro.getQuantity());
+            ps.setBoolean(6,pro.isIsNew());
+            ps.setString(7,pro.getDescription());
+            ps.setInt(8,pro.getIDManufacturer());
+            ps.setString(9, pro.getImage());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean DeleteProduct(int id) {
+        String sql = "DELETE FROM products WHERE IDProduct = " + id;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean UpdateProduct(ProductDTO pro) {
+        String sql = "update products set Name = ?, Price = ?,Introduction=?,Updated=?, Quantity=?,Isnew=?,Description=?,IDManufacturer=? where IDProduct="+pro.getIdProduct();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, pro.getName());
+            ps.setDouble(2,pro.getPrice());
+            ps.setString(3,pro.getIntroduction());
+            java.util.Date date = pro.getUpdated();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            ps.setDate(4,sqlDate);
+            ps.setInt(5,pro.getQuantity());
+            ps.setBoolean(6,pro.isIsNew());
+            ps.setString(7,pro.getDescription());
+            ps.setInt(8,pro.getIDManufacturer());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

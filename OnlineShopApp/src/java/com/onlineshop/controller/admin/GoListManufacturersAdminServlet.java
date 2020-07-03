@@ -5,14 +5,21 @@
  */
 package com.onlineshop.controller.admin;
 
+import com.onlineshop.bo.ManufacturerBO;
+import com.onlineshop.bo.ProductBO;
+import com.onlineshop.dto.ManufacturerDTO;
+import com.onlineshop.dto.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +39,18 @@ public class GoListManufacturersAdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        ServletContext context = request.getServletContext();
+        ManufacturerBO manufacturerBO = new ManufacturerBO(context);
+        ProductBO productBO = new ProductBO(context);
+        List<ManufacturerDTO> list = manufacturerBO.GetListManufacturers();
+        List<ProductDTO> listproducts = productBO.GetAllProducts();
+        HttpSession session = request.getSession();
+        session.setAttribute("listmanufacturers", list);
+        session.setAttribute("listproducts", listproducts);
+        
+        
+        
         String homepage = "./admin/manufacturer.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
         dispatcher.forward(request, response);

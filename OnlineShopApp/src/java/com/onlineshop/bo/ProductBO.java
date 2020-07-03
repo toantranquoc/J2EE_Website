@@ -87,7 +87,23 @@ public class ProductBO {
         }
         return products;
     }
-
+    public List<ProductDTO> GetAllProducts() {
+        List<ProductDTO> products = null;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            products = mapper.GetAllProduct();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
+    }
     public ProductDTO GetProductByID(String IdProduct) {
         ProductDTO product = new ProductDTO();
         ProductMapper mapper = null;
@@ -176,5 +192,73 @@ public class ProductBO {
             }
         }
         return products;
+    }
+     public List<ProductDTO> searchProduct(String productName) {
+        List<ProductDTO> products = null;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            products = mapper.searchProduct(productName);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
+    }
+     public boolean AddNewProduct(ProductDTO product) {
+        boolean result = false;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            result = mapper.AddNewProduct(product);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+     public boolean UpdateProduct(ProductDTO product) {
+        boolean result = false;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            result = mapper.UpdateProduct(product);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+     public boolean DeleteProduct(int id) {
+        boolean result = false;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            result = mapper.DeleteProduct(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
     }
 }

@@ -113,18 +113,6 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </body>
     <script type="text/javascript">
-        $(function () {
-            window.pagObj = $('#pagination').twbsPagination({
-                totalPages: 35,
-                visiblePages: 10,
-                onPageClick: function (event, page) {
-                    console.info(page + ' (from options)');
-                }
-            }).on('page', function (event, page) {
-                console.info(page + ' (from event listening)');
-            });
-        });
-
         function closeDialog() {
             document.getElementById('modal').style.display = "none";
         }

@@ -5,6 +5,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! int i = 1;%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +17,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <link href="css/admin/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/admin/customer.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     </head>
     <body>
         <jsp:directive.include file="template.jsp"/>
@@ -31,14 +33,23 @@
 
                 <!-- DataTables Example -->
                 <div class="card mb-3">
+                    <c:if test="${not empty messageCus}">
+                        <div class="alert alert-primary">
+                            <button id="xoa" type="button" class="close" data-dismiss="alert">${messageCus}
+                        </div>
+                    </c:if>
+                    <%
+                        // Removing after display
+                        session.removeAttribute("messageCus");
+                    %>
                     <div class="card-header row">
                         <div class="col-sm-8 mt-1">
                             <i class="fas fa-table"></i>
                             Danh sách khách hàng
                         </div>
                         <div class="col-sm-4">
-                            <form class="form-inline mt-0 mt-md-0">
-                                <input name="name" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên khách hàng" aria-label="Search">
+                            <form class="form-inline mt-0 mt-md-0" method="GET" action="./SearchCustomer">
+                                <input name="nameSearch" class="form-control-sm mr-sm-2" type="text" placeholder="Nhập tên khách hàng" aria-label="Search">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
                         </div>
@@ -61,19 +72,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                    <tr id="row_1" *ngFor="let user of users, let i=index">
-                                        <td>{{i+1}}</td>
-                                        <td>{{user.username}}</td>
-                                        <td>{{user.fullName}}</td>
-                                        <td>{{user.dateOfBirthday| date:'dd-MM-yyyy'}}</td>
-                                        <td>{{user.email}}</td>
-                                        <td>{{user.phoneNumber}}</td>
-                                        <td>{{user.address}}</td>
-                                        <td>{{user.created| date:'dd-MM-yyyy'}}</td>
-                                        <td>
-                                            <i (click)="deleteUser(user.id)" class="fas fa-trash-alt fa-sm text-danger"></i>
-                                        </td>
-                                    </tr>-->
+                                    <c:forEach items="${listusers}" var="user" >
+                                        <tr id="row_1" *ngFor="let user of users, let i=index">
+                                            <td><%= i%></td>
+                                                <td> ${user.getUsername()} </td>
+                                                <td> ${user.getFullname()} </td>
+                                                <td> ${user.getDateOfBirth()} </td>
+                                                <td> ${user.getEmail()} </td>
+                                                <td> ${user.getPhoneNumber()} </td>
+                                                <td> ${user.getAddress()} </td>
+                                                <td> ${user.getCreated()} </td>
+                                                <td>
+                                                    <a href="./DeleteUser?idUser=${user.getId()}"><li class="list-inline-item"><buttons><i class="fas fa-trash-alt fa-sm text-danger"></i></button></li></a>     
+                                            </td>
+                                        </tr>
+                                        <%i++;%>
+                                    </c:forEach>
+                                         <%i=1;%>
                                 </tbody>
                             </table>
                             <br>

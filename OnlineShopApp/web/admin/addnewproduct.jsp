@@ -6,6 +6,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,22 +18,49 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <link href="css/admin/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/admin/addnewproduct.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    </head>
+    <script>
+        $( document ).ready(function() {
+            $('#save').click(function(){
+                debugger;
+                var filename = $('#photo')[0].files[0];
+                const  fileType = filename['type'];
+                const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+                if (!validImageTypes.includes(fileType)) {
+                    // invalid file type code goes here.
+                    alert("file không hợp lệ");
+                    return false;
+                }
+               
+            });
+            
+            
+        });
+        
+    </script>
     </head>
     <body>
         <jsp:directive.include file="template.jsp"/>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" >
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-sm-10">
+                        <form method="post" action="./AddNewProductAdminServlet" enctype="multipart/form-data">
                         <h4>Thông tin thêm mới</h4>
-                        <form>
+                        
                             <div class="form-group">
                                 <h6>Tên sản phẩm</h6>
                                 <div class="col-4">
                                     <input type="text" name="name" class="form-control" required>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <h6>Hình ảnh</h6>
+                                <div class="col-4">
+                                    <input type="file" name="photo" id="photo" required>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <h6>Giá</h6>
                                 <div class="col-3">
@@ -74,14 +102,17 @@
                                     <!-- <select [(ngModel)]="selectedLevel" (change)="selected()">
                                       <option *ngFor="let item of data" [ngValue]="item">{{item.name}}</option>
                                     </select> -->
-                                    <select name="proSelected">
-                                        <option></option>
+                                    
+                                    <select name="manu">
+                                        <c:forEach items="${listmanufacturers}" var="manufacturer" >
+                                            <option value="${manufacturer.getIDManufacturer()}">${manufacturer.getName()}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group mt-5 ml-3">
-                                <button class="btn btn-primary btn-sm"
+                                <button class="btn btn-primary btn-sm" id="save"
                                         type="submit">Lưu</button>
                                 <a href="./HomeAdminServlet">
                                     <button class="btn btn btn-danger btn-sm" style="margin-left: 10px;"

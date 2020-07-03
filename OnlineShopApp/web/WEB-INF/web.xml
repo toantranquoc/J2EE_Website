@@ -49,10 +49,6 @@
         <servlet-class>com.onlineshop.controller.frontend.GoOrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateToCartServlet</servlet-name>
-        <servlet-class>com.onlineshop.controller.frontend.UpdateToCartServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateUserInforServlet</servlet-name>
         <servlet-class>com.onlineshop.controller.frontend.UpdateUserInforServlet</servlet-class>
     </servlet>
@@ -103,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>GoOrderDetailServlet</servlet-name>
         <url-pattern>/GoOrderDetailServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateToCartServlet</servlet-name>
-        <url-pattern>/UpdateToCartServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateUserInforServlet</servlet-name>

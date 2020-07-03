@@ -77,20 +77,6 @@
                         </c:forEach>
                     </div>
                 </div>
-                <!--Register-->
-                <c:if test="${not empty checkoutmessage}">
-                    <script>
-                        swal("${checkoutmessage}", "", "success");
-                    </script>
-                    ${checkoutmessage= ""} ;
-                </c:if>
-
-                <c:if test="${not empty checkouterror}">
-                    <script>
-                        swal("${checkouterror}", "", "error");
-                    </script>
-                    ${checkouterror  = ""};
-                </c:if>
                                 <!--Update UserInfor-->
                 <c:if test="${not empty updatesuccess}">
                     <script>

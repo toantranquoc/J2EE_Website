@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label for="su-fullname"  class="col-sm-4 col-form-label">Họ tên</label>
                             <div class="col-8">
-                                <input type="text" id="fullname" required name="fullname"
+                                <input type="text" id="fullname" name="fullname"
                                        value="${inforuser.getFullname()}"
                                        class="form-control" placeholder="Full name">
                             </div>
@@ -41,8 +41,7 @@
                                 <input type="date" id="dateOfBirthday"
                                        required name="dateOfBirth" 
                                        value="${inforuser.getDateOfBirth()}"
-                                       class="form-control">
-                            </div>
+                                       class="form-control">                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -54,7 +53,7 @@
                                        placeholder="abc@email.com"
                                        name="email"
                                        value="${inforuser.getEmail()}"
-                                       class="form-control">
+                                       class="form-control">">
                             </div>
                         </div>
 
@@ -66,13 +65,14 @@
                                        required 
                                        name="phoneNumber"
                                        value="${inforuser.getPhoneNumber()}"
-                                       class="form-control">
+                                       class="form-control">>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="su-address" class="col-sm-4 col-form-label">Địa chỉ</label>
                             <div class="col-8">
+
                                 <textarea class="form-control" required rows="2" id="address" name="address">${inforuser.getAddress()}</textarea>
                             </div>
                         </div>

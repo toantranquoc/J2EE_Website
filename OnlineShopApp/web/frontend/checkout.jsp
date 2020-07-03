@@ -55,10 +55,7 @@
                                         <div class="form-group row">
                                             <label for="su-fullname"  class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-8">
-                                                <input type="email"  
-                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                                       placeholder="example@example.com"
-                                                       name="email" required 
+                                                <input type="email"  name="email" required 
                                                        class="form-control">
                                             </div>
                                         </div>
@@ -66,8 +63,7 @@
                                         <div class="form-group row">
                                             <label for="su-email" class="col-sm-4 col-form-label">Số điện thoại</label>
                                             <div class="col-8">
-                                                <input type="text"  name="phone" required
-                                                       pattern="(09|03|07|08|05)+([0-9]{8})"
+                                                <input type="text"  name="phone" required 
                                                        class="form-control">
                                             </div>
                                         </div>
@@ -75,7 +71,7 @@
                                         <div class="form-group row">
                                             <label for="su-address" class="col-sm-4 col-form-label">Địa chỉ</label>
                                             <div class="col-8">
-                                                <textarea class="form-control" rows="2" required name="address" maxlength="2000"></textarea>
+                                                <textarea class="form-control" rows="2" required name="address" ></textarea>
                                             </div>
                                         </div>
 

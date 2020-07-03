@@ -5,8 +5,10 @@
  */
 package com.onlineshop.dto;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.text.NumberFormat;
+import java.util.Formatter;
 import java.util.Locale;
 
 /**
@@ -24,6 +26,8 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
     private boolean IsNew;
     private String Description;
     private int IDManufacturer;
+    private String Image;
+    
     
     public ProductDTO(){
         
@@ -57,8 +61,16 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
         this.Description = Description;
         this.Quantity = Quantity;
     }
-    
-    public ProductDTO(String Name, double Price, String Introduction, Date Created, Date Updated, int Quantity, boolean IsNew, String Description, int IDManufacturer) {
+    public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description, int Quantity, String Image) {
+        this.IdProduct = IdProduct;
+        this.Name = Name;
+        this.Price = Price;
+        this.Introduction = Introduction;
+        this.Description = Description;
+        this.Quantity = Quantity;
+        this.Image = Image;
+    }
+    public ProductDTO(String Name, double Price, String Introduction, Date Created, Date Updated, int Quantity, boolean IsNew, String Description, int IDManufacturer, String image) {
         this.Name = Name;
         this.Price = Price;
         this.Introduction = Introduction;
@@ -68,7 +80,9 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
         this.IsNew = IsNew;
         this.Description = Description;
         this.IDManufacturer = IDManufacturer;
+        this.Image = image;
     }
+    
 
     public int getIdProduct() {
         return IdProduct;
@@ -149,8 +163,14 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
     public void setIDManufacturer(int IDManufacturer) {
         this.IDManufacturer = IDManufacturer;
     }
-    
+    public String getImage(){
+        return Image;
+    }
+    public void setImage(String image){
+        this.Image = image;
+    }
     public String currencyFormat(double price){
         return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
     }
+    
 }

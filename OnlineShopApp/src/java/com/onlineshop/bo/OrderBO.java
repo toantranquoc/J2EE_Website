@@ -78,5 +78,107 @@ public class OrderBO {
         }
         return list;
     }
-
+    public int GetAllOrder() {
+        int result = -1;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            result = mapper.GetLastInsertOrderID();
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+    
+    public List<OrderDTO> GetListAllOrder() {
+        List<OrderDTO> list = new ArrayList<>();
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            list = mapper.GetListAllOrder();
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
+    }
+    public List<OrderDTO> searchOrder(String receiver) {
+        List<OrderDTO> manufacturers = null;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            manufacturers = mapper.searchOrder(receiver);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return manufacturers;
+    }
+    public boolean DeleteOrder(int id) {
+        boolean result = false;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            result = mapper.DeleteOrder(id);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+    public boolean ConfirmOrder(int id) {
+        boolean result = false;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            result = mapper.ConfirmOrder(id);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+    public boolean ThanhToan(int id) {
+        boolean result = false;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            result = mapper.ThanhToan(id);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
 }

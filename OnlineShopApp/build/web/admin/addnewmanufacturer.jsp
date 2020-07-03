@@ -6,6 +6,11 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    session = request.getSession();
+    String mess = "";
+    mess = (String) session.getAttribute("mess");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,13 +25,17 @@
     </head>
     <body>
         <jsp:directive.include file="template.jsp"/>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" >
             <div class="container">
                 <div class="row">
                     <div class="col-5">
-                        <form autocomplete="off">
+                        <form autocomplete="off" method="post" novalidate="" onsubmit="return validRegister()" action="./AddNewManufacturerAdminServlet">
                             <h4 class="text-danger">Thêm Nhà cung cấp</h4>
-
+                            <c:if test="${not empty mess}">
+                                <div class="alert alert-danger">
+                                    ${mess}
+                                </div>
+                            </c:if>
                             <input type="hidden" name="idManufacturer">
                             <div class="form-group row">
                                 <label for="su-nameManufacturer" class="col-sm-5 col-form-label">Tên hãng</label>
@@ -35,13 +44,17 @@
                                            class="form-control" required minlength="2" maxlength="20">
                                 </div>
                             </div>
+                            
+                            <div>
+                                <span></span>
+                            </div>
                             <div class="form-group row">
                                 <label for="status" class="col-sm-5 col-form-label">Trạng thái hoạt động</label>
                                 <div class="col-7">
                                     <input type="checkbox" id="status" name="status">
                                 </div>
                             </div>
-
+                           
                             <div class="form-group">
                                 <button class="btn btn-primary btn-sm"
                                        type="submit">Thêm mới</button>

@@ -51,4 +51,72 @@ public class ManufacturerBO {
         }
         return manufacturers;
     }
+    public List<ManufacturerDTO> searchManufacturerName(String manufacturerName) {
+        List<ManufacturerDTO> manufacturers = null;
+        ManufacturerMapper mapper = null;
+        try {
+            mapper = new ManufacturerMapper();
+            manufacturers = mapper.searchManufacturerName(manufacturerName);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return manufacturers;
+    }
+    public ManufacturerDTO searchManufacturerId(int manufacturerId) {
+        ManufacturerDTO manufacturers = null;
+        ManufacturerMapper mapper = null;
+        try {
+            mapper = new ManufacturerMapper();
+            manufacturers = mapper.searchManufacturerId(manufacturerId);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return manufacturers;
+    }
+    public boolean AddNewManufacturer(ManufacturerDTO manu) {
+        boolean result = false;
+        ManufacturerMapper mapper = null;
+        try {
+            mapper = new ManufacturerMapper();
+            result = mapper.AddNewManufacturer(manu);
+        } catch (Exception ex) {
+            Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+    public boolean DeleteManufacturer(int id) {
+        boolean result = false;
+        ManufacturerMapper mapper = null;
+        try {
+            mapper = new ManufacturerMapper();
+            result = mapper.DeleteManufacturer(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ManufacturerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
 }

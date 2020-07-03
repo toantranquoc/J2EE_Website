@@ -101,7 +101,6 @@ public class UserBO {
         }
         return result;
     }
-
     public UserDTO GetUserByUsername(String username) {
         UserDTO user = new UserDTO();
         UserMapper mapper = null;
@@ -137,4 +136,55 @@ public class UserBO {
         }
         return isUpdate;
     }
-}
+
+    public List<UserDTO> searchUserName(String userName) {
+        List<UserDTO> users = null;
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            users = mapper.searchUser(userName);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return users;
+    }
+    public List<UserDTO> getAllUser() {
+        List<UserDTO> users = null;
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            users = mapper.getAllUser();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return users;
+    }
+    public boolean DeleteUser(int id) {
+        boolean result = false;
+        UserMapper mapper = null;
+        try {
+            mapper = new UserMapper();
+            result = mapper.DeleteUser(id);
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }}
