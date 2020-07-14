@@ -5,12 +5,18 @@
  */
 package com.onlineshop.bo;
 
+import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.OrderDTO;
 import com.onlineshop.mapper.OrderMapper;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 
 /**
@@ -60,8 +66,8 @@ public class OrderBO {
         }
         return result;
     }
-    
-        public List<OrderDTO> GetListOrderByUserID(int UserID) {
+
+    public List<OrderDTO> GetListOrderByUserID(int UserID) {
         List<OrderDTO> list = new ArrayList<>();
         OrderMapper mapper = null;
         try {
@@ -78,6 +84,7 @@ public class OrderBO {
         }
         return list;
     }
+
     public int GetAllOrder() {
         int result = -1;
         OrderMapper mapper = null;
@@ -95,7 +102,7 @@ public class OrderBO {
         }
         return result;
     }
-    
+
     public List<OrderDTO> GetListAllOrder() {
         List<OrderDTO> list = new ArrayList<>();
         OrderMapper mapper = null;
@@ -113,6 +120,7 @@ public class OrderBO {
         }
         return list;
     }
+
     public List<OrderDTO> searchOrder(String receiver) {
         List<OrderDTO> manufacturers = null;
         OrderMapper mapper = null;
@@ -130,6 +138,7 @@ public class OrderBO {
         }
         return manufacturers;
     }
+
     public boolean DeleteOrder(int id) {
         boolean result = false;
         OrderMapper mapper = null;
@@ -147,6 +156,7 @@ public class OrderBO {
         }
         return result;
     }
+
     public boolean ConfirmOrder(int id) {
         boolean result = false;
         OrderMapper mapper = null;
@@ -164,6 +174,7 @@ public class OrderBO {
         }
         return result;
     }
+
     public boolean ThanhToan(int id) {
         boolean result = false;
         OrderMapper mapper = null;
@@ -180,5 +191,41 @@ public class OrderBO {
             }
         }
         return result;
+    }
+
+    public int CountNewOrders() throws NamingException, Exception {
+        int count = 0;
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            count = mapper.CountNewOrders();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return count;
+    }
+
+    public List<OrderDTO> GetListAllNewOrders() throws NamingException, Exception {
+        List<OrderDTO> list = new ArrayList<>();
+        OrderMapper mapper = null;
+        try {
+            mapper = new OrderMapper();
+            list = mapper.GetListAllNewOrders();
+        } catch (Exception ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
     }
 }

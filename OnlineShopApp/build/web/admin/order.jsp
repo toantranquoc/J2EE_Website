@@ -34,7 +34,7 @@
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header row">
-                        <div class="col-sm-6 mt-1">
+                        <div class="col-sm-8 mt-1">
                             <i class="fas fa-table"></i>
                             Danh sách hóa đơn
                         </div>
@@ -51,9 +51,9 @@
                                 <thead  class="thead-light">
                                     <tr>
                                         <th>STT</th>
-                                        <th>Mã hóa đơn</th>
+                                        <th>Mã HD</th>
                                         <th>Người nhận</th>
-                                        <th>Số điện thoại</th>
+                                        <th>SDT</th>
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
                                         <th>Ngày đặt</th>
@@ -66,7 +66,7 @@
                                      <c:forEach items="${listorders}" var="order" >
                                         <tr id="row_1" *ngFor="let order of listorders, let i = index">
                                             <td><%= i%></td>
-                                            <td><a href="./OrderDetail?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>${order.id}</i></button></li></a></td>
+                                            <td><a href="./OrderDetail?idOrder=${order.getId()}"><li class="list-inline-item"><buttons>${order.id}</button></li></a></td>
                                             <td>${order.getReceiver()}</td>
                                             <td>${order.phone}</td>
                                             <td>${order.email}</td>
@@ -86,13 +86,12 @@
                                             </c:choose>
                                             
                                             <td>
-                                                <a href="./DeleteOrder?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Xóa</i></button></li></a>|
-                                                <a href="./ConfirmOrder?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Duyệt</i></button></li></a>
+                                                <a href="./DeleteOrder?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Xóa"><i style="color:red" class="fa fa-ban" aria-hidden="true"></i></button></li></a>
+                                                <a href="./ConfirmOrder?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Duyệt"><i style="color:green"  class="fa fa-check-circle-o" aria-hidden="true"></i></button></li></a>
                                                 
                                                 <c:choose>
-                                                    
                                                     <c:when test="${order.getOrderState() == 2}">
-                                                        |<a href="./ThanhToan?idOrder=${order.getId()}"><li class="list-inline-item"><buttons><i>Đã thanh toán</i></button></li></a>
+                                                        <a href="./ThanhToan?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Đã thanh toán"><i style="color:blue" class="fa fa-money" aria-hidden="true"></i></button></li></a>
                                                     </c:when>
                                                 </c:choose>
                                             </td>
