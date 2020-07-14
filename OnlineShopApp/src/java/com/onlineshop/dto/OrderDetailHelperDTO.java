@@ -17,14 +17,14 @@ public class OrderDetailHelperDTO {
     private int IdOrder;
     private int IdProduct;
     private String Name;
-    private String PhotoURL;
+    private String Image;
     private int Quantity;
     private double UnitPrice;
-    public OrderDetailHelperDTO(int IdOrder, int IdProduct, String Name, int Quantity, double UnitPrice) {
+    public OrderDetailHelperDTO(int IdOrder, int IdProduct, String Name, int Quantity, double UnitPrice, String Image) {
         this.IdOrder = IdOrder;
         this.IdProduct = IdProduct;
         this.Name = Name;
-        this.PhotoURL = "https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg";
+        this.Image = Image;
         this.Quantity = Quantity;
         this.UnitPrice = UnitPrice;
     }
@@ -53,12 +53,12 @@ public class OrderDetailHelperDTO {
         this.Name = Name;
     }
 
-    public String getPhotoURL() {
-        return PhotoURL;
+    public String getImage() {
+        return Image;
     }
 
-    public void setPhotoURL(String PhotoURL) {
-        this.PhotoURL = PhotoURL;
+    public void setImage(String PhotoURL) {
+        this.Image = PhotoURL;
     }
 
     public int getQuantity() {

@@ -58,7 +58,7 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="hidden" name="IdProduct" value="${selection.getId()}">
-                                                                <img style="width: 50px; height: 50px; border-style: none;vertical-align: middle;" src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="${selection.getName()}">
+                                                                <img style="width: 50px; height: 50px; border-style: none;vertical-align: middle;" src="./images/${selection.getImage()}" alt="${selection.getName()}">
                                                             </td>
                                                             <td>
                                                                 ${selection.getName()}

@@ -18,7 +18,15 @@ public class ProductSelectionDTO {
     private double price;
     private String photoURL;
     private int quantity;
+    private String image;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
     public int getId() {
         return id;
     }

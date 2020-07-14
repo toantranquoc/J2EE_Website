@@ -265,7 +265,7 @@ public class ProductMapper extends DBMapper {
         return products;
     }
     public boolean AddNewProduct(ProductDTO pro) {
-        String sql = "insert into products(Name, Price,Introduction,Created, Quantity,Isnew,Description,IDManufacturer,Image)" + "values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into products(Name, Price,Introduction,Created, Quantity,IsNew,Description,IDManufacturer,Image)" + "values(?,?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -299,7 +299,7 @@ public class ProductMapper extends DBMapper {
         }
     }
     public boolean UpdateProduct(ProductDTO pro) {
-        String sql = "update products set Name = ?, Price = ?,Introduction=?,Updated=?, Quantity=?,Isnew=?,Description=?,IDManufacturer=? where IDProduct="+pro.getIdProduct();
+        String sql = "update products set Name = ?, Price = ?,Introduction=?,Updated=?, Quantity=?,IsNew=?,Description=?,IDManufacturer=? where IDProduct="+pro.getIdProduct();
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);

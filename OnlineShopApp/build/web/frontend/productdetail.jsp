@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="card">
-                        <img src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="Apple" class="card-img-top img-thumbnail">
+                        <img src="./images/${productdetail.getImage()}" alt="Apple" class="card-img-top img-thumbnail">
                         <div class="card-body">
                             <div>
                                 <strong>${productdetail.getName()}</strong>

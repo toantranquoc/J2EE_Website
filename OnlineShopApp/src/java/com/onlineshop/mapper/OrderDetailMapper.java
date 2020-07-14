@@ -58,7 +58,8 @@ public class OrderDetailMapper extends DBMapper {
                 String Name = rs.getString("Name");            
                 int Quantity = rs.getInt("Quantity");
                 double UnitPrice = rs.getDouble("UnitPrice");
-                OrderDetailHelperDTO orderDetailDTO = new OrderDetailHelperDTO(IdOrder, IdProduct, Name, Quantity, UnitPrice);
+                String Image = rs.getString("Image");
+                OrderDetailHelperDTO orderDetailDTO = new OrderDetailHelperDTO(IdOrder, IdProduct, Name, Quantity, UnitPrice, Image);
                 list.add(orderDetailDTO);
             }
 

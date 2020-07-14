@@ -29,7 +29,7 @@
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="card mb-4">
                         <div class="card-img-wrapper">
-                            <img src="https://cdn.tgdd.vn/Products/Images/44/221251/acer-aspire-3-a315-nx-heesv-00d-221251-600x600.jpg" alt="${product.getName()}" class="card-img-top">
+                            <img src="./images/${product.getImage()}" alt="${product.getName()}" class="card-img-top">
                             <ul class="list-inline product-icons animate text-center">
                                 <a href="./GoProductDetailServlet?idProduct=${product.getIdProduct()}"><li class="list-inline-item"><button class="btn btn-primary"><i class="fas fa-search"></i></button></li></a>
                                 <a href="./AddToCartServlet?idProduct=${product.getIdProduct()}"><li class="list-inline-item"><button class="btn btn-primary"><i class="fas fa-shopping-cart"></i></button></li></a>
