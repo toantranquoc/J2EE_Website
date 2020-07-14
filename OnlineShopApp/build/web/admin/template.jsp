@@ -6,12 +6,19 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="navbar-nav px-3">
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex px-3">
+        <li class="nav-item px-4">
+            <a class="nav-link" href="./ApproveNewOrders">
+                <span id="items" class="navbar-tool-label">${neworders}</span>
+                <i class="fa fa-bell" aria-hidden="true"></i>
+            </a>
+        </li>
         <li class="nav-item text-nowrap">
             <a href="./HomeAdminServlet" class="nav-link"">Sign out</a>
         </li>
     </ul>
 </nav>
+
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -61,4 +68,11 @@
                 </main>-->
     </div>
 </div>
-
+<!--<script>
+        var text = document.getElementById("items");
+        if (${neworders} === 0) {
+            text.style.display = "none";
+        }else{
+            text.style.display = "block";
+        }
+</script>-->

@@ -5,6 +5,7 @@
  */
 package com.onlineshop.mapper;
 
+import com.onlineshop.bo.ProductBO;
 import com.onlineshop.bo.UserBO;
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.OrderDTO;
@@ -31,8 +32,8 @@ public class OrderMapper extends DBMapper {
     }
 
     public boolean AddNewOrder(OrderDTO order) {
-        String sql = "insert into orders(Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, PhoneNumber, Address)" 
-                + "values(?,?,?,?,?,N'"+order.getReceiver()+"',?,?,N'"+order.getAddress()+"')";
+        String sql = "insert into orders(Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, PhoneNumber, Address)"
+                + "values(?,?,?,?,?,N'" + order.getReceiver() + "',?,?,N'" + order.getAddress() + "')";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -50,6 +51,7 @@ public class OrderMapper extends DBMapper {
             ps.setInt(5, order.getIdUser());
             ps.setString(6, order.getEmail());
             ps.setString(7, order.getPhone());
+            
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +90,7 @@ public class OrderMapper extends DBMapper {
             while (rs.next()) {
                 int IdOrder = rs.getInt("IDOrder");
                 String Paid = rs.getString("Paid");
-                int  OrderState = rs.getInt("OrderState");
+                int OrderState = rs.getInt("OrderState");
                 Date OrderDate = rs.getDate("OrderDate");
                 Date DeliveryDate = rs.getDate("DeliveryDate");
                 int IdUser = rs.getInt("IdUser");
@@ -96,7 +98,7 @@ public class OrderMapper extends DBMapper {
                 String Email = rs.getString("Email");
                 String Phone = rs.getString("PhoneNumber");
                 String Address = rs.getString("Address");
-                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone, Address);
                 list.add(user);
             }
 
@@ -105,6 +107,7 @@ public class OrderMapper extends DBMapper {
         }
         return list;
     }
+
     public List<OrderDTO> GetListAllOrder() throws NamingException, Exception {
         String query = "Select * from orders";
         List<OrderDTO> list = new ArrayList<OrderDTO>();
@@ -115,7 +118,7 @@ public class OrderMapper extends DBMapper {
             while (rs.next()) {
                 int IdOrder = rs.getInt("IDOrder");
                 String Paid = rs.getString("Paid");
-                int  OrderState = rs.getInt("OrderState");
+                int OrderState = rs.getInt("OrderState");
                 Date OrderDate = rs.getDate("OrderDate");
                 Date DeliveryDate = rs.getDate("DeliveryDate");
                 int IdUser = rs.getInt("IdUser");
@@ -123,7 +126,7 @@ public class OrderMapper extends DBMapper {
                 String Email = rs.getString("Email");
                 String Phone = rs.getString("PhoneNumber");
                 String Address = rs.getString("Address");
-                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone, Address);
                 list.add(user);
             }
 
@@ -132,6 +135,7 @@ public class OrderMapper extends DBMapper {
         }
         return list;
     }
+
     public List<OrderDTO> searchOrder(String receiver) throws Exception {
         String query = "SELECT * FROM orders WHERE Receiver LIKE '%" + receiver + "%'";
         List<OrderDTO> list = new ArrayList<OrderDTO>();
@@ -142,7 +146,7 @@ public class OrderMapper extends DBMapper {
             while (rs.next()) {
                 int IdOrder = rs.getInt("IDOrder");
                 String Paid = rs.getString("Paid");
-                int  OrderState = rs.getInt("OrderState");
+                int OrderState = rs.getInt("OrderState");
                 Date OrderDate = rs.getDate("OrderDate");
                 Date DeliveryDate = rs.getDate("DeliveryDate");
                 int IdUser = rs.getInt("IdUser");
@@ -150,7 +154,7 @@ public class OrderMapper extends DBMapper {
                 String Email = rs.getString("Email");
                 String Phone = rs.getString("PhoneNumber");
                 String Address = rs.getString("Address");
-                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone,Address);
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone, Address);
                 list.add(user);
             }
 
@@ -159,6 +163,7 @@ public class OrderMapper extends DBMapper {
         }
         return list;
     }
+
     public boolean DeleteOrder(int id) {
         String sql = "update orders set OrderState = 0 WHERE IDOrder = " + id;
         try {
@@ -170,6 +175,7 @@ public class OrderMapper extends DBMapper {
             return false;
         }
     }
+
     public boolean ConfirmOrder(int id) {
         String sql = "update orders set OrderState = 2 WHERE IDOrder = " + id;
         try {
@@ -181,6 +187,7 @@ public class OrderMapper extends DBMapper {
             return false;
         }
     }
+
     public boolean ThanhToan(int id) {
         String sql = "update orders set Paid = 'Đã thanh toán' WHERE IDOrder = " + id;
         try {
@@ -191,5 +198,51 @@ public class OrderMapper extends DBMapper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public int CountNewOrders() throws NamingException, Exception {
+        String query = "Select count(*) from orders where OrderState=1";
+        int count = 0;
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
+       public List<OrderDTO> GetListAllNewOrders() throws NamingException, Exception {
+        String query = "Select * from orders Where OrderState=1";
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int IdOrder = rs.getInt("IDOrder");
+                String Paid = rs.getString("Paid");
+                int OrderState = rs.getInt("OrderState");
+                Date OrderDate = rs.getDate("OrderDate");
+                Date DeliveryDate = rs.getDate("DeliveryDate");
+                int IdUser = rs.getInt("IdUser");
+                String Receiver = rs.getString("Receiver");
+                String Email = rs.getString("Email");
+                String Phone = rs.getString("PhoneNumber");
+                String Address = rs.getString("Address");
+                OrderDTO user = new OrderDTO(IdOrder, Paid, OrderState, OrderDate, DeliveryDate, IdUser, Receiver, Email, Phone, Address);
+                list.add(user);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.toString());
+        }
+        return list;
     }
 }

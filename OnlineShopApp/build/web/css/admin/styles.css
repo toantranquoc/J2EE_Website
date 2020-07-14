@@ -276,3 +276,17 @@ svg {
   cursor: pointer;
 }
 
+.navbar-tool-label {
+  position: absolute;
+  top: 0.4125rem;
+  right: 5.4125rem;
+  width: 1.0rem;
+  height: 1.0rem;
+  border-radius: 50%;
+  background-color: #fe696a;
+  color: #fff;
+  font-size: .60rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.0rem;
+}

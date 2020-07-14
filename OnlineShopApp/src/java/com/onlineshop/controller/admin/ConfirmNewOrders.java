@@ -7,8 +7,10 @@ package com.onlineshop.controller.admin;
 
 import com.onlineshop.bo.OrderBO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Hung
+ * @author to cong hau
  */
-@WebServlet(name = "ConfirmOrder", urlPatterns = {"/ConfirmOrder"})
-public class ConfirmOrder extends HttpServlet {
+@WebServlet(name = "ConfirmNewOrders", urlPatterns = {"/ConfirmNewOrders"})
+public class ConfirmNewOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,8 +49,7 @@ public class ConfirmOrder extends HttpServlet {
             session.removeAttribute("neworders");
         }
         session.setAttribute("neworders", countNewOrders);
-
-        response.sendRedirect("./GoListOrdersAdminServlet");
+        response.sendRedirect("./ApproveNewOrders");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +67,7 @@ public class ConfirmOrder extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConfirmNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +85,7 @@ public class ConfirmOrder extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConfirmNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -44,7 +44,7 @@
                         // Removing after display
                         session.removeAttribute("messageManu");
                     %>
-                    <div class="card-header row">
+                    <div class="card-header row" style="margin:0">
                         <div class="col-sm-6 mt-1">
                             <i class="fas fa-table"></i>
                             Danh sách nhà cung cấp
@@ -56,7 +56,7 @@
                             </form>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-success btn-sm" style="float:right" href="./AddNewManufacturerAdminServlet">
+                            <a class="btn btn-success btn-sm" style="float:right; margin-top:0;" href="./AddNewManufacturerAdminServlet">
                                 Thêm mới
                             </a>
                         </div>

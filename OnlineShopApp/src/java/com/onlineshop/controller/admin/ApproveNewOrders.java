@@ -6,9 +6,13 @@
 package com.onlineshop.controller.admin;
 
 import com.onlineshop.bo.OrderBO;
+import com.onlineshop.dto.OrderDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +23,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Hung
+ * @author to cong hau
  */
-@WebServlet(name = "ConfirmOrder", urlPatterns = {"/ConfirmOrder"})
-public class ConfirmOrder extends HttpServlet {
+@WebServlet(name = "ApproveNewOrders", urlPatterns = {"/ApproveNewOrders"})
+public class ApproveNewOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,20 +39,26 @@ public class ConfirmOrder extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        String idProduct = request.getParameter("idOrder");
-        int id = Integer.parseInt(idProduct);
         ServletContext context = request.getServletContext();
         OrderBO orderBO = new OrderBO(context);
-        orderBO.ConfirmOrder(id);
-        
+        List<OrderDTO> list = orderBO.GetListAllNewOrders();
         int countNewOrders = orderBO.CountNewOrders();
+        
         HttpSession session = request.getSession();
+        if (session.getAttribute("listneworders") != null) {
+            session.removeAttribute("listneworders");
+        }
+
         if (session.getAttribute("neworders") != null) {
             session.removeAttribute("neworders");
         }
-        session.setAttribute("neworders", countNewOrders);
 
-        response.sendRedirect("./GoListOrdersAdminServlet");
+        session.setAttribute("neworders", countNewOrders);
+        session.setAttribute("listneworders", list);
+        
+        String homepage = "./admin/neworders.jsp";
+        RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +76,7 @@ public class ConfirmOrder extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApproveNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +94,7 @@ public class ConfirmOrder extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApproveNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

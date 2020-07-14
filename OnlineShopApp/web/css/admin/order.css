@@ -8,22 +8,32 @@ and open the template in the editor.
     Author     : to cong hau
 */
 .container-fluid ol li a{
-  color:#1d8afe;
+    color:#1d8afe;
 }
 
 .container-fluid ol li a:hover{
-  color:#007bff;
-  text-decoration: underline;
-  cursor: pointer;
+    color:#007bff;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .text-danger:hover{
-  cursor: pointer;
-  color: red;
+    cursor: pointer;
+    color: red;
 }
 
 .text-primary{
-  cursor: pointer;
-  color: blue;
+    cursor: pointer;
+    color: blue;
+}
+
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.fa{
+    width:17px;
+    height:13px;
 }
 

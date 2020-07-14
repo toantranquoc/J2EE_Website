@@ -96,7 +96,7 @@ public class LoginAdminServlet extends HttpServlet {
 
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("erroradmessage", "Đăng nhập thất bại!");
+            session.setAttribute("admessage", "Đăng nhập thất bại");
             session.setAttribute("usernameadmin", "");
             String homepage = "./admin/login.jsp";
             response.sendRedirect(homepage);

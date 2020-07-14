@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/cart.jsp</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/GoListProductsAdminServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/servlet/UpdateToCartServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/DeleteUser.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dbconnection/DBConnectionService.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/mapper/UserMapper.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/bo/ProductBO.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/GoListCustomersAdminServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/mapper/ProductMapper.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/LoginAdminServlet.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/login.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/GoToHomeServlet.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/HomeAdminServlet.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/header.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -12,6 +12,7 @@ import com.onlineshop.bo.UserBO;
 import com.onlineshop.dto.CartDTO;
 import com.onlineshop.dto.OrderDTO;
 import com.onlineshop.dto.OrderDetailDTO;
+import com.onlineshop.mapper.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletContext;
@@ -84,23 +85,46 @@ public class CreateOrderServlet extends HttpServlet {
         boolean isAddNew = orderBO.AddNewOrder(order);
         OrderDetailBO orderdetailBO = new OrderDetailBO(context);
 
+        String detailCart="";
         if (isAddNew) {
             boolean isAddNewOrderDetail = true;
             int IdOrder = orderBO.GetLastInsertID();
             for (int i = 0; i < cart.getListProduct().size(); i++) {
                 OrderDetailDTO detail = new OrderDetailDTO(IdOrder, cart.getListProduct().get(i).getId(), cart.getListProduct().get(i).getQuantity(), cart.getListProduct().get(i).getPrice());
+                detailCart+="Tên: <b>"+cart.getListProduct().get(i).getName()+"</b>  | Số lượng: <b style='color: red'>"
+                        + cart.getListProduct().get(i).getQuantity()+"</b>" +
+                        " | Giá: <b style='color: red'>"+cart.getListProduct().get(i).getPrice()*cart.getListProduct().get(i).getQuantity()+"</b><br>";
                 isAddNewOrderDetail = orderdetailBO.AddNewOrder(detail);
             }
             if (isAddNewOrderDetail) {
-                session.setAttribute("checkoutmessage", "Đặt hàng thành công!" );
+                // Send mail to customer
+                String subject = "THÔNG TIN ĐƠN HÀNG";
+                String text = "Chào " + order.getReceiver()
+                        + "<br> Đơn hàng đã được tạo thành công.<hr>"
+                        +"Thông tin chi tiết:<hr>"
+                        + detailCart
+                        +"Tổng tiền: "+"<b style='color:red'>"+cart.getTotalPrice()+"</b>"
+                        +"<br><b>Đơn hàng sẽ được xử lý trong 24h.</b>";
+               
+                SendMailToCustomer(order.getEmail(), subject, text);
+                
+                session.setAttribute("checkoutmessage", "Đặt hàng thành công!");
                 session.removeAttribute("cart");
                 session.setAttribute("totalcart", 0);
                 response.sendRedirect("./HomeServlet");
             }
         } else {
-            session.setAttribute("checkouterror", "Đặt hàng thất bại!" );
+            session.setAttribute("checkouterror", "Đặt hàng thất bại!");
         }
 
+    }
+
+    public void SendMailToCustomer(String to, String subject, String text) {
+        if (to != null) {
+            SendMail.sendMail(to, subject, text);
+        } else {
+            System.out.println("No account");
+        }
     }
 
     /**

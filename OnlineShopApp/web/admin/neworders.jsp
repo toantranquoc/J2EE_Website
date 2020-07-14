@@ -34,9 +34,9 @@
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header row">
-                        <div class="col-sm-8 mt-1">
+                        <div class="col-sm-6 mt-1">
                             <i class="fas fa-table"></i>
-                            Danh sách hóa đơn
+                            Hóa đơn mới
                         </div>
                         <div class="col-sm-4">
                             <form class="form-inline mt-0 mt-md-0" method="GET" action="./SearchOrder">
@@ -63,7 +63,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <c:forEach items="${listorders}" var="order" >
+                                     <c:forEach items="${listneworders}" var="order" >
                                         <tr id="row_1" *ngFor="let order of listorders, let i = index">
                                             <td><%= i%></td>
                                             <td><a href="./OrderDetail?idOrder=${order.getId()}"><li class="list-inline-item"><buttons>${order.id}</button></li></a></td>
@@ -87,7 +87,7 @@
                                             
                                             <td>
                                                 <a href="./DeleteOrder?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Xóa"><i style="color:red" class="fa fa-ban" aria-hidden="true"></i></button></li></a>
-                                                <a href="./ConfirmOrder?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Duyệt"><i style="color:green"  class="fa fa-check-circle-o" aria-hidden="true"></i></button></li></a>
+                                                <a href="./ConfirmNewOrders?idOrder=${order.getId()}"><li class="list-inline-item"><button title="Duyệt"><i style="color:green"  class="fa fa-check-circle-o" aria-hidden="true"></i></button></li></a>
                                                 
                                                 <c:choose>
                                                     <c:when test="${order.getOrderState() == 2}">
@@ -103,7 +103,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="7"><b>Tổng đơn hàng</b></td>
-                                        <td colspan="1">${listorders.size()}</td>
+                                        <td colspan="1">${listneworders.size()}</td>
                                         <td colspan="2"></td>
                                     </tr>
                                 </tfoot>
