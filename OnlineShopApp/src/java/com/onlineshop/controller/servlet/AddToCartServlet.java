@@ -44,7 +44,7 @@ public class AddToCartServlet extends HttpServlet {
         ProductDTO productDTO = productBO.GetProductByID(idProduct);
         int totalCart = 0;
         if (productDTO != null) {
-            if (request.getParameter("quantity")!= null) {
+            if (request.getParameter("quantity") != null) {
                 quantity = Integer.parseInt(request.getParameter("quantity"));
             }
             HttpSession session = request.getSession();
@@ -56,14 +56,13 @@ public class AddToCartServlet extends HttpServlet {
                 productSelectionDTO.setName(productDTO.getName());
                 productSelectionDTO.setPrice(productDTO.getPrice());
                 productSelectionDTO.setQuantity(quantity);
+                productSelectionDTO.setImage(productDTO.getImage());
                 listItem.add(productSelectionDTO);
                 cart.setListProduct(listItem);
                 totalCart = cart.getTotalQuantity();
                 session.setAttribute("cart", cart);
                 session.setAttribute("totalcart", totalCart);
-            }
-            else
-            {
+            } else {
                 CartDTO cart = (CartDTO) session.getAttribute("cart");
                 List<ProductSelectionDTO> list = cart.getListProduct();
                 boolean check = false;
@@ -79,6 +78,7 @@ public class AddToCartServlet extends HttpServlet {
                     productSelectionDTO.setName(productDTO.getName());
                     productSelectionDTO.setPrice(productDTO.getPrice());
                     productSelectionDTO.setQuantity(quantity);
+                    productSelectionDTO.setImage(productDTO.getImage());
                     list.add(productSelectionDTO);
                 }
                 totalCart = cart.getTotalQuantity();

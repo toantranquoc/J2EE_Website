@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="./AddToCartServlet?idProduct=${product.getIdProduct()}"><button class="btn btn-primary"><i class="fas fa-shopping-cart"></i></button></a>
+                            <a href="./AddToCartServlet?idProduct=${productdetail.getIdProduct()}"><button class="btn btn-primary"><i class="fas fa-shopping-cart"></i></button></a>
                         </div>
                     </div>
                 </div>

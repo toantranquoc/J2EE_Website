@@ -28,7 +28,8 @@ public class ProductMapper extends DBMapper {
     public ProductMapper() throws Exception {
         super();
     }
-    public List<ProductDTO> GetAllProduct() throws NamingException, Exception{
+
+    public List<ProductDTO> GetAllProduct() throws NamingException, Exception {
         String query = "Select * from products";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
@@ -43,8 +44,8 @@ public class ProductMapper extends DBMapper {
                 String descrip = rs.getString("Description");
                 int quantity = Integer.parseInt(rs.getString("Quantity"));
                 String Image = rs.getString("Image");
-                
-                ProductDTO pro = new ProductDTO(id, name, price, intro, descrip,quantity,Image);
+
+                ProductDTO pro = new ProductDTO(id, name, price, intro, descrip, quantity, Image);
                 list.add(pro);
             }
 
@@ -53,8 +54,9 @@ public class ProductMapper extends DBMapper {
         }
         return list;
     }
+
     public List<ProductDTO> GetListProducts(int offset, int limit) throws NamingException, Exception {
-        String query = "Select * from products limit ? OFFSET ?";        
+        String query = "Select * from products limit ? OFFSET ?";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
@@ -68,7 +70,8 @@ public class ProductMapper extends DBMapper {
                 double price = rs.getDouble("Price");
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
-                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
+                String Image = rs.getString("Image");
+                ProductDTO user = new ProductDTO(id, name, price, intro, descrip, Image);
                 list.add(user);
             }
 
@@ -95,8 +98,8 @@ public class ProductMapper extends DBMapper {
                 //NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price); 
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
-
-                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
+                String image = rs.getString("Image");
+                ProductDTO user = new ProductDTO(id, name, price, intro, descrip, image);
                 list.add(user);
             }
 
@@ -124,6 +127,7 @@ public class ProductMapper extends DBMapper {
                 int quantity = rs.getInt("Quantity");
                 int IdManufacturer = rs.getInt("IDManufacturer");
                 Boolean isNew = rs.getBoolean("IsNew");
+                String image = rs.getString("Image");
                 product.setIdProduct(id);
                 product.setName(name);
                 product.setPrice(price);
@@ -132,6 +136,7 @@ public class ProductMapper extends DBMapper {
                 product.setQuantity(quantity);
                 product.setIDManufacturer(IdManufacturer);
                 product.setIsNew(isNew);
+                product.setImage(image);
             }
 
         } catch (SQLException ex) {
@@ -140,7 +145,7 @@ public class ProductMapper extends DBMapper {
         return product;
     }
 
-    public List<ProductDTO> GetListNewProduct() throws NamingException, Exception{
+    public List<ProductDTO> GetListNewProduct() throws NamingException, Exception {
         String query = "Select * from products where IsNew = true";
         List<ProductDTO> list = new ArrayList<ProductDTO>();
         try {
@@ -153,8 +158,8 @@ public class ProductMapper extends DBMapper {
                 double price = rs.getDouble("Price");
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
-
-                ProductDTO user = new ProductDTO(id, name, price, intro, descrip);
+                String image = rs.getString("Image");
+                ProductDTO user = new ProductDTO(id, name, price, intro, descrip, image);
                 list.add(user);
             }
 
@@ -215,6 +220,7 @@ public class ProductMapper extends DBMapper {
         }
         return count;
     }
+
     public ArrayList<ProductDTO> searchProduct(int offset, int limit, String productName) throws Exception {
         String query = "SELECT * FROM products WHERE name LIKE '%" + productName + "%'"
                 + "LIMIT ? OFFSET ?";
@@ -231,7 +237,8 @@ public class ProductMapper extends DBMapper {
                 double price = rs.getDouble("Price");
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
-                ProductDTO product = new ProductDTO(id, name, price, intro, descrip);
+                String image = rs.getString("Image");
+                ProductDTO product = new ProductDTO(id, name, price, intro, descrip, image);
                 products.add(product);
             }
 
@@ -241,6 +248,7 @@ public class ProductMapper extends DBMapper {
 
         return products;
     }
+
     public ArrayList<ProductDTO> searchProduct(String productName) throws Exception {
         String query = "SELECT * FROM products WHERE name LIKE '%" + productName + "%'";
         ArrayList<ProductDTO> products = new ArrayList<>();
@@ -254,7 +262,8 @@ public class ProductMapper extends DBMapper {
                 double price = rs.getDouble("Price");
                 String intro = rs.getString("Introduction");
                 String descrip = rs.getString("Description");
-                ProductDTO product = new ProductDTO(id, name, price, intro, descrip);
+                String image = rs.getString("Image");
+                ProductDTO product = new ProductDTO(id, name, price, intro, descrip, image);
                 products.add(product);
             }
 
@@ -264,21 +273,22 @@ public class ProductMapper extends DBMapper {
 
         return products;
     }
+
     public boolean AddNewProduct(ProductDTO pro) {
         String sql = "insert into products(Name, Price,Introduction,Created, Quantity,IsNew,Description,IDManufacturer,Image)" + "values(?,?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, pro.getName());
-            ps.setDouble(2,pro.getPrice());
-            ps.setString(3,pro.getIntroduction());
+            ps.setDouble(2, pro.getPrice());
+            ps.setString(3, pro.getIntroduction());
             java.util.Date date = pro.getCreated();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            ps.setDate(4,sqlDate);
-            ps.setInt(5,pro.getQuantity());
-            ps.setBoolean(6,pro.isIsNew());
-            ps.setString(7,pro.getDescription());
-            ps.setInt(8,pro.getIDManufacturer());
+            ps.setDate(4, sqlDate);
+            ps.setInt(5, pro.getQuantity());
+            ps.setBoolean(6, pro.isIsNew());
+            ps.setString(7, pro.getDescription());
+            ps.setInt(8, pro.getIDManufacturer());
             ps.setString(9, pro.getImage());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
@@ -286,7 +296,7 @@ public class ProductMapper extends DBMapper {
             return false;
         }
     }
-    
+
     public boolean DeleteProduct(int id) {
         String sql = "DELETE FROM products WHERE IDProduct = " + id;
         try {
@@ -298,21 +308,22 @@ public class ProductMapper extends DBMapper {
             return false;
         }
     }
+
     public boolean UpdateProduct(ProductDTO pro) {
-        String sql = "update products set Name = ?, Price = ?,Introduction=?,Updated=?, Quantity=?,IsNew=?,Description=?,IDManufacturer=? where IDProduct="+pro.getIdProduct();
+        String sql = "update products set Name = ?, Price = ?,Introduction=?,Updated=?, Quantity=?,IsNew=?,Description=?,IDManufacturer=? where IDProduct=" + pro.getIdProduct();
         try {
             Connection connection = DBConnectionService.getConnectionFromConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, pro.getName());
-            ps.setDouble(2,pro.getPrice());
-            ps.setString(3,pro.getIntroduction());
+            ps.setDouble(2, pro.getPrice());
+            ps.setString(3, pro.getIntroduction());
             java.util.Date date = pro.getUpdated();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            ps.setDate(4,sqlDate);
-            ps.setInt(5,pro.getQuantity());
-            ps.setBoolean(6,pro.isIsNew());
-            ps.setString(7,pro.getDescription());
-            ps.setInt(8,pro.getIDManufacturer());
+            ps.setDate(4, sqlDate);
+            ps.setInt(5, pro.getQuantity());
+            ps.setBoolean(6, pro.isIsNew());
+            ps.setString(7, pro.getDescription());
+            ps.setInt(8, pro.getIDManufacturer());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();

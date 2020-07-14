@@ -45,12 +45,13 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
         this.IDManufacturer = IDManufacturer;
     }
 
-    public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description) {
+    public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description, String Image) {
         this.IdProduct = IdProduct;
         this.Name = Name;
         this.Price = Price;
         this.Introduction = Introduction;
         this.Description = Description;
+        this.Image = Image;
     }
     
         public ProductDTO(int IdProduct, String Name, double Price, String Introduction, String Description, int Quantity) {
