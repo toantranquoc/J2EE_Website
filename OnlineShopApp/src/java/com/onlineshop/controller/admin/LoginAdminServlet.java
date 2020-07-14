@@ -5,19 +5,22 @@
  */
 package com.onlineshop.controller.admin;
 
+import com.onlineshop.bo.UserBO;
+import com.onlineshop.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author to cong hau
+ * @author pc
  */
-@WebServlet(name = "LoginAdminServlet", urlPatterns = {"/LoginAdminServlet"})
 public class LoginAdminServlet extends HttpServlet {
 
     /**
@@ -31,7 +34,19 @@ public class LoginAdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("./GoSearchPageServlet");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoginAdminServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LoginAdminServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,7 +75,32 @@ public class LoginAdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter pw = response.getWriter();
+        String username = request.getParameter("usernamead");
+        String password = request.getParameter("passwordad");
+        UserDTO user = new UserDTO(username, password);
+
+        ServletContext context = request.getServletContext();
+        UserBO userBO = new UserBO(context);
+        int checkType = userBO.Login(user);
+
+        if (checkType != -1 && username.equalsIgnoreCase("admin")) {
+            HttpSession session = request.getSession();
+            session.setAttribute("loginadmessage", "Đăng nhập thành công!");
+            session.setAttribute("usernameadmin", username);
+            String homepage = "./admin/home.jsp";
+            RequestDispatcher dispatcher = request.getRequestDispatcher(homepage);
+            dispatcher.forward(request, response);
+
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("erroradmessage", "Đăng nhập thất bại!");
+            session.setAttribute("usernameadmin", "");
+            String homepage = "./admin/login.jsp";
+            response.sendRedirect(homepage);
+        }
     }
 
     /**

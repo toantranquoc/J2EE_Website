@@ -56,6 +56,14 @@
         <servlet-name>UpdateToCartServlet</servlet-name>
         <servlet-class>com.onlineshop.controller.servlet.UpdateToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginAdminServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.admin.LoginAdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GoToHomeServlet</servlet-name>
+        <servlet-class>com.onlineshop.controller.admin.GoToHomeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>UpdateToCartServlet</servlet-name>
         <url-pattern>/UpdateToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginAdminServlet</servlet-name>
+        <url-pattern>/LoginAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoToHomeServlet</servlet-name>
+        <url-pattern>/GoToHomeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
