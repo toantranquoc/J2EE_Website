@@ -71,6 +71,11 @@ public class ProductDTO extends AbstractModel<ProductDTO> {
         this.Quantity = Quantity;
         this.Image = Image;
     }
+public ProductDTO(String Name, int Quantity ) {
+        this.Quantity = Quantity;
+        this.Name = Name;
+        
+    }
     public ProductDTO(String Name, double Price, String Introduction, Date Created, Date Updated, int Quantity, boolean IsNew, String Description, int IDManufacturer, String image) {
         this.Name = Name;
         this.Price = Price;
