@@ -9,6 +9,7 @@ import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.ProductDTO;
 import com.onlineshop.mapper.ProductMapper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -260,5 +261,22 @@ public class ProductBO {
             }
         }
         return result;
+    }
+public ArrayList<ProductDTO> GetListTop10Products(Date startDate, Date endDate) {
+        ArrayList<ProductDTO> products = null;
+        ProductMapper mapper = null;
+        try {
+            mapper = new ProductMapper();
+            products = mapper.top10Product(startDate, endDate);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(ProductBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return products;
     }
 }

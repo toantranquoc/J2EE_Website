@@ -9,6 +9,7 @@ import com.onlineshop.bo.UserBO;
 import com.onlineshop.dbconnection.DBConnectionService;
 import com.onlineshop.dto.ProductDTO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -329,5 +330,27 @@ public class ProductMapper extends DBMapper {
             e.printStackTrace();
             return false;
         }
+    }
+public ArrayList<ProductDTO> top10Product(Date startDate, Date endDate) throws Exception {
+        String query = "CALL top10Product(?,?);";
+        ArrayList<ProductDTO> products = new ArrayList<>();
+        try {
+            Connection connection = DBConnectionService.getConnectionFromConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDate(1,startDate);
+            ps.setDate(2, endDate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int sl = rs.getInt("sl");
+                String name = rs.getString("ten");
+                ProductDTO product = new ProductDTO(name,sl);
+                products.add(product);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return products;
     }
 }
