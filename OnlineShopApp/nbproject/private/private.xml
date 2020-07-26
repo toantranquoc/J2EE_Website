@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/LoginAdminServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/login.jsp</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/GoToHomeServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dbconnection/DBConnectionService.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/header.jsp</file>
-            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/WEB-INF/web.xml</file>
+            <file>file:/D:/GitHub/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/chart.java</file>
+            <file>file:/D:/GitHub/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dbconnection/DBConnectionService.java</file>
+            <file>file:/D:/GitHub/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/bo/ProductBO.java</file>
         </group>
     </open-files>
 </project-private>

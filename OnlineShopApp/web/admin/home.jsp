@@ -15,8 +15,10 @@ Map<Object,Object> map = null;
 List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
 if(ls != null && sum > 0)
 {
+    
     for(ProductDTO pro : ls) {
-        map = new HashMap<Object,Object>(); map.put("label", pro.getName()); map.put("y", pro.getQuantity()/sum*100); list.add(map);
+        
+        map = new HashMap<Object,Object>(); map.put("label", pro.getName()); map.put("y", Math.round((pro.getQuantity()*100000/sum)*10.0/10.0)); list.add(map);
     }
 }
 
@@ -61,7 +63,9 @@ String dataPoints = gsonObj.toJson(list);
         chart.render();
 
         }
+        
         </script>
+        
     </head>
     
     <body>
@@ -80,14 +84,14 @@ String dataPoints = gsonObj.toJson(list);
                    
                     <div class="card-header row">
                         
-                        <div class="col-sm-6 mt-1">
+                        <div class="col-sm-5 mt-1">
                             <i class="fas fa-table"></i>
                             Top 10 sản phẩm bán chạy nhất
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-7">
                             <form class="form-inline mt-0 mt-md-0" method="GET" action="./chart">
-                                <input type="date" id="startDate" name="startDate" placeholder="Từ ngày" value="${StartDate}">
-                                <input type="date" id="endDate" name="endDate" placeholder="Đến ngày" value="${EndDate}">
+                                <input style="margin-right: 5px;" type="date" id="startDate" name="startDate" placeholder="Từ ngày" value="${StartDate}">
+                                <input style="margin-right: 5px" type="date" id="endDate" name="endDate" placeholder="Đến ngày" value="${EndDate}">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Xem kết quả</button>
                             </form>
                         </div>
