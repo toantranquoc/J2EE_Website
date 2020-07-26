@@ -1,3 +1,4 @@
+DELIMITER //
 CREATE PROCEDURE top10Product (
 StartDate date,
 EndDate date
@@ -13,7 +14,5 @@ BEGIN
     and ors.OrderState = 2
     group by pro.Name, ords.Quantity
     order by pro.Name, ords.Quantity
-    limit 10
-    ;
-    
-END
+    limit 10;
+END //

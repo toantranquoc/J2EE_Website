@@ -43,9 +43,6 @@ String dataPoints = gsonObj.toJson(list);
 
         var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                title:{
-                        text: "Top 10 sản phẩm bán chạy"
-                },
                 legend: {
                         verticalAlign: "center",
                         horizontalAlign: "right"
@@ -90,8 +87,8 @@ String dataPoints = gsonObj.toJson(list);
                         </div>
                         <div class="col-sm-7">
                             <form class="form-inline mt-0 mt-md-0" method="GET" action="./chart">
-                                <input style="margin-right: 5px;" type="date" id="startDate" name="startDate" placeholder="Từ ngày" value="${StartDate}">
-                                <input style="margin-right: 5px" type="date" id="endDate" name="endDate" placeholder="Đến ngày" value="${EndDate}">
+                                From <input style="margin-right: 5px; margin-left: 5px" type="date" id="startDate" name="startDate" placeholder="Từ ngày" value="${StartDate}">
+                                To <input style="margin-right: 5px; margin-left: 5px" type="date" id="endDate" name="endDate" placeholder="Đến ngày" value="${EndDate}">
                                 <button class="btn btn-info btn-sm my-2 my-sm-0" type="submit">Xem kết quả</button>
                             </form>
                         </div>

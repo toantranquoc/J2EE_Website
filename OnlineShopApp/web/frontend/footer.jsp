@@ -7,13 +7,14 @@
 				<hr class="light">
 				<p>Tran Quoc Toan</p>
 				<p>To Cong Hau</p>
+                                <p>Nguyen Dang Hung</p>
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<h5>Project</h5>
 				<hr class="light">
 				<p>Shopping Online</p>
-				<p>Group: 14 </p>
-				<p>GVHD: Huynh Ngoc Tin</p>
+				<p>Group: 4 </p>
+				<p>GVHD: Mr. Huynh Ngoc Tin</p>
 			</div>
 			<div class="col-md-4 col-sm-6"> 
 				<h5>Contact</h5>
