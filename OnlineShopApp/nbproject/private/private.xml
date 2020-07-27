@@ -3,6 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/productdetail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/orderdetail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/footer.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/chart.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/login.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/template.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/dbconnection/DBConnectionService.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/home.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/admin/product.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/web/frontend/listallproducts.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/bo/ProductBO.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/mapper/ProductMapper.java</file>
+            <file>file:/C:/Users/pc/Downloads/Documents/NetBeansProjects/J2EE_Website/OnlineShopApp/src/java/com/onlineshop/controller/admin/AddNewProductAdminServlet.java</file>
         </group>
     </open-files>
 </project-private>
